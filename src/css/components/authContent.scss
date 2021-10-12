@@ -1,0 +1,22 @@
+.authContentPage{
+    &__content{
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        &-text{
+            width: 50%;
+            padding: 20px;
+        }
+        &-media{
+            width: 50%;
+        }
+        &-title{
+            @include font-bold(48px)
+        }
+        &-description{
+            margin-top: 18px;
+            @include font-regular(27px);
+            word-break: normal;
+        }
+    }
+}

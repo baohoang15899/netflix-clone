@@ -1,0 +1,29 @@
+@mixin font-regular($size,$color:white){
+    font-weight: $regular;
+    font-size: $size;
+    font-family: $font-montserrat;
+    @if $color != white {
+        color: $color;
+    }
+    color: $color;
+}
+
+@mixin font-semiBold($size,$color:white){
+    font-weight: $semi-bold;
+    font-size: $size;
+    font-family: $font-montserrat;
+    @if $color != white {
+        color: $color;
+    }
+    color: $color;
+}
+
+@mixin font-bold($size,$color:white){
+    font-weight: $bold;
+    font-size: $size;
+    font-family: $font-montserrat;
+    @if $color != white {
+        color: $color;
+    }
+    color: $color;
+}

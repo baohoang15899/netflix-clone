@@ -1,0 +1,116 @@
+.banner{
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    @include borderBottom;
+    background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9b3267c9-5086-4550-92f1-eddc22a1f78e/57241e85-65de-46d2-9785-c41a30fc3a89/VN-en-20211004-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    &__content{
+        position: relative;
+        padding: 20px 0;
+        z-index: 2;
+        &-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-logo{
+            @include logo
+        }
+        &-wrapperText{
+            padding-bottom: 90px;
+        }
+        &-signin{
+            background-color: $red-color;
+            padding: 7px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            p{
+                @include font-regular(16px)
+            }
+        }
+        &-text{
+            padding: 80px 0;
+        }
+        &-mainText{
+            text-align: center;
+            padding-top: 70px;
+            line-height: 55px;
+            @include font-bold(55px);
+            letter-spacing: 1px;
+            h5{
+                margin: auto;
+                width: 50%;
+            }
+            h6{
+                @include font-semiBold(23px);
+                letter-spacing: 1px;
+                line-height: normal;
+                margin: 20px 0;
+            }
+        }
+        &-description{
+            text-align: center; 
+            @include font-semiBold(16px);
+            margin-top: 20px;
+            p{
+                word-break: normal;
+            }
+        }
+        @include media(1100){
+            &-mainText{
+                h5{
+                    width: 70%;
+                }
+            }
+        }
+        @include media(800){
+            &-mainText{
+                h5{
+                    width: 90%;
+                }
+            }
+            &-description{
+                @include font-semiBold(14px);
+            }
+        }
+        @include media(600){
+            &-mainText{
+                h5{
+                    width: 90%;
+                }
+            }
+            &-description{
+                @include font-semiBold(14px);
+                max-width: 430px;
+                margin: auto
+            }
+        }
+        @include media(500){
+            &-text{
+                padding: 30px 0;
+            }
+            &-wrapperText{
+                padding-bottom: 40px;
+            }
+            &-mainText{
+                h5{
+                    @include font-bold(25px);
+                    line-height: 25px;
+                }
+                h6{
+                    @include font-bold(14px)
+                }
+            }
+        }
+    }
+    &::after{
+        content:'';
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba($color: #000000, $alpha: 0.62);
+        z-index: 1;
+    }
+}

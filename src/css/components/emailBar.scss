@@ -1,0 +1,54 @@
+.emailBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .inputWrapper{
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        &__input{
+            width: 100%;
+            max-width: 450px;
+            padding: 0 12px;
+            height: 58px;   
+            outline: none;
+            border: none;
+        }
+        &__placeholder{
+            @include font-regular(19px,$placeholder-color);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            transition: ease-in-out 0.2s;
+            pointer-events: none;
+            &.add{
+                top: 20%;
+                @include font-bold(12px,$placeholder-color);
+            }
+        }
+    }
+    .sendBtn{
+        height: 58px;  
+        padding: 0 26px;
+        @include font-regular(26px);
+        background-color: $red-color;
+        outline: none;
+        border: none;
+        box-sizing: border-box;
+        &:active{
+            background-color: $red-color-active;
+            box-shadow: $box-shadow-red;
+        }
+    }
+    @include media(800){
+        flex-direction: column;
+        .sendBtn{
+            @include font-regular(16px);
+            height: initial;
+            padding: 12px 24px;
+            margin-top: 20px;
+        }
+    }
+}
