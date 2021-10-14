@@ -1,0 +1,41 @@
+.questionAuth{
+    &__content{
+        padding: 45px 0px;
+        &-title{
+            text-align: center;
+            @include font-bold(40px);
+            margin-bottom: 20px;
+        }
+        &-dropdown{
+            width: 55%;
+            margin: 10px auto;
+        }
+        &-description{
+            background-color: $dropdown-color;
+            margin-top: 2px;
+            max-height: 0vh;
+            overflow: hidden;
+            transition: ease-out 0.25s;
+            transition-property: max-height;
+            &.show{
+                max-height: 100vh;
+            }
+            p{
+                word-break: normal;
+                padding: 15px 20px;
+                @include font-regular(20px)
+            }
+        }
+        &-main{
+            background-color: $dropdown-color;
+            align-items: center;
+            justify-content: space-between;
+            display: flex;
+            padding: 15px 20px;
+            h6{
+                @include font-regular(22px)
+            }
+        }
+    }
+    @include borderBottom
+}

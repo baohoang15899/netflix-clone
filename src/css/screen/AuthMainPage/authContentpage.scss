@@ -1,3 +1,5 @@
 .authContentPage{
-    @include borderBottom
+    &__content{
+        @include borderBottom
+    }
 }

@@ -76,7 +76,7 @@
         @include media(600){
             &-mainText{
                 h5{
-                    width: 90%;
+                    width: 100%;
                 }
             }
             &-description{
@@ -87,18 +87,19 @@
         }
         @include media(500){
             &-text{
-                padding: 30px 0;
+                padding: 15px 0;
             }
             &-wrapperText{
                 padding-bottom: 40px;
             }
             &-mainText{
+                padding-top: 50px;  
                 h5{
                     @include font-bold(25px);
                     line-height: 25px;
                 }
                 h6{
-                    @include font-bold(14px)
+                    @include font-bold(13px)
                 }
             }
         }

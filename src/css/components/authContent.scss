@@ -1,22 +1,87 @@
 .authContentPage{
     &__content{
-        display: flex;
-        align-items: center;
-        padding: 0 40px;
+        padding: 25px 50px;
+        &-wrapper{
+            display: flex;
+            align-items: center;
+            &.reverse {
+                flex-direction: row-reverse;
+            }
+        }
         &-text{
-            width: 50%;
+            margin: auto;
+            width: 43%;
             padding: 20px;
         }
         &-media{
-            width: 50%;
+            margin: auto;
+            width: 43%;
+            position: relative;
+            img{
+                position: relative;
+                z-index: 2;
+            }
+        }
+        &-video{
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 100%;
+            height: 100%;
+            max-width: 73%;
+            max-height: 54%;
+            z-index: 1;
+            video{
+                width: 100%;
+                height: 100%;
+            }
         }
         &-title{
-            @include font-bold(48px)
+            @include font-bold(40px)
         }
         &-description{
             margin-top: 18px;
-            @include font-regular(27px);
+            @include font-regular(22px);
             word-break: normal;
+        }
+        @include media(1000){
+            &-wrapper{
+                flex-direction: column;
+                &.reverse {
+                    flex-direction: column;
+                }
+            }
+            &-text{
+                width: 80%;
+                padding: initial;
+                padding-top: 20px;
+                text-align: center;
+            }
+            &-title{
+                @include font-bold(38px)
+            }
+            &-description{
+                @include font-regular(22px);
+            }
+            &-media{
+                width: 90%;
+            }
+        }
+        @include media(600){
+            padding: 35px 10px;
+            &-text{
+                width: 100%;
+            }
+            &-title{
+                @include font-bold(24px)
+            }
+            &-description{
+                @include font-regular(14px);
+            }
+            &-media{
+                width: 100%;
+            }
         }
     }
 }

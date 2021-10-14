@@ -151,30 +151,109 @@ button {
 }
 
 .authContentPage__content {
+  padding: 25px 50px;
+}
+.authContentPage__content-wrapper {
   display: flex;
   align-items: center;
-  padding: 0 40px;
+}
+.authContentPage__content-wrapper.reverse {
+  flex-direction: row-reverse;
 }
 .authContentPage__content-text {
-  width: 50%;
+  margin: auto;
+  width: 43%;
   padding: 20px;
 }
 .authContentPage__content-media {
-  width: 50%;
+  margin: auto;
+  width: 43%;
+  position: relative;
+}
+.authContentPage__content-media img {
+  position: relative;
+  z-index: 2;
+}
+.authContentPage__content-video {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  max-width: 73%;
+  max-height: 54%;
+  z-index: 1;
+}
+.authContentPage__content-video video {
+  width: 100%;
+  height: 100%;
 }
 .authContentPage__content-title {
   font-weight: 700;
-  font-size: 48px;
+  font-size: 40px;
   font-family: "Montserrat", sans-serif;
   color: white;
 }
 .authContentPage__content-description {
   margin-top: 18px;
   font-weight: 400;
-  font-size: 27px;
+  font-size: 22px;
   font-family: "Montserrat", sans-serif;
   color: white;
   word-break: normal;
+}
+@media only screen and (max-width: 1000px) {
+  .authContentPage__content-wrapper {
+    flex-direction: column;
+  }
+  .authContentPage__content-wrapper.reverse {
+    flex-direction: column;
+  }
+  .authContentPage__content-text {
+    width: 80%;
+    padding: initial;
+    padding-top: 20px;
+    text-align: center;
+  }
+  .authContentPage__content-title {
+    font-weight: 700;
+    font-size: 38px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .authContentPage__content-description {
+    font-weight: 400;
+    font-size: 22px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .authContentPage__content-media {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .authContentPage__content {
+    padding: 35px 10px;
+  }
+  .authContentPage__content-text {
+    width: 100%;
+  }
+  .authContentPage__content-title {
+    font-weight: 700;
+    font-size: 24px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .authContentPage__content-description {
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .authContentPage__content-media {
+    width: 100%;
+  }
 }
 
 .banner {
@@ -276,7 +355,7 @@ button {
 }
 @media only screen and (max-width: 600px) {
   .banner__content-mainText h5 {
-    width: 90%;
+    width: 100%;
   }
   .banner__content-description {
     font-weight: 600;
@@ -289,10 +368,13 @@ button {
 }
 @media only screen and (max-width: 500px) {
   .banner__content-text {
-    padding: 30px 0;
+    padding: 15px 0;
   }
   .banner__content-wrapperText {
     padding-bottom: 40px;
+  }
+  .banner__content-mainText {
+    padding-top: 50px;
   }
   .banner__content-mainText h5 {
     font-weight: 700;
@@ -303,7 +385,7 @@ button {
   }
   .banner__content-mainText h6 {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Montserrat", sans-serif;
     color: white;
   }
@@ -319,8 +401,59 @@ button {
   z-index: 1;
 }
 
-.authContentPage {
+.authContentPage__content {
   border-bottom: 8px solid #222;
+}
+
+.questionAuth {
+  border-bottom: 8px solid #222;
+}
+.questionAuth__content {
+  padding: 45px 0px;
+}
+.questionAuth__content-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 40px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  margin-bottom: 20px;
+}
+.questionAuth__content-dropdown {
+  width: 55%;
+  margin: 10px auto;
+}
+.questionAuth__content-description {
+  background-color: #303030;
+  margin-top: 2px;
+  max-height: 0vh;
+  overflow: hidden;
+  transition: ease-out 0.25s;
+  transition-property: max-height;
+}
+.questionAuth__content-description.show {
+  max-height: 100vh;
+}
+.questionAuth__content-description p {
+  word-break: normal;
+  padding: 15px 20px;
+  font-weight: 400;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.questionAuth__content-main {
+  background-color: #303030;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  padding: 15px 20px;
+}
+.questionAuth__content-main h6 {
+  font-weight: 400;
+  font-size: 22px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */
