@@ -1,0 +1,10 @@
+.footerData{
+    &__content{
+        padding: 20px 0;
+        &-data{
+            padding: 5px 0;
+            @include font-regular(14px,$grey-color);
+            cursor: pointer;
+        }
+    }
+}

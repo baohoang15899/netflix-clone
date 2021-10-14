@@ -1,6 +1,6 @@
 import React from 'react'
-import ContentAuthPage from 'components/ContentAuthPage'
-import { authContentData } from 'global/ContentData'
+import ContentAuthPage from 'components/Auth/ContentAuthPage'
+import { authContentData } from 'global/Auth/ContentData'
 import { reverse } from 'dns'
 export default function Content() {
     return (

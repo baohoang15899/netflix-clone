@@ -1,5 +1,5 @@
 import React from 'react'
-import EmailBar from 'components/EmailBar'
+import EmailBar from 'components/Auth/EmailBar'
 
 export default function index() {
     return (

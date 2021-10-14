@@ -11,7 +11,9 @@ img{
     width: 100%;
 }
 
-
+p{
+    word-break: normal;
+}
 
 html,body{
     width: 100%;
@@ -49,9 +51,7 @@ a{
 li{
     list-style: none;
 }
-p{
-    word-break: break-all;
-}
+
 hr{
     color: rgb(20, 20, 20);
 }

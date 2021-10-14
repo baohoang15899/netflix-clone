@@ -1,4 +1,4 @@
-import { IauthContentPage } from 'global/Interfaces'
+import { IauthContentPage } from 'global/Auth/Interfaces'
 import React from 'react'
 
 export default function ContentAuthPage({

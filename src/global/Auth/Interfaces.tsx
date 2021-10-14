@@ -13,4 +13,11 @@ export interface IauthQuestion {
     secondContent?:string
 }
 
+export interface IfooterContentType{
+    title:string
+}
+
+export interface IfooterContent{
+    contentData:Array<IfooterContentType>
+}
 

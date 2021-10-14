@@ -1,0 +1,39 @@
+.footer{
+    &__content{
+        padding-top: 70px;
+        padding-bottom: 40px;
+        padding-left: 170px;
+        padding-right: 170px;
+        &-title{
+            @include font-regular(16px,$grey-color)
+        }
+        &-category{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+        }
+        &-brand{
+            @include font-regular(12px,$grey-color);
+            cursor: pointer;
+        }
+        @include media(1100){
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+        @include media(850){
+            padding-left: 30px;
+            padding-right: 30px;
+            &-category{
+                display: grid;
+                grid-template-columns: auto auto ;
+            }
+        }
+        @include media(500){
+            padding-left: 30px;
+            padding-right: 30px;
+            &-category{
+                display: grid;
+                grid-template-columns: auto;
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { IauthContentPage, IauthQuestion } from "./Interfaces";
+import { IauthContentPage, IauthQuestion, IfooterContentType} from "./Interfaces";
 
 export const questionData: Array<IauthQuestion> = [
     {
@@ -52,5 +52,62 @@ export const authContentData: Array<IauthContentPage> = [
         img: "https://occ-0-3687-64.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABdFTpLmANuJpYneLq8L5m7CunMCi8e8Nl4y7xaPVWzG3IeoDoq17egTQAthApKg_4sdRWdwuR8KadWu1frjL3JQImpwq.png?r=fcd",
         title: 'Create profiles for kids.',
         description: 'Send kids on adventures with their favorite characters in a space made just for them—free with your membership.'
+    },
+]
+
+export const firstFooterData:Array<IfooterContentType> = [
+    {
+        title:'FAQ'
+    },
+    {
+        title:'Investor Relations'
+    },
+    {
+        title:'Privacy'
+    },
+    {
+        title:'Speed Test'
+    }
+]
+
+export const secondFooterData:Array<IfooterContentType> = [
+    {
+        title:'Help Center'
+    },
+    {
+        title:'Jobs'
+    },
+    {
+        title:'Cookie Preferences'
+    },
+    {
+        title:'Legal Notices'
+    }
+]
+
+export const thirdFooterData:Array<IfooterContentType> = [
+    {
+        title:'Account'
+    },
+    {
+        title:'Ways to Watch'
+    },
+    {
+        title:'Corporate Information'
+    },
+    {
+        title:'Only on Netflix'
+    }
+]
+
+export const fourthFooterData:Array<IfooterContentType> = [
+    {
+        title:'Media Center'
+    },
+    {
+        title:'Terms of Use'
+    },
+    {
+        title:'Contact Us'
     },
 ]

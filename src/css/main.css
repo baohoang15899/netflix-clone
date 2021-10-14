@@ -13,6 +13,10 @@ img {
   width: 100%;
 }
 
+p {
+  word-break: normal;
+}
+
 html, body {
   width: 100%;
   margin: 0;
@@ -41,10 +45,6 @@ a {
 
 li {
   list-style: none;
-}
-
-p {
-  word-break: break-all;
 }
 
 hr {
@@ -256,6 +256,71 @@ button {
   }
 }
 
+.footerData__content {
+  padding: 20px 0;
+}
+.footerData__content-data {
+  padding: 5px 0;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #757575;
+  color: #757575;
+  cursor: pointer;
+}
+
+.footer__content {
+  padding-top: 70px;
+  padding-bottom: 40px;
+  padding-left: 170px;
+  padding-right: 170px;
+}
+.footer__content-title {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: #757575;
+  color: #757575;
+}
+.footer__content-category {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+.footer__content-brand {
+  font-weight: 400;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: #757575;
+  color: #757575;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1100px) {
+  .footer__content {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .footer__content {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .footer__content-category {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .footer__content {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .footer__content-category {
+    display: grid;
+    grid-template-columns: auto;
+  }
+}
+
 .banner {
   position: relative;
   background-position: center;
@@ -408,6 +473,25 @@ button {
 .questionAuth {
   border-bottom: 8px solid #222;
 }
+.questionAuth__email {
+  padding-bottom: 45px;
+  text-align: center;
+}
+.questionAuth__email-title {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  margin: 18px 0;
+}
+@media only screen and (max-width: 600px) {
+  .questionAuth__email-title {
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+}
 .questionAuth__content {
   padding: 45px 0px;
   display: flex;
@@ -424,7 +508,7 @@ button {
 }
 .questionAuth__content-dropdown {
   width: 55%;
-  margin: 10px 0;
+  margin: 6px 0;
 }
 .questionAuth__content-description {
   background-color: #303030;
@@ -438,12 +522,12 @@ button {
   max-height: 100vh;
 }
 .questionAuth__content-description p {
-  word-break: normal;
   padding: 15px 20px;
   font-weight: 400;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
   color: white;
+  text-align: left;
 }
 .questionAuth__content-main {
   background-color: #303030;
@@ -457,6 +541,43 @@ button {
   font-size: 22px;
   font-family: "Montserrat", sans-serif;
   color: white;
+  text-align: left;
+}
+@media only screen and (max-width: 1150px) {
+  .questionAuth__content-dropdown {
+    width: 85%;
+  }
+  .questionAuth__content-main h6 {
+    font-weight: 400;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .questionAuth__content-description p {
+    font-weight: 400;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .questionAuth__content-main h6 {
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .questionAuth__content-description p {
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .questionAuth__content-dropdown {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

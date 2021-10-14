@@ -1,4 +1,4 @@
-import { IauthQuestion } from 'global/Interfaces'
+import { IauthQuestion } from 'global/Auth/Interfaces'
 import React, { useState } from 'react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'

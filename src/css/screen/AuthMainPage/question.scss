@@ -1,4 +1,17 @@
 .questionAuth{
+    &__email{
+        padding-bottom: 45px;
+        text-align: center;
+        &-title{
+            @include font-regular(16px);
+            margin: 18px 0;
+        }
+        @include media(600){
+            &-title{
+                @include font-regular(14px);
+            }
+        }
+    }
     &__content{
         padding: 45px 0px;
         display: flex;
@@ -11,7 +24,7 @@
         }
         &-dropdown{
             width: 55%;
-            margin:10px 0
+            margin:6px 0
         }
         &-description{
             background-color: $dropdown-color;
@@ -24,9 +37,9 @@
                 max-height: 100vh;
             }
             p{
-                word-break: normal;
                 padding: 15px 20px;
-                @include font-regular(20px)
+                @include font-regular(20px);
+                text-align: left;
             }
         }
         &-main{
@@ -36,9 +49,48 @@
             display: flex;
             padding: 15px 20px;
             h6{
-                @include font-regular(22px)
+                @include font-regular(22px);
+                text-align: left;
             }
         }
     }
-    @include borderBottom
+    @include borderBottom;
+    @include media(1150){
+        &__content{
+            &-dropdown{
+                width: 85%;
+            }
+            &-main{
+                h6{
+                    @include font-regular(18px)
+                }
+            }
+            &-description{
+                p{
+                    @include font-regular(18px)
+                }
+            }
+        }
+    }
+    @include media(800){
+        &__content{
+            &-main{
+                h6{
+                    @include font-regular(14px)
+                }
+            }
+            &-description{
+                p{
+                    @include font-regular(14px)
+                }
+            }
+        }
+    }
+    @include media(600){
+        &__content{
+            &-dropdown{
+                width: 100%;
+            }
+        }
+    }
 }

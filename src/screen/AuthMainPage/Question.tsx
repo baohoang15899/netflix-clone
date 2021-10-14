@@ -1,7 +1,8 @@
 import React from 'react'
-import DropDownQuestion from 'components/DropDownAuth'
-import { IauthQuestion } from 'global/Interfaces'
-import { questionData } from 'global/ContentData'
+import DropDownQuestion from 'components/Auth/DropDownAuth'
+import { IauthQuestion } from 'global/Auth/Interfaces'
+import { questionData } from 'global/Auth/ContentData'
+import EmailBar from 'components/Auth/EmailBar'
 export default function Question() {
     return (
         <div className='questionAuth'>
@@ -16,6 +17,10 @@ export default function Question() {
                             content={item.content}
                         />
                     })}
+                </div>
+                <div className='questionAuth__email'>
+                    <p className='questionAuth__email-title'>Ready to watch? Enter your email to create or restart your membership.</p>
+                    <EmailBar />
                 </div>
             </div>
         </div>
