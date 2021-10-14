@@ -269,6 +269,11 @@ button {
   cursor: pointer;
 }
 
+.footer {
+  background: rgba(0, 0, 0, 0.75);
+  position: relative;
+  z-index: 5;
+}
 .footer__content {
   padding-top: 70px;
   padding-bottom: 40px;
@@ -321,7 +326,20 @@ button {
   }
 }
 
-.banner {
+.logoBrand {
+  font-size: 40px;
+  color: #e50914;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-family: "Montserrat", sans-serif;
+}
+@media only screen and (max-width: 500px) {
+  .logoBrand {
+    font-size: 25px;
+  }
+}
+
+.banner, .login {
   position: relative;
   background-position: center;
   background-size: cover;
@@ -338,18 +356,6 @@ button {
   justify-content: space-between;
   align-items: center;
 }
-.banner__content-logo {
-  font-size: 20px;
-  color: #e50914;
-  font-weight: 700;
-  letter-spacing: 1px;
-  font-family: "Montserrat", sans-serif;
-}
-@media only screen and (max-width: 500px) {
-  .banner__content-logo {
-    font-size: 15px;
-  }
-}
 .banner__content-wrapperText {
   padding-bottom: 90px;
 }
@@ -359,7 +365,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
-.banner__content-signin p {
+.banner__content-signin .p {
   font-weight: 400;
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
@@ -455,14 +461,14 @@ button {
     color: white;
   }
 }
-.banner::after {
+.banner::after, .login::after {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.62);
+  background-color: rgba(0, 0, 0, 0.55);
   z-index: 1;
 }
 
@@ -578,6 +584,29 @@ button {
   .questionAuth__content-dropdown {
     width: 100%;
   }
+}
+
+.login {
+  border-bottom: 8px solid #222;
+  border: 0px;
+}
+.login__content {
+  position: relative;
+  z-index: 5;
+}
+.login__content-form {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 20px 40px;
+  max-width: 450px;
+  margin: 30px auto 60px auto;
+}
+.login__content-form .formTitle {
+  margin: 25px 0;
+  font-weight: 700;
+  font-size: 26px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */

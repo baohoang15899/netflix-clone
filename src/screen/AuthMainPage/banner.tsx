@@ -1,5 +1,7 @@
 import React from 'react'
 import EmailBar from 'components/Auth/EmailBar'
+import { Link } from 'react-router-dom'
+import LogoBrand from 'components/Logo'
 
 export default function index() {
     return (
@@ -7,11 +9,9 @@ export default function index() {
             <div className="container">
                 <div className="banner__content">
                     <div className='banner__content-header'>
-                        <div className="banner__content-logo">
-                            <h1>Netflix</h1>
-                        </div>
+                        <LogoBrand/>
                         <div className="banner__content-signin">
-                            <p>Sign in</p>
+                            <Link className='p' to='sign-in'>Sign in</Link>
                         </div>
                     </div>
                     <div className="banner__content-wrapperText">

@@ -1,4 +1,7 @@
 .footer{
+    background: rgba(0,0,0,.75);
+    position: relative;
+    z-index: 5;
     &__content{
         padding-top: 70px;
         padding-bottom: 40px;

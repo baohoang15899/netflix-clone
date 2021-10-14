@@ -1,3 +1,6 @@
-@mixin borderBottom {
+@mixin borderBottom($check:true) {
     border-bottom: 8px solid #222;
+    @if $check == false {
+        border: 0px;
+    }
 }

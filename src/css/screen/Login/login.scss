@@ -1,0 +1,19 @@
+.login{
+    @extend .banner;
+    @include borderBottom(false);
+    &__content{
+        position: relative;
+        z-index: 5;
+        &-form{
+            border-radius: 4px;
+            background: rgba(0,0,0,.75);
+            padding: 20px 40px;
+            max-width: 450px;
+            margin: 30px auto 60px auto;
+            .formTitle{
+                margin: 25px 0;
+                @include font-bold(26px)
+            }
+        }
+    }
+}
