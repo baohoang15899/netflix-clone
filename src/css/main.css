@@ -410,9 +410,12 @@ button {
 }
 .questionAuth__content {
   padding: 45px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 .questionAuth__content-title {
-  text-align: center;
   font-weight: 700;
   font-size: 40px;
   font-family: "Montserrat", sans-serif;
@@ -421,7 +424,7 @@ button {
 }
 .questionAuth__content-dropdown {
   width: 55%;
-  margin: 10px auto;
+  margin: 10px 0;
 }
 .questionAuth__content-description {
   background-color: #303030;

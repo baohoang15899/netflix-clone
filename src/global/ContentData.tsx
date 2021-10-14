@@ -20,10 +20,6 @@ export const questionData: Array<IauthQuestion> = [
         content: 'Netflix is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.'
     },
     {
-        title: 'How do I cancel?',
-        content: 'Netflix is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.'
-    },
-    {
         title: 'What can I watch on Netflix?',
         content: 'Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want.'
     },
