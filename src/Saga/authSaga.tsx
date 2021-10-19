@@ -28,10 +28,12 @@ function* loginSaga({payload}:any){
             }
             else{
                 yield put(authAction.accountNotExist())
+                yield put(authAction.LoginFailed())
             }
         }
     } catch (error) {
         console.log(error);
+        yield put(authAction.LoginFailed())
     }
     finally{
         yield put(authAction.stopLoading())
