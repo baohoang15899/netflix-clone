@@ -339,6 +339,57 @@ button {
   }
 }
 
+.Ninput {
+  position: relative;
+  margin-top: 15px;
+}
+.Ninput input {
+  color: white;
+  width: 100%;
+  background-color: #303030;
+  outline: none;
+  border: 0px;
+  padding: 18px 20px;
+  border-radius: 4px;
+}
+.Ninput input.showErr {
+  border-bottom: 1px solid #e87c03;
+}
+.Ninput_placeholder {
+  font-weight: 400;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  transition: ease-in-out 0.2s;
+  pointer-events: none;
+}
+.Ninput_placeholder.add {
+  top: 20%;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+}
+.Ninput_password {
+  font-weight: 400;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+}
+
 .banner, .login {
   position: relative;
   background-position: center;
@@ -597,7 +648,7 @@ button {
 .login__content-form {
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.75);
-  padding: 20px 40px;
+  padding: 20px 55px;
   max-width: 450px;
   margin: 30px auto 60px auto;
 }
@@ -605,6 +656,29 @@ button {
   margin: 25px 0;
   font-weight: 700;
   font-size: 26px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.login__content-err {
+  margin-top: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #e87c03;
+  color: #e87c03;
+}
+.login__content-btn {
+  margin: 20px 0;
+  margin-bottom: 40px;
+  background-color: #e50914;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.login__content-btn p {
+  padding: 15px 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
   font-family: "Montserrat", sans-serif;
   color: white;
 }

@@ -7,12 +7,28 @@
         &-form{
             border-radius: 4px;
             background: rgba(0,0,0,.75);
-            padding: 20px 40px;
+            padding: 20px 55px;
             max-width: 450px;
             margin: 30px auto 60px auto;
             .formTitle{
                 margin: 25px 0;
                 @include font-bold(26px)
+            }
+        }
+        &-err{
+            margin-top: 5px;
+            @include font-regular(14px,$orange);
+        }
+        &-btn{
+            margin: 20px 0;
+            margin-bottom: 40px;
+            background-color: $red-color;
+            border-radius: 4px;
+            cursor: pointer;
+            p{
+                padding: 15px 30px;
+                text-align: center;
+                @include font-semiBold(16px);
             }
         }
     }

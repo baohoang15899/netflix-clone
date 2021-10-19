@@ -1,0 +1,38 @@
+.Ninput{
+    position: relative;
+    margin-top: 15px;
+    input{
+        color: white;
+        width: 100%;
+        background-color:$dropdown-color;
+        outline: none;
+        border: 0px;
+        padding: 18px 20px;
+        border-radius: 4px;
+        &.showErr{
+            border-bottom: 1px solid $orange;
+        }
+    }
+    &_placeholder{
+        @include font-regular(15px,$placeholder-color);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        transition: ease-in-out 0.2s;
+        pointer-events: none;
+        &.add{
+            top: 20%;
+            @include font-bold(12px,$placeholder-color);
+        }
+    }
+    &_password{
+        @include font-regular(15px,$placeholder-color);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        transition: ease-in-out 0.2s;
+        cursor: pointer;
+    }
+}
