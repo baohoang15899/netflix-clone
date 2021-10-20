@@ -6,6 +6,7 @@ export enum Urls {
     SEARCH = 'search/multi?',
     REQUEST_TOKEN = 'authentication/token/new?',
     REQUEST_LOGIN = 'authentication/token/validate_with_login?',
-    CREATE_SESSION = 'authentication/session/new?'
+    CREATE_SESSION = 'authentication/session/new?',
+    ACCOUNT = 'account?'
     // https://api.themoviedb.org/3/search/multi?api_key=<<api_key>>&language=en-US&query=batman&page=1&include_adult=false
 }

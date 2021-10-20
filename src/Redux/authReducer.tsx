@@ -33,7 +33,8 @@ const authSlice = createSlice({
         },
         accountExist:(state) =>{
             state.accountExist = true
-        }
+        },
+        getUser:() =>{}
     }
 })
 

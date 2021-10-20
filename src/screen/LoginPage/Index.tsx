@@ -7,15 +7,17 @@ import ValidatePassword from './CustoomHook/ValidatePasswiord'
 import { useDispatch, useSelector } from 'react-redux'
 import { authAction } from 'Redux/authReducer'
 import { RootReducerModel } from 'Redux/rootReducer'
-export default function Index() {
+import { Redirect } from 'react-router-dom'
+
+export default function Index(props:any) {
+    console.log(props,'test');
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const validateEmail = ValidateEmail(email)
     const validatePassword = ValidatePassword(password)
     const dispatch = useDispatch()
-    const all = useSelector((state: RootReducerModel) => state.authReducer)
-    console.log(all,'authState');
-    
+    const { accountExist, isLoggedIn } = useSelector((state: RootReducerModel) => state.authReducer)
+    console.log(isLoggedIn, 'authState log in');
     const [checkSubmit, setCheckSubmit] = useState<Boolean>(false)
     const hanldeSubmit = () => {
         if (email.length > 0 && password.length > 0) {
@@ -28,7 +30,6 @@ export default function Index() {
             setCheckSubmit(true)
         }
     }
-
     // const testApi = async() => {
     //     const key ='131c3841b70be2908cf7a3fabcaa002e'
     //     const token = await fetch(`https://api.themoviedb.org/3/authentication/token/new?api_key=${key}`)
@@ -61,13 +62,18 @@ export default function Index() {
     //     console.log(accData,'data data');
     // }
 
-    const handleChangeText = (cb:(e:any)=>void,event:any)=>{
+    const handleChangeText = (cb: (e: any) => void, event: any) => {
         cb(event.target.value)
         dispatch(authAction.accountExist())
         setCheckSubmit(false)
+        // if (isLoggedIn) {
+        //     return <Redirect to={{pathname:'/home'}}/>
+        // }
     }
-
-    return (
+    
+    return isLoggedIn ? 
+    <Redirect to={{pathname:'/home'}}/> :
+    (
         <div className="login">
             <div className="container">
                 <div className="login__content">
@@ -77,7 +83,7 @@ export default function Index() {
                         <Ninput
                             showErr={email.length > 0 && !validateEmail ? 'showErr' : ''}
                             text={email}
-                            onChangeText={(e) =>  handleChangeText(setEmail,e)}
+                            onChangeText={(e) => handleChangeText(setEmail, e)}
                             placeholder="Username or phone number" />
                         {
                             email.length > 0
@@ -88,7 +94,7 @@ export default function Index() {
                         <Ninput
                             showErr={password.length > 0 && !validatePassword ? 'showErr' : ''}
                             passwordInput={true} text={password}
-                            onChangeText={(e) => handleChangeText(setPassword,e)}
+                            onChangeText={(e) => handleChangeText(setPassword, e)}
                             placeholder="Password" />
                         {password.length > 0
                             && !validatePassword
@@ -103,11 +109,11 @@ export default function Index() {
                                 style={{ textAlign: 'center' }}>
                                 Do not leave email and password empty</p>
                         }
-                        {/* {!accountExist &&
+                        {!accountExist &&
                             <p className="login__content-err"
                                 style={{ textAlign: 'center' }}>
                                 Your username or password not existed</p>
-                        } */}
+                        }
                     </div>
                 </div>
             </div>

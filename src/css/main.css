@@ -643,6 +643,7 @@ button {
 }
 .login__content {
   position: relative;
+  padding: 20px 0px;
   z-index: 5;
 }
 .login__content-form {

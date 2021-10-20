@@ -3,6 +3,7 @@
     @include borderBottom(false);
     &__content{
         position: relative;
+        padding: 20px 0px;
         z-index: 5;
         &-form{
             border-radius: 4px;
