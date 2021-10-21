@@ -23,7 +23,7 @@ export const processRequest = async (request: any) => {
 
 
 export const LoginRequest = async () => {
-    const data = await NAxios.get(`${Urls.REQUEST_TOKEN}api_key=${client_ID}`)
+    const data = NAxios.get(`${Urls.REQUEST_TOKEN}api_key=${client_ID}`)
     return processRequest(data)
 }
 

@@ -120,16 +120,12 @@ button {
   color: #8c8c8c;
 }
 .emailBar .sendBtn {
-  height: 58px;
-  padding: 0 26px;
+  padding: 13.15px 26px;
+  background-color: #e50914;
   font-weight: 400;
   font-size: 26px;
   font-family: "Montserrat", sans-serif;
   color: white;
-  background-color: #e50914;
-  outline: none;
-  border: none;
-  box-sizing: border-box;
 }
 .emailBar .sendBtn:active {
   background-color: #bb0a12;
@@ -390,6 +386,18 @@ button {
   cursor: pointer;
 }
 
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 9999;
+}
+
 .banner, .login {
   position: relative;
   background-position: center;
@@ -646,6 +654,52 @@ button {
   padding: 20px 0px;
   z-index: 5;
 }
+.login__content-register {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+}
+.login__content-register a {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  margin-left: 5px;
+}
+.login__content-more {
+  margin: 10px 0px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+}
+.login__content-more span {
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.login__content-policy {
+  font-weight: 400;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+  opacity: 0;
+  visibility: hidden;
+  transition-property: opacity;
+  transition: ease-in-out 0.25s;
+}
+.login__content-policy.show {
+  opacity: 1;
+  visibility: visible;
+}
 .login__content-form {
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.75);
@@ -682,6 +736,22 @@ button {
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
   color: white;
+}
+.login__content-btn p.disable {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: #8c8c8c;
+  color: #8c8c8c;
+}
+.login__content-btn.disable {
+  background-color: #757575;
+  border-radius: 4px;
+}
+@media only screen and (max-width: 500px) {
+  .login__content-form {
+    padding: 20px 25px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

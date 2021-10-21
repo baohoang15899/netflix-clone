@@ -9,15 +9,14 @@ import { authAction } from 'Redux/authReducer'
 import { RootReducerModel } from 'Redux/rootReducer'
 import { Redirect } from 'react-router-dom'
 
-export default function Index(props:any) {
-    console.log(props,'test');
-    const [email, setEmail] = useState<string>('')
+export default function Index(props: any) {
+    const [email, setEmail] = useState<string>(props?.location?.state ? props?.location?.state : '')
     const [password, setPassword] = useState<string>('')
     const validateEmail = ValidateEmail(email)
     const validatePassword = ValidatePassword(password)
+    const [policy,setPolicy] = useState<Boolean>(false)
     const dispatch = useDispatch()
-    const { accountExist, isLoggedIn } = useSelector((state: RootReducerModel) => state.authReducer)
-    console.log(isLoggedIn, 'authState log in');
+    const { accountExist, isLoggedIn, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
     const [checkSubmit, setCheckSubmit] = useState<Boolean>(false)
     const hanldeSubmit = () => {
         if (email.length > 0 && password.length > 0) {
@@ -30,94 +29,79 @@ export default function Index(props:any) {
             setCheckSubmit(true)
         }
     }
-    // const testApi = async() => {
-    //     const key ='131c3841b70be2908cf7a3fabcaa002e'
-    //     const token = await fetch(`https://api.themoviedb.org/3/authentication/token/new?api_key=${key}`)
-    //     const tokenData = await token.json()
-    //     const response = await fetch(`https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${key}`, {
-    //         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //         headers: {
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             username:email,
-    //             password:password,
-    //             request_token:tokenData.request_token
-    //         }) // body data type must match "Content-Type" header
-    //       });
-    //     const res = await response.json()
-    //     const session = await fetch(`https://api.themoviedb.org/3/authentication/session/new?api_key=131c3841b70be2908cf7a3fabcaa002e`, {
-    //         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //         headers: {
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             request_token:res.request_token
-    //         }) // body data type must match "Content-Type" header
-    //       });
-    //       const sessData = await session.json()
-    //       console.log(sessData);
-    //     const testData = await fetch(`https://api.themoviedb.org/3/account?api_key=131c3841b70be2908cf7a3fabcaa002e&session_id=${sessData.session_id}`)
-    //     const accData = await testData.json()
-    //     console.log(accData,'data data');
-    // }
+    useEffect(() => {
+        return () => {
+            dispatch(authAction.accountExist())
+        }
+    }, [])
 
     const handleChangeText = (cb: (e: any) => void, event: any) => {
         cb(event.target.value)
         dispatch(authAction.accountExist())
         setCheckSubmit(false)
-        // if (isLoggedIn) {
-        //     return <Redirect to={{pathname:'/home'}}/>
-        // }
     }
-    
-    return isLoggedIn ? 
-    <Redirect to={{pathname:'/home'}}/> :
-    (
-        <div className="login">
-            <div className="container">
-                <div className="login__content">
-                    <LogoBrand />
-                    <div className="login__content-form">
-                        <h6 className="formTitle">Sign In</h6>
-                        <Ninput
-                            showErr={email.length > 0 && !validateEmail ? 'showErr' : ''}
-                            text={email}
-                            onChangeText={(e) => handleChangeText(setEmail, e)}
-                            placeholder="Username or phone number" />
-                        {
-                            email.length > 0
-                            && !validateEmail &&
-                            <p className="login__content-err">
-                                Your email is invalid
-                            </p>}
-                        <Ninput
-                            showErr={password.length > 0 && !validatePassword ? 'showErr' : ''}
-                            passwordInput={true} text={password}
-                            onChangeText={(e) => handleChangeText(setPassword, e)}
-                            placeholder="Password" />
-                        {password.length > 0
-                            && !validatePassword
-                            && <p className="login__content-err">
-                                Your password is invalid
-                            </p>}
-                        <div onClick={() => hanldeSubmit()} className="login__content-btn">
-                            <p>Sign In</p>
+
+    return isLoggedIn ?
+        <Redirect to={{ pathname: '/home' }} /> :
+        (
+            <div className="login">
+                <div className="container">
+                    <div className="login__content">
+                        <LogoBrand />
+                        <div className="login__content-form">
+                            <h6 className="formTitle">Sign In</h6>
+                            <Ninput
+                                value={email}
+                                showErr={email.length > 0 && !validateEmail ? 'showErr' : ''}
+                                text={email}
+                                onChangeText={(e) => handleChangeText(setEmail, e)}
+                                placeholder="Username or phone number" />
+                            {
+                                email.length > 0
+                                && !validateEmail &&
+                                <p className="login__content-err">
+                                    Your email is invalid
+                                </p>}
+                            <Ninput
+                                value={password}
+                                showErr={password.length > 0 && !validatePassword ? 'showErr' : ''}
+                                passwordInput={true} text={password}
+                                onChangeText={(e) => handleChangeText(setPassword, e)}
+                                placeholder="Password" />
+                            {password.length > 0
+                                && !validatePassword
+                                && <p className="login__content-err">
+                                    Your password is invalid
+                                </p>}
+                            <div onClick={() => !btnDisable && hanldeSubmit()}
+                                className={btnDisable ? "login__content-btn disable" : "login__content-btn"}>
+                                <p className={btnDisable ? 'disable' : ''}>Sign In</p>
+                            </div>
+                            {checkSubmit &&
+                                <p className="login__content-err"
+                                    style={{ textAlign: 'center' }}>
+                                    Do not leave email and password empty</p>
+                            }
+                            {!accountExist &&
+                                <p className="login__content-err"
+                                    style={{ textAlign: 'center'}}>
+                                    Your username or password not existed</p>
+                            }
+                            <p className="login__content-register">
+                                New to Netflix?
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://www.themoviedb.org/signup">
+                                    Sign up now.
+                                </a>
+                            </p>
+                            <p className="login__content-more">This page is protected by Google reCAPTCHA to ensure you\'re not a bot.{!policy && <span onClick={()=>setPolicy(true)}>Learn more .</span>}</p>
+                            <p className={policy ? "login__content-policy show" : "login__content-policy"}>The information collected by Google reCAPTCHA is subject to the Google Privacy Policy and Terms of Service, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
                         </div>
-                        {checkSubmit &&
-                            <p className="login__content-err"
-                                style={{ textAlign: 'center' }}>
-                                Do not leave email and password empty</p>
-                        }
-                        {!accountExist &&
-                            <p className="login__content-err"
-                                style={{ textAlign: 'center' }}>
-                                Your username or password not existed</p>
-                        }
                     </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
-    )
+        )
 }

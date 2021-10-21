@@ -3,5 +3,6 @@ export interface IinputLogin{
     onChangeText:(e:any) => void,
     text?:any
     passwordInput?:Boolean,
-    showErr?:string
+    showErr?:string,
+    value:string
 }

@@ -30,13 +30,9 @@
         }
     }
     .sendBtn{
-        height: 58px;  
-        padding: 0 26px;
-        @include font-regular(26px);
+        padding: 13.15px 26px;
         background-color: $red-color;
-        outline: none;
-        border: none;
-        box-sizing: border-box;
+        @include font-regular(26px,white);
         &:active{
             background-color: $red-color-active;
             box-shadow: $box-shadow-red;

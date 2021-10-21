@@ -6,6 +6,7 @@ const initState: IauthReducer = {
     isLoading: false,
     user: null,
     accountExist:true,
+    btnDisable:false
 }
 
 const authSlice = createSlice({
@@ -15,6 +16,12 @@ const authSlice = createSlice({
         LoginRequest: (state,payload) => {},
         LoginSuccess:(state)=>{
             state.isLoggedIn = true
+        },
+        startDisableBtn:(state)=>{
+            state.btnDisable=true
+        },
+        stopDisableBtn:(state)=>{
+            state.btnDisable=false
         },
         LoginFailed:(state)=>{
             state.isLoggedIn = false

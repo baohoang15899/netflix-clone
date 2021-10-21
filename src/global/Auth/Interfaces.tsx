@@ -25,7 +25,8 @@ export interface IauthReducer {
     isLoggedIn: Boolean,
     isLoading: Boolean,
     user: any,
-    accountExist:Boolean
+    accountExist:Boolean,
+    btnDisable:Boolean
 }
 
 export interface irootReducer {
