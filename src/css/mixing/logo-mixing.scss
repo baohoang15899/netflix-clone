@@ -1,5 +1,8 @@
-@mixin logo{
-    font-size: 40px;
+@mixin logo($size:40px){
+    @if ($size != 40px) {
+        font-size: $size;
+    }
+    font-size: $size;
     color: $red-color;
     font-weight: $bold;
     letter-spacing: 1px;

@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Logo() {
+interface Ilogo{
+    custom?:Boolean
+}
+
+export default function Logo({custom}:Ilogo) {
     return (
-        <Link className='logoBrand' to={"/"}>Netflix</Link>
+        <Link className={custom ? 'logoCustom' : 'logoBrand'  } to={"/"}>Netflix</Link>
     )
 }

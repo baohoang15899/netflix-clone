@@ -14,8 +14,9 @@ import { RootReducerModel } from 'Redux/rootReducer';
 import PrivateRoute from 'components/Home/PrivateRoute';
 import { authAction } from 'Redux/authReducer';
 import Loading from 'components/Loading'
+import Header from 'components/Home/Homeheader'
 export default function App() {
-    const { isLoggedIn, isLoading } = useSelector((state: RootReducerModel) => state.authReducer)
+    const { isLoggedIn, isLoading ,user} = useSelector((state: RootReducerModel) => state.authReducer)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(authAction.getUser())
@@ -23,15 +24,14 @@ export default function App() {
     return (
         <div className='wrapper'>
             <Router>
+                {isLoggedIn  && user &&  <Header/> }
                 {isLoading ?
                     <Loading/> :
                     <Switch>
                         <Route exact path="/" component={AuthMainPage} />
                         <Route exact path="/sign-in" component={SignIn} />
-                        <PrivateRoute exact path='/home' component={Home} auth={isLoggedIn} />
+                        <PrivateRoute exact path='/home' component={ user && Home} auth={isLoggedIn} />
                     </Switch>}
-
-
             </Router>
         </div>
     )

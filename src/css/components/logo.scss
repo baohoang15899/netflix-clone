@@ -1,3 +1,6 @@
 .logoBrand{
     @include logo
 }
+.logoCustom{
+    @include logo(30px)
+}

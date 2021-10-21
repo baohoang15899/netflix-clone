@@ -10,3 +10,7 @@ export enum Urls {
     ACCOUNT = 'account?'
     // https://api.themoviedb.org/3/search/multi?api_key=<<api_key>>&language=en-US&query=batman&page=1&include_adult=false
 }
+
+export enum UrlImage {
+    AVATAR = 'https://www.themoviedb.org/t/p/w150_and_h150_face/'
+}
