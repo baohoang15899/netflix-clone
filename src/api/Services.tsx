@@ -60,3 +60,4 @@ export const logOut = (session_id:string) => {
     formData.append("session_id", session_id)
     return processRequest(NAxios.delete(`${Urls.LOG_OUT}api_key=${client_ID}`,{ data: formData }))
 }
+
