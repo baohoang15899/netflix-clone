@@ -21,9 +21,7 @@
             padding: 7px 14px;
             border-radius: 4px;
             cursor: pointer;
-            .p{
-                @include font-regular(16px,white)
-            }
+            @include font-regular(16px,white)
         }
         &-text{
             padding: 80px 0;

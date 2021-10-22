@@ -6,6 +6,7 @@ export default function ClickOutSide(ref : any, cb:(e:Boolean) => void) {
             if (ref.current && !ref.current.contains(event.target)) {
                 cb(false)
             }
+            
         }
         document.addEventListener("mousedown", handleClickOutside);
         return () => {

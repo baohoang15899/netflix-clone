@@ -7,6 +7,7 @@ export default function InputLogin({
     text,
     passwordInput,
     showErr,
+    onKeyDown,
     value }: IinputLogin) {
     const [show, setShow] = useState<Boolean>(false)
     const [passwordCheck, setPasswordCheck] = useState<Boolean>(true)
@@ -21,13 +22,13 @@ export default function InputLogin({
     return (
         <div className={`Ninput`}>
             <input
-                autoFocus
                 className={showErr}
                 type={passwordInput && passwordCheck ? "password" :'text'}
                 onFocus={() => setShow(true)}
                 onBlur={() => handleBlur()}
                 onChange={onChangeText}
-                value={value} />
+                value={value}
+                onKeyDown={onKeyDown} />
             <p className={
                 show || value?.length > 0 ?
                     "Ninput_placeholder add"

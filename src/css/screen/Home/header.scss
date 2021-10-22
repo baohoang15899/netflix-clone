@@ -4,6 +4,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        max-width: 1920px;
+        z-index: 999;
         &-left{
             display: flex;
             align-items: center;
@@ -22,7 +26,7 @@
             padding-left: 10px;
             display: flex;
             flex-direction: column;
-            background-color: rgba($color: pink, $alpha: 0.8);
+            background-color: rgba($color: #000000, $alpha: 0.35);
             border: solid 1px rgba(255,255,255,.15);
             right: -15px;
             left: 0;
@@ -41,6 +45,7 @@
             margin-top: 5px;
             span{
                 position: relative;
+                cursor: pointer;
                 &::after{
                     content: '';
                     position: absolute;
@@ -86,7 +91,7 @@
         }
         &-username{
             margin-left: 8px;
-            @include font-regular(12px)
+            @include font-semiBold(14px)
         }
         &-avatar{
             width: 35px;
@@ -96,12 +101,12 @@
         }
         &-link{
             margin-left: 20px;
-            @include font-regular(14px);
+            @include font-semiBold(14px);
             transition: ease-in-out 0.25s;
             transition-property: color;
             @media (hover: hover) {
                 &:hover{
-                    color: $placeholder-color;
+                    color: $light-grey;
                 }
               }
         }

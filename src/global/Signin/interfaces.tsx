@@ -4,5 +4,6 @@ export interface IinputLogin{
     text?:any
     passwordInput?:Boolean,
     showErr?:string,
-    value:string
+    value:string,
+    onKeyDown?:(e:any) => void,
 }

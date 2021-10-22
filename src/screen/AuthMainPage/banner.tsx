@@ -10,9 +10,7 @@ export default function index() {
                 <div className="banner__content">
                     <div className='banner__content-header'>
                         <LogoBrand/>
-                        <div className="banner__content-signin">
-                            <Link className='p' to='sign-in'>Sign in</Link>
-                        </div>
+                        <Link className='banner__content-signin' to='sign-in'>Sign in</Link>
                     </div>
                     <div className="banner__content-wrapperText">
                         <div className="banner__content-text">

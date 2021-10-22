@@ -17,6 +17,11 @@ const authSlice = createSlice({
         LoginSuccess:(state)=>{
             state.isLoggedIn = true
         },
+        logOutRequest:() =>{
+        },
+        logOutSuccess:(state)=>{
+            state.isLoggedIn = false
+        },
         startDisableBtn:(state)=>{
             state.btnDisable=true
         },

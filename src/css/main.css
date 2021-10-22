@@ -437,8 +437,6 @@ button {
   padding: 7px 14px;
   border-radius: 4px;
   cursor: pointer;
-}
-.banner__content-signin .p {
   font-weight: 400;
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
@@ -773,6 +771,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  max-width: 1920px;
+  z-index: 999;
 }
 .home__header-left {
   display: flex;
@@ -792,7 +794,7 @@ button {
   padding-left: 10px;
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 192, 203, 0.8);
+  background-color: rgba(0, 0, 0, 0.35);
   border: solid 1px rgba(255, 255, 255, 0.15);
   right: -15px;
   left: 0;
@@ -815,6 +817,7 @@ button {
 }
 .home__header-detail span {
   position: relative;
+  cursor: pointer;
 }
 .home__header-detail span::after {
   content: "";
@@ -859,8 +862,8 @@ button {
 }
 .home__header-username {
   margin-left: 8px;
-  font-weight: 400;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 14px;
   font-family: "Montserrat", sans-serif;
   color: white;
 }
@@ -872,7 +875,7 @@ button {
 }
 .home__header-link {
   margin-left: 20px;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
   color: white;
@@ -881,8 +884,22 @@ button {
 }
 @media (hover: hover) {
   .home__header-link:hover {
-    color: #8c8c8c;
+    color: #b3b3b3;
   }
+}
+.home__banner {
+  height: 500px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.home__banner::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.32);
+  position: absolute;
 }
 
 /*# sourceMappingURL=main.css.map */

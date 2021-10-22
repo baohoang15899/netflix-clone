@@ -1,4 +1,4 @@
-import { createSessionId, getUserDetail, LoginRequest, validateUsernamePassword } from 'api/Services';
+import { createSessionId, getUserDetail, LoginRequest, logOut, validateUsernamePassword } from 'api/Services';
 import { ResponseType } from 'axios';
 import { takeLatest, call, put, select, take } from 'redux-saga/effects'
 import { authAction } from 'Redux/authReducer'
@@ -67,9 +67,31 @@ function* getUserData() {
     }
 }
 
+function* logOutSaga(){
+    yield put(authAction.startLoading())
+    const data: string = yield localStorage.getItem('token')
+    yield put(authAction.startDisableBtn())
+    try {
+        if (data) {
+            const res:Response =  yield call(logOut,JSON.parse(data))
+            if (res.status === 200) {
+                yield localStorage.removeItem('token')
+                yield put(authAction.logOutSuccess())
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        yield put(authAction.stopDisableBtn())
+        yield put(authAction.stopLoading())
+    }
+}
+
 function* authSaga() {
     yield takeLatest(authAction.LoginRequest, loginSaga)
     yield takeLatest(authAction.getUser, getUserData)
+    yield takeLatest(authAction.logOutRequest, logOutSaga)
 }
 
 export default authSaga

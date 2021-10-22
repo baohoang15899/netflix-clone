@@ -14,21 +14,33 @@ export default function Index(props: any) {
     const [password, setPassword] = useState<string>('')
     const validateEmail = ValidateEmail(email)
     const validatePassword = ValidatePassword(password)
-    const [policy,setPolicy] = useState<Boolean>(false)
+    const [policy, setPolicy] = useState<Boolean>(false)
     const dispatch = useDispatch()
     const { accountExist, isLoggedIn, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
     const [checkSubmit, setCheckSubmit] = useState<Boolean>(false)
-    const hanldeSubmit = () => {
+
+    const clientLoginCheck = () => {
         if (email.length > 0 && password.length > 0) {
             if (validateEmail && validatePassword) {
                 setCheckSubmit(false)
                 dispatch(authAction.LoginRequest({ username: email, password: password }))
+                return true
+            }
+            else {
+                setCheckSubmit(true)
+                return false
             }
         }
         else {
             setCheckSubmit(true)
+            return false
         }
     }
+
+    const hanldeSubmit = () => {
+        clientLoginCheck()
+    }
+
     useEffect(() => {
         return () => {
             dispatch(authAction.accountExist())
@@ -36,9 +48,15 @@ export default function Index(props: any) {
     }, [])
 
     const handleChangeText = (cb: (e: any) => void, event: any) => {
-        cb(event.target.value)
+        cb(event.target.value.trim())
         dispatch(authAction.accountExist())
         setCheckSubmit(false)
+    }
+
+    const handleKeyPress = (e: any) => {
+        if (e.code === "Enter") {
+            clientLoginCheck()
+        }
     }
 
     return isLoggedIn ?
@@ -51,6 +69,7 @@ export default function Index(props: any) {
                         <div className="login__content-form">
                             <h6 className="formTitle">Sign In</h6>
                             <Ninput
+                                onKeyDown={(e) => !btnDisable && handleKeyPress(e)}
                                 value={email}
                                 showErr={email.length > 0 && !validateEmail ? 'showErr' : ''}
                                 text={email}
@@ -63,6 +82,7 @@ export default function Index(props: any) {
                                     Your email is invalid
                                 </p>}
                             <Ninput
+                                onKeyDown={(e) => !btnDisable && handleKeyPress(e)}
                                 value={password}
                                 showErr={password.length > 0 && !validatePassword ? 'showErr' : ''}
                                 passwordInput={true} text={password}
@@ -84,7 +104,7 @@ export default function Index(props: any) {
                             }
                             {!accountExist &&
                                 <p className="login__content-err"
-                                    style={{ textAlign: 'center'}}>
+                                    style={{ textAlign: 'center' }}>
                                     Your username or password not existed</p>
                             }
                             <p className="login__content-register">
@@ -96,7 +116,7 @@ export default function Index(props: any) {
                                     Sign up now.
                                 </a>
                             </p>
-                            <p className="login__content-more">This page is protected by Google reCAPTCHA to ensure you\'re not a bot.{!policy && <span onClick={()=>setPolicy(true)}>Learn more .</span>}</p>
+                            <p className="login__content-more">This page is protected by Google reCAPTCHA to ensure you\'re not a bot.{!policy && <span onClick={() => setPolicy(true)}>Learn more .</span>}</p>
                             <p className={policy ? "login__content-policy show" : "login__content-policy"}>The information collected by Google reCAPTCHA is subject to the Google Privacy Policy and Terms of Service, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
                         </div>
                     </div>
