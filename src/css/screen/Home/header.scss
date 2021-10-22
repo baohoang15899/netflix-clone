@@ -99,7 +99,7 @@
             border-radius: 4px;
             overflow: hidden;
         }
-        &-link{
+        &-link{ 
             margin-left: 20px;
             @include font-semiBold(14px);
             transition: ease-in-out 0.25s;

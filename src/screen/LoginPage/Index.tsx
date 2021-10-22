@@ -18,7 +18,6 @@ export default function Index(props: any) {
     const dispatch = useDispatch()
     const { accountExist, isLoggedIn, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
     const [checkSubmit, setCheckSubmit] = useState<Boolean>(false)
-
     const clientLoginCheck = () => {
         if (email.length > 0 && password.length > 0) {
             if (validateEmail && validatePassword) {
@@ -58,6 +57,7 @@ export default function Index(props: any) {
             clientLoginCheck()
         }
     }
+
 
     return isLoggedIn ?
         <Redirect to={{ pathname: '/home' }} /> :
@@ -109,12 +109,18 @@ export default function Index(props: any) {
                             }
                             <p className="login__content-register">
                                 New to Netflix?
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="https://www.themoviedb.org/signup">
+                                <span
+                                    onClick={() => {
+                                        window.open(
+                                            "https://www.themoviedb.org/signup",
+                                            "newwindow",
+                                            `width=${window.innerWidth * 0.8}
+                                            ,height=${window.innerHeight * 1}`
+                                        )
+                                    }}
+                                >
                                     Sign up now.
-                                </a>
+                                </span>
                             </p>
                             <p className="login__content-more">This page is protected by Google reCAPTCHA to ensure you\'re not a bot.{!policy && <span onClick={() => setPolicy(true)}>Learn more .</span>}</p>
                             <p className={policy ? "login__content-policy show" : "login__content-policy"}>The information collected by Google reCAPTCHA is subject to the Google Privacy Policy and Terms of Service, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>

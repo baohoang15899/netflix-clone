@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&display=swap");
 *,
 ::before,
 ::after {
@@ -674,7 +675,8 @@ button {
   color: #8c8c8c;
   color: #8c8c8c;
 }
-.login__content-register a {
+.login__content-register span {
+  cursor: pointer;
   font-weight: 400;
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
@@ -888,7 +890,6 @@ button {
   }
 }
 .home__banner {
-  height: 500px;
   width: 100%;
   background-position: center;
   background-size: cover;
@@ -898,8 +899,31 @@ button {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.32);
+  top: 0;
+  left: 0;
+  background-color: rgba(15, 15, 15, 0.47);
   position: absolute;
+  z-index: 7;
+}
+.home__banner-content {
+  position: relative;
+  z-index: 10;
+  padding-top: 200px;
+  padding-bottom: 160px;
+}
+.home__banner-title {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 75px;
+  color: white;
+}
+.home__banner-overview {
+  margin-top: 10px;
+  width: 47%;
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */

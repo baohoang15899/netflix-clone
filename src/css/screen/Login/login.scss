@@ -8,7 +8,8 @@
         &-register{
             margin-top: 10px;
             @include font-regular(16px,$placeholder-color);
-            a{
+            span{
+                cursor: pointer;
                 @include font-regular(16px,white);
                 margin-left: 5px;  
             }

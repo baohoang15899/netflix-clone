@@ -1,6 +1,5 @@
 .home{
     &__banner{
-        height: 500px;
         width: 100%;
         background-position: center;
         background-size: cover;
@@ -9,9 +8,28 @@
             content: '';
             width: 100%;
             height: 100%;
-            background-color: rgba($color: #000000, $alpha: 0.32);
+            top: 0;
+            left: 0;
+            background-color: rgba($color: #0f0f0f, $alpha: 0.47);
             position: absolute;
+            z-index: 7;
         }
-
+        &-content{
+            position: relative;
+            z-index: 10;
+            padding-top: 200px;
+            padding-bottom: 160px;
+        }
+        &-title{
+            font-family: $font-archivo;
+            font-size: 75px;
+            color: white;
+        }
+        &-overview{
+            margin-top: 10px;
+            width: 47%;
+            line-height: 20px;
+            @include font-regular(14px)
+        }
     }
 }
