@@ -21,6 +21,15 @@ export const processRequest = async (request: any) => {
     }
 }
 
+export const getAllRequest = async (requests: any) => {
+    try {
+        const values = await Promise.all(requests);
+        return { movies: values[0], tvShows: values[1] };
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
+}
 
 export const LoginRequest = () => {
     const data = NAxios.get(`${Urls.REQUEST_TOKEN}api_key=${client_ID}`)
@@ -28,34 +37,39 @@ export const LoginRequest = () => {
 }
 
 export const validateUsernamePassword = (params: IloginService, token: string) => {
-    const formData:any = new FormData();
+    const formData: any = new FormData();
     formData.append('username', params.username.trim())
     formData.append('password', params.password.trim())
     formData.append('request_token', token)
     // for(var pair of formData.entries()) {
     //     console.log(pair[0]+', '+pair[1]);
     //   }    
-    return processRequest(NAxios.post(`${Urls.REQUEST_LOGIN}api_key=${client_ID}`,formData))
+    return processRequest(NAxios.post(`${Urls.REQUEST_LOGIN}api_key=${client_ID}`, formData))
 }
 
-export const createSessionId = (token:string)=>{
-    console.log(token,'token');
-    const formData:any = new FormData();
+export const createSessionId = (token: string) => {
+    const formData: any = new FormData();
     formData.append('request_token', token)
-    return processRequest(NAxios.post(`${Urls.CREATE_SESSION}api_key=${client_ID}`,formData))
+    return processRequest(NAxios.post(`${Urls.CREATE_SESSION}api_key=${client_ID}`, formData))
 }
 
-export const getUserDetail = (token:string)=>{
+export const getUserDetail = (token: string) => {
     return processRequest(NAxios.get(`${Urls.ACCOUNT}api_key=${client_ID}&session_id=${token}`))
 }
 
-export const getTrendingData = () =>{
+export const getTrendingData = () => {
     return processRequest(NAxios.get(`${Urls.TRENDING}api_key=${client_ID}`))
 }
 
-export const logOut = (session_id:string) => {
-    const formData:any = new FormData()
+export const logOut = (session_id: string) => {
+    const formData: any = new FormData()
     formData.append("session_id", session_id)
-    return processRequest(NAxios.delete(`${Urls.LOG_OUT}api_key=${client_ID}`,{ data: formData }))
+    return processRequest(NAxios.delete(`${Urls.LOG_OUT}api_key=${client_ID}`, { data: formData }))
 }
 
+export const allMovieRequest = () => {
+    const movieUrl = NAxios.get(`${Urls.MOVIE_POPULAR}api_key=${client_ID}`)
+    const tvUrl = NAxios.get(`${Urls.TV_POPULAR}api_key=${client_ID}`)
+    const arrRequest = [movieUrl, tvUrl]
+    return getAllRequest(arrRequest)
+}

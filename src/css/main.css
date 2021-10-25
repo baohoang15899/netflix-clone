@@ -777,6 +777,11 @@ button {
   width: 100%;
   max-width: 1920px;
   z-index: 999;
+  transition: ease-in-out 0.2s;
+  transition-property: background-color;
+}
+.home__header.add {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 @media only screen and (max-width: 992px) {
   .home__header {

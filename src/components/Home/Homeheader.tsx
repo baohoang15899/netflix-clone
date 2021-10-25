@@ -15,15 +15,28 @@ export default function Homeheader() {
     const [show, setShow] = useState<Boolean>(false)
     const [menuMobile, setMenuMobile] = useState<Boolean>(false)
     const [showSearch, setShowSearch] = useState<Boolean>(false)
+    const [showHeader,setShowHeader] = useState<Boolean>(false)
     const ref = useRef<any>(null)
     const mobileRef = useRef<any>(null)
     const dispatch = useDispatch()
     ClickOutSide(ref, setShow, mobileRef, setMenuMobile)
 
+    useEffect(()=>{
+        const handleScroll = () =>{
+            if (window.scrollY > 0) {
+                setShowHeader(true)
+            }
+            else{
+                setShowHeader(false)
+            }
+        }
+        document.addEventListener("scroll",handleScroll)
+        return () => document.removeEventListener("scroll",handleScroll)
+    },[window.scrollY])
     return (
-        <div className='home__header'>
+        <div className={showHeader ? 'home__header add' : 'home__header'}>
             <div ref={mobileRef} className='home__header-left'>
-                <Icon onClick={() => setMenuMobile(!menuMobile)} className='home__header-mobileBtn' icon={menuMobile ? faTimes : faBars} size="lg" />
+                <Icon onClick={() => setMenuMobile(!menuMobile)} className='home__header-mobileBtn' icon={faBars} size="lg" />
                 <div className={menuMobile ? 'home__header-menuMobile open' : 'home__header-menuMobile'}>
                     <div className="home__header-detailMobile">
                         <div className='home__header-avatarMobile'>

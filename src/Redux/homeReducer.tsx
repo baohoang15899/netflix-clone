@@ -2,7 +2,11 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 import { IhomeReducer } from 'global/Home/Interfaces'
 
 const initState:IhomeReducer = {
-    trending:{}
+    trending:{},
+    allMoviesTvshowsTrending:{
+        movies:[],
+        tvShows:[]
+    }
 }
 
 const homeSlice = createSlice({
@@ -12,6 +16,10 @@ const homeSlice = createSlice({
         getTrendingRequest:()=>{},
         trendingDataSuccess:(state,{payload})=>{
             state.trending = payload
+        },
+        getTrendingMovieAndTvshowRequest:()=>{},
+        getTrendingMovieAndTvshowDataSuccess:(state,{payload})=>{
+            state.allMoviesTvshowsTrending = payload
         }
     }
 })
