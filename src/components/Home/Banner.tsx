@@ -3,8 +3,10 @@ import { IbannerData } from 'global/Home/Interfaces'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { faPlay, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 
-export default function Banner({data}:IbannerData) {
+export default function Banner({ data }: IbannerData) {
     return (
         <div className='home__banner'
             style={data && { backgroundImage: `url(${UrlImage.TRENDING_BACKGROUND}${data.backdrop_path})` }}>
@@ -21,8 +23,14 @@ export default function Banner({data}:IbannerData) {
                             {data.overview && data.overview}
                         </p>
                         <div className='home__banner-btnGroup'>
-                            <span>Trailer</span>
-                            <span>Detail</span>
+                            <div className='home__banner-btnTrailer'>
+                                <Icon style={{marginRight:'10px'}} size="sm" icon={faPlay} />
+                                <span>Trailer</span>
+                            </div>
+                            <div className='home__banner-btnDetail'>
+                                <Icon style={{marginRight:'10px'}} size="sm" icon={faExclamationCircle} />
+                                <span>Press for more</span>
+                            </div>
                         </div>
                     </div>
                 </div>

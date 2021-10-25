@@ -8,15 +8,128 @@
         width: 100%;
         max-width: 1920px;
         z-index: 999;
+        @include media(992){
+            padding: 20px 20px;
+            background-color: rgba($color: #000000, $alpha: 0.7);
+            flex-wrap: wrap;
+        }
+        &-linkMobile{
+            display: flex;
+            flex-direction: column;
+            padding: 10px 20px;
+        }
+        &-mobileBtn{
+            margin-right: 10px;
+            display: none;
+            transition: ease-in-out 0.2s;
+            cursor: pointer;
+            @include media(992){
+                display: block;
+            }
+        }
+        &-avatarMobile{
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+        &-detailMobile{
+            border-bottom: 1px solid #333;
+        }
         &-left{
             display: flex;
             align-items: center;
         }
+        &-logoutMobile{
+            @include font-semiBold(14px);
+            padding: 0px 20px;
+            padding-bottom: 10px;
+            span{
+                cursor: pointer;
+            }
+        }
+
         &-right{
+            display: flex;
+            align-items: center;
             position: relative;
+            margin-right: 5px;
+            @include media(992){
+                display: none;
+            }
         }
         &-menu{
             margin-left: 20px;
+            @include media(992){
+                display: none;
+            }
+        }
+        &-mobileSearchGroup{
+            align-items: center;
+            background-color: rgba($color: #000000, $alpha: 0.4);
+            border: 1px solid white;
+            padding: 6px 8px;
+            display: none;
+            @include media(992){
+                display: flex;
+            }
+        }
+        &-searchGroup{
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            background-color: transparent;
+            width: 0vw;
+            margin-right: 20px;
+            transition-property: width;
+            transition: ease-in-out 0.2s;
+            &.show{
+                background-color: rgba($color: #000000, $alpha: 0.4);
+                border: 1px solid white;
+                width: initial;
+            }
+        }
+        &-search{
+            margin-right: 10px;
+            padding: 2px 8px;
+            color: white;   
+            outline: none;
+            border: none;
+            display: none;
+            background-color: transparent;
+            &.show{
+                display: block;
+            }
+            @include media(992){
+                &.mobile{
+                    margin-right: initial;
+                    display: block;
+                }
+            }
+        }
+        &-menuMobile{
+            position: absolute;
+            height: 100vh;
+            top: 100%;
+            left: 0;
+            // padding: 20px;
+            width: 40vw;
+            background-color: #000000;
+            transform: translateX(-100%);
+            transition-property: transform;
+            transition: ease-in-out 0.2s;
+            display: none;
+            @include media(992){
+                display: block;
+                &.open{
+                    transform: translateX(0);
+                }
+            }
+            @include media(500){
+                width: 50vw;
+            }
+            @include media(450){
+                width: 60vw;
+            }
         }
         &-dropdown{
             position: absolute;
@@ -43,6 +156,7 @@
         &-detail{
             @include font-semiBold(10px);
             margin-top: 5px;
+            cursor: pointer;
             span{
                 position: relative;
                 cursor: pointer;
@@ -65,6 +179,10 @@
                     opacity: 1;
                     visibility: visible;
                 }
+            }
+            @include media(992){
+                padding: 10px 20px;
+                @include font-semiBold(14px);
             }
         }
         &-triangle{
@@ -108,6 +226,10 @@
                 &:hover{
                     color: $light-grey;
                 }
+              }
+              @include media(992){
+                  margin-left: initial;
+                  margin-top: 8px;
               }
         }
     }

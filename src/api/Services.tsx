@@ -54,8 +54,6 @@ export const getTrendingData = () =>{
 }
 
 export const logOut = (session_id:string) => {
-    console.log(session_id,'id');
-    
     const formData:any = new FormData()
     formData.append("session_id", session_id)
     return processRequest(NAxios.delete(`${Urls.LOG_OUT}api_key=${client_ID}`,{ data: formData }))

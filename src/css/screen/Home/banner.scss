@@ -26,10 +26,75 @@
             color: white;
         }
         &-overview{
-            margin-top: 10px;
+            margin: 15px 0px;
             width: 47%;
             line-height: 20px;
             @include font-regular(14px)
+        }
+        &-btnGroup{
+            margin-top: 20px;
+            display: flex;
+        }
+        &-btnTrailer{
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: white;
+            border-radius: 4px;
+            @include font-semiBold(14px,black);
+            transition: ease-in-out 0.2s;
+            transition-property: background-color;
+            @media (hover:hover){
+                &:hover{
+                    background-color: rgba($color: white, $alpha: 0.7);
+                }
+            }
+        }
+        &-btnDetail{
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 4px;
+            padding: 10px 45px;
+            background-color: rgba($color: $grey-color, $alpha: 0.8);
+            @include font-semiBold(14px,white);
+            transition: ease-in-out 0.2s;
+            transition-property: background-color;
+            @media (hover:hover){
+                &:hover{
+                    background-color: rgba($color: $grey-color, $alpha: 0.5);
+                }
+            }
+        }
+        @include media(992){
+            &-content{
+                padding-top: 150px;
+                padding-bottom: 80px;
+            }
+        }
+        @include media(700){
+            &-overview{
+                width: 100%;
+            }
+            &-title{
+                font-size: 55px;
+            }
+        }
+        @include media(600){
+            &-content{
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+            &-overview{
+                @include font-regular(12px)
+            }
+        }
+        @include media(400){
+            &-btnDetail{
+                margin-left: initial;
+                margin-top: 10px;
+            }
+            &-btnGroup{
+                flex-direction: column;
+            }
         }
     }
 }
