@@ -413,6 +413,11 @@ button {
   z-index: 9999;
 }
 
+.itemBox_img {
+  max-width: 280px;
+  border-radius: 8px;
+}
+
 .banner, .login {
   position: relative;
   background-position: center;
@@ -1045,6 +1050,7 @@ button {
   background-position: center;
   background-size: cover;
   position: relative;
+  margin-bottom: 2;
 }
 .home__banner::after {
   content: "";
@@ -1052,7 +1058,7 @@ button {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(15, 15, 15, 0.47);
+  background-color: rgba(15, 15, 15, 0.27);
   position: absolute;
   z-index: 7;
 }
@@ -1060,7 +1066,7 @@ button {
   position: relative;
   z-index: 10;
   padding-top: 200px;
-  padding-bottom: 160px;
+  padding-bottom: 260px;
 }
 .home__banner-title {
   font-family: "Archivo Black", sans-serif;
@@ -1150,6 +1156,33 @@ button {
   .home__banner-btnGroup {
     flex-direction: column;
   }
+}
+
+.home__wrapper {
+  position: relative;
+  z-index: 8;
+}
+.home__categoryContent {
+  position: absolute;
+  top: -170px;
+}
+@media only screen and (max-width: 992px) {
+  .home__categoryContent {
+    top: 0px;
+  }
+}
+.home__category {
+  z-index: 8;
+}
+.home__category-content {
+  padding-bottom: 28px;
+}
+.home__category-header {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */

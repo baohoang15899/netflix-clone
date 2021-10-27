@@ -22,11 +22,41 @@ export interface IbannerData {
 }
 
 export interface ItrendingMovieTv {
-    movies: Array<Imovie>,
-    tvShows: Array<ItvShow>
+    movies?:  Imovie,
+    tvShows?: ItvShow
 }
 
-interface Imovie {
+export interface IcategoryContent {
+    title:string,
+    movies?:Imovie,
+    tvShows?:ItvShow,
+    type:string
+}
+
+export interface IitemBox {
+    adult?: Boolean,
+    backdrop_path?: string,
+    genre_ids?: Array<number>,
+    id?: number,
+    original_language?: string,
+    original_title?: string,
+    first_air_date?: string,
+    original_name?: string,
+    overview?: string,
+    popularity?: number,
+    poster_path?: string,
+    release_date?: string,
+    title?: string,
+    video?: Boolean,
+    vote_average?: number,
+    vote_count?: number,
+}
+
+export interface Imovie {
+    results?:Array<ImovieResults>
+}
+
+export interface ImovieResults {
     adult?: Boolean,
     backdrop_path?: string,
     genre_ids?: Array<number>,
@@ -43,7 +73,11 @@ interface Imovie {
     vote_count?: number,
 }
 
-interface ItvShow {
+export interface ItvShow {
+    results?:Array<ItvShowResults>
+}
+
+export interface ItvShowResults {
     backdrop_path?: string,
     first_air_date?: string,
     genre_ids?: Array<number>,

@@ -1,0 +1,23 @@
+.home{
+    &__wrapper{
+        position: relative;
+        z-index: 8;
+    }
+    &__categoryContent{
+        position: absolute;
+        top: -170px;
+        @include media(992){
+            top: 0px;
+        }
+    }
+    &__category{
+        z-index: 8;
+        &-content{
+            padding-bottom: 28px;
+        }
+        &-header{
+            @include font-semiBold(18px);
+            margin-bottom: 20px;
+        }
+    }
+}

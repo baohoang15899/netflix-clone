@@ -4,8 +4,8 @@ import { IhomeReducer } from 'global/Home/Interfaces'
 const initState:IhomeReducer = {
     trending:{},
     allMoviesTvshowsTrending:{
-        movies:[],
-        tvShows:[]
+        movies:{},
+        tvShows:{}
     }
 }
 

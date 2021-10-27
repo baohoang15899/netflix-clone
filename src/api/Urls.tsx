@@ -18,5 +18,6 @@ export enum Urls {
 
 export enum UrlImage {
     AVATAR = 'https://www.themoviedb.org/t/p/w150_and_h150_face/',
-    TRENDING_BACKGROUND='https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/'
+    TRENDING_BACKGROUND='https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/',
+    POSTER = 'https://themoviedb.org/t/p/w355_and_h200_multi_faces/'
 }

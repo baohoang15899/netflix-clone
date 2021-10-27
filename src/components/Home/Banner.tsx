@@ -9,7 +9,12 @@ import { faPlay, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 export default function Banner({ data }: IbannerData) {
     return (
         <div className='home__banner'
-            style={data && { backgroundImage: `url(${UrlImage.TRENDING_BACKGROUND}${data.backdrop_path})` }}>
+            style={data && {
+                backgroundImage: `
+                linear-gradient(
+                    0deg,rgba(0,0,0,.96) 0,rgba(0,0,0,0) 95%),
+                  url(${UrlImage.TRENDING_BACKGROUND}${data.backdrop_path})`
+            }}>
             {
                 data &&
                 <div className='home__banner-content'>
@@ -24,11 +29,11 @@ export default function Banner({ data }: IbannerData) {
                         </p>
                         <div className='home__banner-btnGroup'>
                             <div className='home__banner-btnTrailer'>
-                                <Icon style={{marginRight:'10px'}} size="sm" icon={faPlay} />
+                                <Icon style={{ marginRight: '10px' }} size="sm" icon={faPlay} />
                                 <span>Trailer</span>
                             </div>
                             <div className='home__banner-btnDetail'>
-                                <Icon style={{marginRight:'10px'}} size="sm" icon={faExclamationCircle} />
+                                <Icon style={{ marginRight: '10px' }} size="sm" icon={faExclamationCircle} />
                                 <span>Press for more</span>
                             </div>
                         </div>
