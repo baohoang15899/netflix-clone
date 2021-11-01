@@ -22,8 +22,7 @@ export default function Index() {
         dispatch(homeAction.getMoviesByGenreRequest())
         dispatch(homeAction.getTvByGenreRequest())
     }, [])
-    console.log(popular, 'loading');
-
+   
     return (
         <div className='home'>
             <>
