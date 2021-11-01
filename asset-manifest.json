@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/baohoang15899.github.io/netflix-clone/static/css/main.102da34e.chunk.css",
-    "main.js": "/baohoang15899.github.io/netflix-clone/static/js/main.eee5e9d4.chunk.js",
-    "main.js.map": "/baohoang15899.github.io/netflix-clone/static/js/main.eee5e9d4.chunk.js.map",
+    "main.js": "/baohoang15899.github.io/netflix-clone/static/js/main.c381531b.chunk.js",
+    "main.js.map": "/baohoang15899.github.io/netflix-clone/static/js/main.c381531b.chunk.js.map",
     "runtime-main.js": "/baohoang15899.github.io/netflix-clone/static/js/runtime-main.23c44414.js",
     "runtime-main.js.map": "/baohoang15899.github.io/netflix-clone/static/js/runtime-main.23c44414.js.map",
     "static/css/2.1f254814.chunk.css": "/baohoang15899.github.io/netflix-clone/static/css/2.1f254814.chunk.css",
-    "static/js/2.68dc3e54.chunk.js": "/baohoang15899.github.io/netflix-clone/static/js/2.68dc3e54.chunk.js",
-    "static/js/2.68dc3e54.chunk.js.map": "/baohoang15899.github.io/netflix-clone/static/js/2.68dc3e54.chunk.js.map",
+    "static/js/2.daed8dd0.chunk.js": "/baohoang15899.github.io/netflix-clone/static/js/2.daed8dd0.chunk.js",
+    "static/js/2.daed8dd0.chunk.js.map": "/baohoang15899.github.io/netflix-clone/static/js/2.daed8dd0.chunk.js.map",
     "index.html": "/baohoang15899.github.io/netflix-clone/index.html",
     "static/css/2.1f254814.chunk.css.map": "/baohoang15899.github.io/netflix-clone/static/css/2.1f254814.chunk.css.map",
     "static/css/main.102da34e.chunk.css.map": "/baohoang15899.github.io/netflix-clone/static/css/main.102da34e.chunk.css.map",
-    "static/js/2.68dc3e54.chunk.js.LICENSE.txt": "/baohoang15899.github.io/netflix-clone/static/js/2.68dc3e54.chunk.js.LICENSE.txt",
+    "static/js/2.daed8dd0.chunk.js.LICENSE.txt": "/baohoang15899.github.io/netflix-clone/static/js/2.daed8dd0.chunk.js.LICENSE.txt",
     "static/media/avatar.4c6f8b3d.png": "/baohoang15899.github.io/netflix-clone/static/media/avatar.4c6f8b3d.png",
     "static/media/defaultPoster.22bff5ce.jpg": "/baohoang15899.github.io/netflix-clone/static/media/defaultPoster.22bff5ce.jpg",
     "static/media/slick-theme.css": "/baohoang15899.github.io/netflix-clone/static/media/slick.c94f7671.ttf"
@@ -19,8 +19,8 @@
   "entrypoints": [
     "static/js/runtime-main.23c44414.js",
     "static/css/2.1f254814.chunk.css",
-    "static/js/2.68dc3e54.chunk.js",
+    "static/js/2.daed8dd0.chunk.js",
     "static/css/main.102da34e.chunk.css",
-    "static/js/main.eee5e9d4.chunk.js"
+    "static/js/main.c381531b.chunk.js"
   ]
 }
