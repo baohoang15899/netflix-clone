@@ -12,7 +12,7 @@ export default function Banner({ data }: IbannerData) {
             style={data && {
                 backgroundImage: `
                 linear-gradient(
-                    0deg,rgba(0,0,0,.96) 0,rgba(0,0,0,0) 95%),
+                    0deg,rgba(0,0,0,1) 0,rgba(0,0,0,0) 100%),
                   url(${UrlImage.TRENDING_BACKGROUND}${data.backdrop_path})`
             }}>
             {

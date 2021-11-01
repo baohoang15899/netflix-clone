@@ -1,5 +1,5 @@
-import { allMovieRequest, getTrendingData } from 'api/Services'
-import { takeLatest, call, put, select, take } from 'redux-saga/effects'
+import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenreRequest, getTrendingData, getTvByGenreRequest } from 'api/Services'
+import { takeLatest, call, put, select, take, takeEvery,delay } from 'redux-saga/effects'
 import { homeAction } from 'Redux/homeReducer'
 
 interface Response {
@@ -7,9 +7,9 @@ interface Response {
     status?: number
 }
 
-interface MoviesAndTvshows{
-    movies?:Response,
-    tvShows?:Response
+interface MoviesAndTvshows {
+    movies?: Response,
+    tvShows?: Response
 }
 
 function* getTrending() {
@@ -24,14 +24,29 @@ function* getTrending() {
 }
 
 function* getMovieandTvTrending() {
+    yield put(homeAction.startLoadingPopuplar())
     try {
-        const res: MoviesAndTvshows = yield call (allMovieRequest)
+        const res: MoviesAndTvshows = yield call(allMovieRequest)
         if (res.movies?.status === 200 && res.tvShows?.status === 200) {
-            const data:Object = {
-                movies:res.movies.data,
-                tvShows:res.tvShows.data
+            const data: Object = {
+                movies: res.movies.data,
+                tvShows: res.tvShows.data
             }
             yield put(homeAction.getTrendingMovieAndTvshowDataSuccess(data))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        yield put(homeAction.stopLoadingPopular())
+    }
+}
+
+function* getGenreMovie() {
+    try {
+        const res: Response = yield call(getGenresMovieRequest)
+        if (res?.status === 200) {
+            yield put(homeAction.getGenresMovieSuccess(res.data.genres))
         }
     } catch (error) {
         console.log(error);
@@ -39,9 +54,57 @@ function* getMovieandTvTrending() {
     }
 }
 
+function* getGenreTv() {
+    yield put(homeAction.startLoadingGenreTv())
+    try {
+        const res: Response = yield call(getGenresTvRequest)
+        if (res?.status === 200) {
+            yield put(homeAction.getGenresTvSuccess(res.data.genres))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        yield put(homeAction.stopLoadingGenreTv())
+    }
+}
+
+function* getMovie() {
+    yield put(homeAction.startLoadingGenreMovie())
+    const res: Response = yield getMovieByGenreRequest()
+    try {
+        if (res) {
+            yield put(homeAction.getMoviesByGenreSuccess(res))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally {
+        yield put(homeAction.stopLoadingGenreMovie())
+    }
+}
+
+function* getTvshows() {
+    const res: Response = yield getTvByGenreRequest()
+    try {
+        if (res) {
+            yield put(homeAction.getTvByGenreSuccess(res))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally {
+
+    }
+}
+
 function* homeSaga() {
     yield takeLatest(homeAction.getTrendingRequest, getTrending)
     yield takeLatest(homeAction.getTrendingMovieAndTvshowRequest, getMovieandTvTrending)
+    yield takeLatest(homeAction.getGenresMovieRequest, getGenreMovie)
+    yield takeLatest(homeAction.getGenresTvRequest, getGenreTv)
+    yield takeLatest(homeAction.getMoviesByGenreRequest, getMovie)
+    yield takeLatest(homeAction.getTvByGenreRequest,getTvshows)
 }
 
 export default homeSaga

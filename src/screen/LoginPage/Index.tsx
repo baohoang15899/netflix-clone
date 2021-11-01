@@ -1,4 +1,3 @@
-import Footer from 'components/Auth/Footer'
 import React, { useEffect, useState } from 'react'
 import LogoBrand from 'components/Logo'
 import Ninput from 'components/Signin/InputLogin'
@@ -127,7 +126,6 @@ export default function Index(props: any) {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </div>
         )
 }

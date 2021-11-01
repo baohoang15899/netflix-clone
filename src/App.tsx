@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import AuthMainPage from 'screen/AuthMainPage/Index'
 import SignIn from 'screen/LoginPage/Index'
 import Home from 'screen/HomePage/Home/Index'
+import Footer from 'components/Auth/Footer'
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Link,
@@ -33,6 +34,7 @@ export default function App() {
                         <PrivateRoute exact path='/home' component={ user && Home} auth={isLoggedIn} />
                     </Switch>}
             </Router>
+            <Footer/>
         </div>
     )
 }

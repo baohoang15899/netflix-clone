@@ -1,14 +1,17 @@
 import { UrlImage } from 'api/Urls';
-import { IitemBox, Imovie, ImovieResults, ItvShow, ItvShowResults } from 'global/Home/Interfaces'
+import { IdataResults } from 'global/Home/Interfaces'
 import React from 'react'
+import LazyLoad from 'react-lazyload'
+import DefaultPoster from 'assets/image/defaultPoster.jpg'
 
-export default function ItemBox(props :{movies?:ImovieResults,tvShows?:ItvShowResults}) {
-    console.log(props.movies,'props');
-    
+export default function ItemBox(props: { data?: IdataResults, type: string }) {
     return (
         <div className='itemBox'>
-            <img className='itemBox_img' 
-            src= {props.movies?.backdrop_path ? `${UrlImage.POSTER}${props.movies?.backdrop_path}` :''}/>
+            <LazyLoad height={220} once>
+                <img className='itemBox_img'
+                    src={props.data?.backdrop_path ? `${UrlImage.POSTER}${props.data?.backdrop_path}` : DefaultPoster} />
+            </LazyLoad>
+            <p className='itemBox_title'>{props.data?.original_title ? props.data?.original_title : props.data?.original_name}</p>
         </div>
     )
 }

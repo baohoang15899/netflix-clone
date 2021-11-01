@@ -9,7 +9,7 @@ const NAxios = axios.create({
 })
 
 NAxios.interceptors.request.use(function (config) {
-    console.log(`[START][${config.method} ${config.baseURL}${config.url} ]`, config)
+    // console.log(`[START][${config.method} ${config.baseURL}${config.url} ]`, config)
     return config;
   }, function (error) {
     // Do something with request error
@@ -18,7 +18,7 @@ NAxios.interceptors.request.use(function (config) {
 
 // Add a response interceptor
 NAxios.interceptors.response.use(function (response) {
-    console.log(`[END][${response.config.url}]`, response)
+    // console.log(`[END][${response.config.url}]`, response)
     return response;
   }, function (error) {
     console.log(error.response);

@@ -34,7 +34,7 @@ export default function EmailBar() {
                     placeholder ?
                         'inputWrapper__placeholder add' :
                         'inputWrapper__placeholder'}>
-                    Email address
+                    Username or phone
                 </p>
             </div>
             <Link  className='sendBtn' to={{pathname:'/sign-in', state:email}} >Get Started</Link>

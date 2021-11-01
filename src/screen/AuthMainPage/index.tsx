@@ -14,7 +14,6 @@ export default function Index() {
             <Banner/>
             <Content/>
             <Question/>
-            <Footer/>
         </>
     )
 }

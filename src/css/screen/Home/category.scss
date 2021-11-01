@@ -1,23 +1,28 @@
 .home{
     &__wrapper{
         position: relative;
-        z-index: 8;
-    }
-    &__categoryContent{
-        position: absolute;
-        top: -170px;
+        z-index: 100;
+        top: -120px;
         @include media(992){
             top: 0px;
         }
     }
-    &__category{
+    &__category{    
         z-index: 8;
-        &-content{
-            padding-bottom: 28px;
-        }
+        margin-bottom: 40px;
         &-header{
             @include font-semiBold(18px);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+        &-content{
+            .slick-slider{
+                display: flex;
+                align-items: center;
+                .arrow{
+                    cursor: pointer;
+                    margin: auto 8px;
+                }
+            }
         }
     }
 }

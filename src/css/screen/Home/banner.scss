@@ -5,6 +5,7 @@
         background-size: cover;
         position: relative;
         margin-bottom: 2;
+        border: none;
         &::after{
             content: '';
             width: 100%;
@@ -19,7 +20,7 @@
             position: relative;
             z-index: 10;
             padding-top: 200px;
-            padding-bottom: 260px;
+            padding-bottom: 240px;
         }
         &-title{
             font-family: $font-archivo;

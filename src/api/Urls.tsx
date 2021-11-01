@@ -12,6 +12,10 @@ export enum Urls {
     LOG_OUT = 'authentication/session?',
     MOVIE_DETAIL = 'movie/',
     TV_DETAIL = 'tv/',
+    GENRE_MOVIE = 'genre/movie/list?',
+    GENRE_TV = 'genre/tv/list?',
+    MOVIE_BY_GENRE = 'discover/movie?',
+    TV_BY_GENRE = 'discover/tv?',
     FAVORITE_WATCHLIST = 'account/' // add favorite or watchlist in the end of url ex: acc_id/favorite
     // https://api.themoviedb.org/3/search/multi?api_key=<<api_key>>&language=en-US&query=batman&page=1&include_adult=false
 }

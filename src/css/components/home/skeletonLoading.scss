@@ -1,0 +1,17 @@
+.skeleton{
+    width: 100%;
+    min-height: 150px;
+}
+
+.skeletonName{
+    width: 15%;
+    margin-bottom: 15px;
+}
+
+.skeletonWrapper{
+    padding: 0 50px;
+    margin-bottom: 20px;
+    @include media(992){
+        padding:  0 10px;
+    }
+}
