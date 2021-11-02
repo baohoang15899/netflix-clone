@@ -4,6 +4,10 @@
     cursor: pointer;
     aspect-ratio: 18/9;
     overflow: hidden;
+    -webkit-aspect-ratio: 18/9;
+    -moz-aspect-ratio: 18/9;
+    -ms-aspect-ratio: 18/9;
+    -o-aspect-ratio: 18/9;
     &::after{
         content: '';
         position:absolute;
@@ -14,7 +18,7 @@
         bottom: 0;
     }
     &_img{
-        max-width: 320px;
+        max-width: 100%;
         border-radius: 4px;
         height: 100%;
     }

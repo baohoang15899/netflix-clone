@@ -415,6 +415,10 @@ button {
   cursor: pointer;
   aspect-ratio: 18/9;
   overflow: hidden;
+  -webkit-aspect-ratio: 18/9;
+  -moz-aspect-ratio: 18/9;
+  -ms-aspect-ratio: 18/9;
+  -o-aspect-ratio: 18/9;
 }
 .itemBox::after {
   content: "";
@@ -426,7 +430,7 @@ button {
   bottom: 0;
 }
 .itemBox_img {
-  max-width: 320px;
+  max-width: 100%;
   border-radius: 4px;
   height: 100%;
 }
@@ -956,15 +960,23 @@ button {
   width: 40vw;
   background-color: #000000;
   transform: translateX(-100%);
-  transition-property: transform;
-  transition: ease-in-out 0.2s;
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
   display: none;
 }
 @media only screen and (max-width: 992px) {
   .home__header-menuMobile {
     display: block;
+    transition-property: transform;
+    transition: ease-in-out 0.2s;
   }
   .home__header-menuMobile.open {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
     transform: translateX(0);
   }
 }

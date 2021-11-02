@@ -13,7 +13,6 @@ export default function SliderComponent({ Component }: any) {
         watchOverflow: true,
         lazy: true,
         enabled: true,
-        speed: 400,
         pagination: {
             "clickable": false
         },

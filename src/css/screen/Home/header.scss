@@ -117,12 +117,20 @@
             width: 40vw;
             background-color: #000000;
             transform: translateX(-100%);
-            transition-property: transform;
-            transition: ease-in-out 0.2s;
+            -webkit-transform: translateX(-100%);
+            -moz-transform: translateX(-100%);
+            -ms-transform: translateX(-100%);
+            -o-transform: translateX(-100%);
             display: none;
             @include media(992){
                 display: block;
+                transition-property: transform;
+                transition: ease-in-out 0.2s;
                 &.open{
+                    -webkit-transform: translateX(0);
+                    -moz-transform: translateX(0);
+                    -ms-transform: translateX(0);
+                    -o-transform: translateX(0);
                     transform: translateX(0);
                 }
             }
