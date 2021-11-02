@@ -452,6 +452,16 @@ button {
   margin-bottom: 15px;
 }
 
+.skeletonLoad {
+  width: 100%;
+  min-height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
 .skeletonWrapper {
   padding: 0 50px;
   margin-bottom: 20px;
