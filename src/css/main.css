@@ -828,7 +828,7 @@ button {
 }
 
 .home__header {
-  padding: 20px 60px;
+  padding: 10px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -924,13 +924,12 @@ button {
   align-items: center;
   padding: 5px;
   background-color: transparent;
-  width: 0%;
   margin-right: 20px;
+  transition: all ease-in-out 0.2s;
 }
 .home__header-searchGroup.show {
   background-color: rgba(0, 0, 0, 0.4);
   border: 1px solid white;
-  width: initial;
 }
 .home__header-search {
   margin-right: 10px;
@@ -982,7 +981,6 @@ button {
 }
 .home__header-dropdown {
   position: absolute;
-  margin-top: 10px;
   padding: 5px 20px;
   padding-right: 30px;
   padding-left: 10px;
@@ -997,10 +995,6 @@ button {
   opacity: 0;
   transition-property: opacity;
   transition: ease-in-out 0.25s;
-}
-.home__header-dropdown.show {
-  opacity: 1;
-  visibility: visible;
 }
 .home__header-detail {
   font-weight: 600;
@@ -1055,14 +1049,21 @@ button {
   transition: ease-in-out 0.25s;
   transition-property: transform;
 }
-.home__header-triangle.rotate {
-  transform: translateY(-50%) rotateX(180deg);
-}
 .home__header-avatarGroup {
   display: flex;
   align-items: center;
   position: relative;
   cursor: pointer;
+  padding: 10px 0px;
+}
+@media (hover: hover) {
+  .home__header-avatarGroup:hover .home__header-dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+  .home__header-avatarGroup:hover .home__header-triangle {
+    transform: translateY(-50%) rotateX(180deg);
+  }
 }
 .home__header-username {
   margin-left: 8px;

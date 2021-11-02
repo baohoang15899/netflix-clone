@@ -19,7 +19,7 @@ export default function Homeheader() {
     const ref = useRef<any>(null)
     const mobileRef = useRef<any>(null)
     const dispatch = useDispatch()
-    ClickOutSide(ref, setShow, mobileRef, setMenuMobile)
+    ClickOutSide(mobileRef, setMenuMobile)
 
     useEffect(()=>{
         const handleScroll = () =>{
@@ -73,14 +73,14 @@ export default function Homeheader() {
                     <Icon onClick={() => { setShowSearch(!showSearch) }} style={{ cursor: 'pointer' }} icon={faSearch} />
                     <input placeholder='Movie, Tvshow, Actor' className={showSearch ? 'home__header-search show' : 'home__header-search'} type='text' />
                 </div>
-                <div ref={ref} onClick={() => setShow(!show)} className='home__header-avatarGroup'>
+                <div className='home__header-avatarGroup'>
                     <div className='home__header-avatar'>
                         <img src={user.avatar.tmdb.avatar_path ? `${UrlImage.AVATAR}${user.avatar.tmdb.avatar_path}` : DefaultAvatar}
                             alt="avatar" />
                     </div>
-                    <span className={show ? "home__header-triangle rotate" : 'home__header-triangle'}></span>
+                    <span className="home__header-triangle"></span>
                     <p className='home__header-username'>{user.name ? user.name : user.username}</p>
-                    <div className={show ? 'home__header-dropdown show' : 'home__header-dropdown'}>
+                    <div className='home__header-dropdown'>
                         <Link to='/home' className='home__header-detail'><span>Account Detail</span></Link>
                         <p className='home__header-detail'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())} >Log out</span> </p>
                     </div>

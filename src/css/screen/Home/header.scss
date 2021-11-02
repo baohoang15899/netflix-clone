@@ -1,6 +1,6 @@
 .home{
     &__header{
-        padding: 20px 60px;
+        padding: 10px 60px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -83,12 +83,11 @@
             align-items: center;
             padding: 5px;
             background-color: transparent;
-            width: 0%;
             margin-right: 20px;
+            transition: all ease-in-out 0.2s;
             &.show{
                 background-color: rgba($color: #000000, $alpha: 0.4);
                 border: 1px solid white;
-                width: initial;
             }
         }
         &-search{
@@ -136,7 +135,6 @@
         }
         &-dropdown{
             position: absolute;
-            margin-top: 10px;
             padding: 5px 20px;
             padding-right: 30px;
             padding-left: 10px;
@@ -151,10 +149,6 @@
             opacity: 0;
             transition-property: opacity;
             transition: ease-in-out 0.25s;
-            &.show{
-                opacity: 1;
-                visibility: visible;
-            }
         }
         &-detail{
             @include font-semiBold(10px);
@@ -200,15 +194,22 @@
             border-color: #fff transparent transparent transparent;
             transition: ease-in-out 0.25s;
             transition-property: transform;
-            &.rotate{
-                transform: translateY(-50%) rotateX(180deg);
-            }
         }
         &-avatarGroup{
             display: flex;
             align-items: center;
             position: relative;
             cursor: pointer;
+            padding: 10px 0px;  
+            @media (hover:hover){
+                &:hover .home__header-dropdown{
+                    opacity: 1;
+                    visibility: visible;
+                }
+                &:hover .home__header-triangle{
+                    transform: translateY(-50%) rotateX(180deg);
+                }
+            }
         }
         &-username{
             margin-left: 8px;

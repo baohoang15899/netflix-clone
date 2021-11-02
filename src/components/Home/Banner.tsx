@@ -34,7 +34,7 @@ export default function Banner({ data }: IbannerData) {
                             </div>
                             <div className='home__banner-btnDetail'>
                                 <Icon style={{ marginRight: '10px' }} size="sm" icon={faExclamationCircle} />
-                                <span>Press for more</span>
+                                <span>More info</span>
                             </div>
                         </div>
                     </div>
