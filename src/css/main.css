@@ -1271,7 +1271,7 @@ button {
   transition: opacity, ease-in-out 0.2s;
 }
 .home__category-content .swiper-container .swiper-pagination .swiper-pagination-bullet {
-  background: rgba(140, 140, 140, 0.5);
+  background: rgba(140, 140, 140, 0.4);
   width: 40px;
   height: 3px;
   right: 15px;
