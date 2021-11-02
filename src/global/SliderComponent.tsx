@@ -1,61 +1,48 @@
 import React from 'react'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft,faChevronRight } from '@fortawesome/free-solid-svg-icons'
-function SampleNextArrow(props?: any) {
-    const { className, style, onClick } = props;
-    return (
-        <Icon className='arrow' size='2x' onClick={onClick} icon={faChevronRight} />
-    );
-}
-
-function SamplePrevArrow(props?: any) {
-    const { className, style, onClick } = props;
-    return (
-        <Icon className='arrow' size='2x' onClick={onClick} icon={faChevronLeft} />
-    );
-}
-
+import SwiperCore, { Navigation, Lazy, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+// import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+// import { faChevronLeft,faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function SliderComponent({ Component }: any) {
-    const settings = {
-        dots: false,
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        arrows: true,
-        draggable: false,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
+    const setting = {
+        navigation: true,
+        spaceBetween: 2,
+        watchOverflow: true,
+        lazy: true,
+        enabled: true,
+        speed: 400,
+        pagination: {
+            "clickable": false
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+                spaceBetween: 0,
             },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                }
+            400: {
+                slidesPerView: 2.45,
+                slidesPerGroup: 2,
             },
-            {
-                breakpoint: 400,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+            800: {
+                slidesPerView: 4.45,
+                slidesPerGroup: 4,
+            },
+            992: {
+                slidesPerView: 5.45,
+                slidesPerGroup: 5,
+                noSwiping: true,
+                noSwipingClass: 'swiper-slide',
             }
-        ]
-    };
+        }
+    }
+    SwiperCore.use([Navigation, Lazy, Pagination]);
     return (
-        <Slider {...settings}>
+        <Swiper {...setting} >
             {Component}
-        </Slider>
+        </Swiper>
     )
 }

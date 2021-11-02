@@ -2,6 +2,8 @@
     padding: 0px 2px;
     position: relative;
     cursor: pointer;
+    aspect-ratio: 18/9;
+    overflow: hidden;
     &::after{
         content: '';
         position:absolute;
@@ -14,6 +16,7 @@
     &_img{
         max-width: 320px;
         border-radius: 4px;
+        height: 100%;
     }
     &_title{
         z-index: 10;
@@ -25,7 +28,4 @@
     }
 }
 
-.slick-slide img{
-    aspect-ratio: 19/10;
-}
 
