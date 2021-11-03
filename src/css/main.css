@@ -180,6 +180,10 @@ button {
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
   max-width: 73%;
@@ -421,6 +425,7 @@ button {
   padding: 0px 2px;
   position: relative;
   cursor: pointer;
+  max-height: 150px;
   aspect-ratio: 18/9;
   overflow: hidden;
   -webkit-aspect-ratio: 18/9;
@@ -467,8 +472,6 @@ button {
 .skeletonLoad {
   position: absolute;
   z-index: 200;
-  width: 100%;
-  height: 100%;
   top: 50%;
   transform: translateY(-50%);
   min-height: 200px;
