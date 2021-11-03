@@ -425,6 +425,7 @@ button {
   padding: 0px 2px;
   position: relative;
   cursor: pointer;
+  max-height: 150px;
   aspect-ratio: 18/9;
   overflow: hidden;
   -webkit-aspect-ratio: 18/9;
