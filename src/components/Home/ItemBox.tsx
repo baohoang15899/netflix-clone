@@ -9,13 +9,13 @@ export default function ItemBox(props: { data?: IdataResults, type: string }) {
 
     return (
         <div className='itemBox'>
-            {!loading &&
+            {/* {!loading &&
                 <SkeletonTheme  baseColor="#202020" highlightColor="#444">
                     <Skeleton className='skeletonLoad' />
-                </SkeletonTheme>}
-            <img onLoad={() => setLoading(!loading)} className='itemBox_img swiper-lazy'
+                </SkeletonTheme>} */}
+            <img className='itemBox_img swiper-lazy'
                 data-src={props.data?.backdrop_path ? `${UrlImage.POSTER}${props.data?.backdrop_path}` : DefaultPoster} />
-           {loading && <p className='itemBox_title'>{props.data?.original_title ? props.data?.original_title : props.data?.original_name}</p>} 
+            <p className='itemBox_title'>{props.data?.original_title ? props.data?.original_title : props.data?.original_name}</p>
         </div>
     )
 }
