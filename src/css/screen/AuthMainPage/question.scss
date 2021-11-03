@@ -33,6 +33,10 @@
             overflow: hidden;
             transition: ease-out 0.25s;
             transition-property: max-height;
+            -webkit-transition: ease-out 0.25s;
+            -moz-transition: ease-out 0.25s;
+            -ms-transition: ease-out 0.25s;
+            -o-transition: ease-out 0.25s;
             &.show{
                 max-height: 100vh;
             }

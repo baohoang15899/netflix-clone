@@ -3,6 +3,10 @@
 *,
 ::before,
 ::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -10,6 +14,10 @@
 
 img {
   display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
 }
@@ -458,11 +466,12 @@ button {
 
 .skeletonLoad {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  z-index: 200;
+  width: 100%;
   height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  min-height: 200px;
 }
 
 .skeletonWrapper {
@@ -657,6 +666,10 @@ button {
   overflow: hidden;
   transition: ease-out 0.25s;
   transition-property: max-height;
+  -webkit-transition: ease-out 0.25s;
+  -moz-transition: ease-out 0.25s;
+  -ms-transition: ease-out 0.25s;
+  -o-transition: ease-out 0.25s;
 }
 .questionAuth__content-description.show {
   max-height: 100vh;
@@ -771,6 +784,10 @@ button {
   visibility: hidden;
   transition-property: opacity;
   transition: ease-in-out 0.25s;
+  -webkit-transition: ease-out 0.25s;
+  -moz-transition: ease-out 0.25s;
+  -ms-transition: ease-out 0.25s;
+  -o-transition: ease-out 0.25s;
 }
 .login__content-policy.show {
   opacity: 1;

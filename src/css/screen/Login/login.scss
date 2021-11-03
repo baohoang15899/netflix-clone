@@ -29,6 +29,10 @@
             visibility: hidden;
             transition-property: opacity;
             transition: ease-in-out 0.25s;
+            -webkit-transition: ease-out 0.25s;
+            -moz-transition: ease-out 0.25s;
+            -ms-transition: ease-out 0.25s;
+            -o-transition: ease-out 0.25s;
             &.show{
                 opacity: 1;
                 visibility: visible;
