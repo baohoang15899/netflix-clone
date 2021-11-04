@@ -23,7 +23,7 @@ export default function SliderComponent({ Component }: any) {
                 spaceBetween: 0,
             },
             400: {
-                slidesPerView: 2.45,
+                slidesPerView: 1.9,
                 slidesPerGroup: 2,
             },
             800: {

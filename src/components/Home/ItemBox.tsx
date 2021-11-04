@@ -8,19 +8,19 @@ export default function ItemBox(props: { data?: IdataResults, type: string }) {
     const [loading, setLoading] = useState<Boolean>(false)
     const [scale,setScale] = useState<Boolean>(false)
     const ref = useRef<any>(null)
-    const handleMouseOver = () =>{
-        ref.current = setTimeout(()=>setScale(true),2000)
-    }
+    // const handleMouseOver = () =>{
+    //     ref.current = setTimeout(()=>setScale(true),200)
+    // }
 
-    const handleMouseOut = () =>{
-        if (ref.current) {
-            clearTimeout(ref.current)
-            if (scale) setScale(false)
-        }
-    }
+    // const handleMouseOut = () =>{
+    //     if (ref.current) {
+    //         clearTimeout(ref.current)
+    //         if (scale) setScale(false)
+    //     }
+    // }
 
     return (
-        <div onMouseOut={()=>handleMouseOut()} onMouseOver={() =>handleMouseOver()} className={scale ? 'itemBox add' : 'itemBox'}>
+        <div className='itemBox'>
             <div className='itemBox_cover'>
                 {/* {!loading &&
                 <SkeletonTheme  baseColor="#202020" highlightColor="#444">
