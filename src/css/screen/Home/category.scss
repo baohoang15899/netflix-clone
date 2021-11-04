@@ -34,11 +34,12 @@
                     display: flex;
                     right: 3rem;
                     opacity: 0;
+                    height: 1rem;
                     visibility: hidden;
                     transition: opacity,ease-in-out 0.2s;
                     .swiper-pagination-bullet{
                         background: rgba($color: $placeholder-color, $alpha: .4);
-                        width: 40px;
+                        width: 15px;
                         height: 3px;
                         right: 15px;
                         opacity: 1;
