@@ -1,0 +1,25 @@
+.detailModal{
+    position: fixed;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    z-index: 999;
+    &__inner{
+        background-color: #181818;
+        width: 65vw;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1000;
+        border-radius: 4px;
+        @include media(700){
+            width: 75vw;
+        }
+        @include media(500){
+            width: 90vw;
+        }
+    }
+}

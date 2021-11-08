@@ -18,7 +18,7 @@ export default function SliderComponent({ Component }: any) {
         },
         breakpoints: {
             320: {
-                slidesPerView: 1,
+                slidesPerView: 1.1,
                 slidesPerGroup: 1,
                 spaceBetween: 0,
             },
@@ -27,11 +27,11 @@ export default function SliderComponent({ Component }: any) {
                 slidesPerGroup: 2,
             },
             800: {
-                slidesPerView: 4.45,
+                slidesPerView: 4.2,
                 slidesPerGroup: 4,
             },
             992: {
-                slidesPerView: 5.45,
+                slidesPerView: 5.2,
                 slidesPerGroup: 5,
                 noSwiping: true,
                 noSwipingClass: 'swiper-slide',

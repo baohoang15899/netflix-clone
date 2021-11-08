@@ -22,7 +22,7 @@ export default function Index() {
         dispatch(homeAction.getMoviesByGenreRequest())
         dispatch(homeAction.getTvByGenreRequest())
     }, [])
-   
+
     return (
         <div className='home'>
             <>

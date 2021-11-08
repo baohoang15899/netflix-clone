@@ -54,6 +54,8 @@ function* getUserData() {
             }
             else {
                 yield put(authAction.LoginFailed())
+                yield localStorage.removeItem('token')
+                yield put(authAction.logOutSuccess())
             }
         }
         else {

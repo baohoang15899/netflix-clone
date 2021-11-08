@@ -59,8 +59,8 @@
                     margin-top: initial;
                     top: 0;
                     cursor: pointer;
-                    padding: 0px 28px;
-                    right: 0;
+                    padding: 0px 56px;
+                    right: -60px;
                     opacity: 0;
                     visibility: hidden;
                     background-color: rgba($color: #000000, $alpha: .6);
@@ -72,7 +72,7 @@
                 }
                 .swiper-button-prev{
                     @extend .swiper-button-next;
-                    left: 0;
+                    left: -60px;
                 }
                 @media (hover:hover){
                     &:hover .swiper-button-next{
@@ -88,11 +88,16 @@
                     .swiper-button-next{
                         opacity: 1;
                         visibility: visible;
+                        right: -20px;
+                        padding: 0px 28px;
+                    }
+                    .swiper-button-prev{
+                        left: -20px;
                     }
                 }
                 @include media(600){
                     .swiper-button-next{
-                        padding: 0px 18px;
+                        padding: 0px 28px;
                         &::after{
                             font-size: 26px;
                             font-weight: bold

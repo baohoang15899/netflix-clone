@@ -17,7 +17,7 @@ export default function Homeheader() {
     const [showSearch, setShowSearch] = useState<Boolean>(false)
     const [showHeader,setShowHeader] = useState<Boolean>(false)
     const ref = useRef<any>(null)
-    const mobileRef = useRef<any>(null)
+    const mobileRef = useRef<any>()
     const dispatch = useDispatch()
     ClickOutSide(mobileRef, setMenuMobile)
 

@@ -10,13 +10,12 @@ export default function CategoryContent({ title, movies, tvShows, type }: Icateg
         <div className="home__category">
             <div className="container">
                 <div className="home__category-header">{title}</div>
-            </div>
-            <div className="home__category-content">
+                <div className="home__category-content">
                 {type === CategoryType.MOVIE &&
                     <SliderComponent Component={
                         movies?.results?.map(item => {
                             return <SwiperSlide key={item.id}>
-                                <Item type={type} key={item.id} data={item} />
+                                <Item mediaType={type} key={item.id} data={item} />
                             </SwiperSlide>
                         })
                     } />
@@ -25,11 +24,12 @@ export default function CategoryContent({ title, movies, tvShows, type }: Icateg
                     <SliderComponent Component={
                         tvShows?.results?.map(item => {
                             return <SwiperSlide key={item.id}>
-                                <Item type={type} key={item.id} data={item} />
+                                <Item mediaType={type} key={item.id} data={item} />
                             </SwiperSlide>
                         })
                     } />
                 }
+            </div>
             </div>
         </div>
     )
