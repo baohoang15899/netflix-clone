@@ -1255,6 +1255,7 @@ button {
   .home__banner-btnDetail {
     margin-left: initial;
     margin-top: 10px;
+    padding: 10px 20px;
   }
   .home__banner-btnGroup {
     flex-direction: column;

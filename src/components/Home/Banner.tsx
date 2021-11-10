@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faPlay, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link,useLocation } from 'react-router-dom'
 
 export default function Banner({ data }: IbannerData) {
+    const location = useLocation()
     return (
         <div className='home__banner'
             style={data && {
@@ -32,10 +34,14 @@ export default function Banner({ data }: IbannerData) {
                                 <Icon style={{ marginRight: '10px' }} size="sm" icon={faPlay} />
                                 <span>Trailer</span>
                             </div>
-                            <div className='home__banner-btnDetail'>
+                            <Link key={data?.id}
+                                to={{
+                                    pathname: `/home/${data?.media_type}/${data?.id}`,
+                                    state: { background: location }
+                                }} className='home__banner-btnDetail'>
                                 <Icon style={{ marginRight: '10px' }} size="sm" icon={faExclamationCircle} />
                                 <span>More info</span>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
