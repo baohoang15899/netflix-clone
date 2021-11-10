@@ -35,7 +35,7 @@ export default function App() {
     let background = location?.state && location.state.background
     return (
         <div className='wrapper'>
-            {isLoggedIn && user && <Header/>}
+            {isLoggedIn && user && <Header/>} 
             {isLoading ?
                 <Loading /> :
                 <>
@@ -46,14 +46,14 @@ export default function App() {
                     </Switch>
                     {!background &&
                         <Switch>
-                            <PrivateRoute path='/home/:id' component={(props: any) => <Modal key={window.location.hash} {...props} />} auth={isLoggedIn} />
+                            <PrivateRoute path='/home/:type/:id' component={(props: any) => <Modal key={window.location.hash} {...props} />} auth={isLoggedIn} />
                         </Switch>
                     }
                 </>
             }
             {background &&
                 <PrivateRoute
-                    path='/home/:id'
+                    path='/home/:type/:id'
                     auth={isLoggedIn}
                     component={(props: any) => <Modal key={window.location.hash} {...props} />} />}
             <Footer />

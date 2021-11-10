@@ -84,6 +84,27 @@ export const getGenresTvRequest = () =>{
     return processRequest(NAxios.get(`${Urls.GENRE_TV}api_key=${client_ID}`))
 }
 
+export const getMovieDetail = async(id:string,cb:(e:any)=>void,connect:(e:Boolean)=>void) =>{
+    try {
+        const url = await NAxios.get(`${Urls.MOVIE_DETAIL}${id}?api_key=${client_ID}`)
+        const data = url.data
+        cb(data)
+        connect(true)
+    } catch (error) {
+        connect(false)
+    }
+}
+
+export const getTvDetail = async(id:string,cb:(e:any)=>void,connect:(e:Boolean)=>void) =>{
+    try {
+        const url = await NAxios.get(`${Urls.TV_DETAIL}${id}?api_key=${client_ID}`)
+        const data = url.data
+        cb(data)
+        connect(true)
+    } catch (error) {
+        connect(false)
+    }
+}
 
 export const getMovieByGenreRequest = async() => {
     const genres:ApiResponse = await getGenresMovieRequest()

@@ -5,21 +5,100 @@
     left: 0;
     right: 0;
     bottom: 0;
-    cursor: pointer;
+    overflow-y: scroll;
     z-index: 999;
     &__inner{
+        overflow: hidden;
         background-color: #181818;
-        width: 65vw;
+        width: 60vw;
         margin-top: 30px;
         margin-left: auto;
         margin-right: auto;
         z-index: 1000;
         border-radius: 4px;
-        @include media(700){
-            width: 75vw;
+        position: relative;
+        &-background{
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        &-title{
+            padding-top: 300px;
+            padding-bottom: 150px;
+            padding-left: 50px;
+            padding-right: 20px;
+        }
+        &-name{
+            font-family: $font-archivo;
+            font-size: 40px;
+            color: white;
+            max-width: 70%;
+        }
+        &-btn{
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap
+        }
+        &-btnTrailer{
+            @extend .home__banner-btnTrailer;
+            display: inline;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        &-icon{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        &-config{
+            display: flex;
+            align-items: center;
+        }
+        &-btnAdd{
+            border:3px solid white;
+            padding: 5px 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            margin-left: 15px;
+            &:nth-child(1){
+                margin-left: 0px;
+            }
+        }
+        @include media(992){
+            width: 90vw;
+        }
+        @include media(600){
+            &-title{
+                padding-left: 20px;
+            }
+            &-name{
+                font-size: 20px;
+                max-width: 100%;
+            }
         }
         @include media(500){
             width: 90vw;
         }
+        @include media(407){
+            &-config{
+                // // margin-left: -15px;
+                margin-top: 10px;
+            }
+        }
+    }
+    &__close{
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        z-index: 888;
+        cursor: pointer;
+        background-color: #181818;
+        padding: 5px 10px;
+        border-radius: 50%;
     }
 }

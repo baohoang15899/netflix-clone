@@ -13,7 +13,7 @@ export default function Index(props:any) {
         <>
             <Banner/>
             <Content/>
-            <Question/>
+            <Question/> 
         </>
     )
 }

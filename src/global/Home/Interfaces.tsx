@@ -13,11 +13,11 @@ export interface IhomeReducer {
     Loading: Iloading
 }
 
-interface Iloading{
-    trending:Boolean,
-    popular:Boolean,
-    genreTv:Boolean,
-    genreMovie:Boolean
+interface Iloading {
+    trending: Boolean,
+    popular: Boolean,
+    genreTv: Boolean,
+    genreMovie: Boolean
 }
 interface IsingleMovie {
     genre?: string,
@@ -123,4 +123,41 @@ export interface IdataResults {
     release_date?: string,
     video?: Boolean,
     title?: string,
+}
+
+export interface ImovieDetail {
+    id?: number,
+    adult?: Boolean,
+    backdrop_path?: string,
+    original_title?: string,
+    overview?: string,
+    release_date?: string,
+    runtime?: number,
+    tagline?: string,
+    genres?: IgenreData[],
+    vote_average?: number,
+    vote_count?: number
+}
+
+interface Icreated_by {
+    credit_id?: string
+    gender?: number
+    id?: number
+    name?: string
+    profile_path?: string
+}
+export interface ItvDetail {
+    id?: number,
+    tagline?: string,
+    genres?: IgenreData[],
+    vote_average?: number,
+    vote_count?: number
+    first_air_date?: string,
+    name?: string,
+    original_name?: string,
+    last_air_date?: string,
+    number_of_episodes?: number,
+    number_of_seasons?: number,
+    created_by:Icreated_by[],
+    backdrop_path?: string,
 }

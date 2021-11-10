@@ -11,25 +11,29 @@ export default function CategoryContent({ title, movies, tvShows, type }: Icateg
             <div className="container">
                 <div className="home__category-header">{title}</div>
                 <div className="home__category-content">
-                {type === CategoryType.MOVIE &&
-                    <SliderComponent Component={
-                        movies?.results?.map(item => {
-                            return <SwiperSlide key={item.id}>
-                                <Item mediaType={type} key={item.id} data={item} />
-                            </SwiperSlide>
-                        })
-                    } />
-                }
-                {type === CategoryType.TV &&
-                    <SliderComponent Component={
-                        tvShows?.results?.map(item => {
-                            return <SwiperSlide key={item.id}>
-                                <Item mediaType={type} key={item.id} data={item} />
-                            </SwiperSlide>
-                        })
-                    } />
-                }
-            </div>
+                    {type === CategoryType.MOVIE &&
+                        <SliderComponent Component={
+                            movies?.results?.map(item => {
+                                if (item.backdrop_path && item.poster_path) {
+                                    return <SwiperSlide key={item.id}>
+                                        <Item mediaType={type} key={item.id} data={item} />
+                                    </SwiperSlide>
+                                }
+                            })
+                        } />
+                    }
+                    {type === CategoryType.TV &&
+                        <SliderComponent Component={
+                            tvShows?.results?.map(item => {
+                                if (item.backdrop_path && item.poster_path) {
+                                    return <SwiperSlide key={item.id}>
+                                        <Item mediaType={type} key={item.id} data={item} />
+                                    </SwiperSlide>
+                                }
+                            })
+                        } />
+                    }
+                </div>
             </div>
         </div>
     )

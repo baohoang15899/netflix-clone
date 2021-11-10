@@ -1189,7 +1189,7 @@ button {
   margin-top: 20px;
   display: flex;
 }
-.home__banner-btnTrailer {
+.home__banner-btnTrailer, .detailModal__inner-btnTrailer {
   cursor: pointer;
   padding: 10px 20px;
   background-color: white;
@@ -1203,7 +1203,7 @@ button {
   transition-property: background-color;
 }
 @media (hover: hover) {
-  .home__banner-btnTrailer:hover {
+  .home__banner-btnTrailer:hover, .detailModal__inner-btnTrailer:hover {
     background-color: rgba(255, 255, 255, 0.7);
   }
 }
@@ -1372,9 +1372,6 @@ button {
   }
 }
 @media only screen and (max-width: 400px) {
-  .home__category-content .swiper-container {
-    padding: 0px 20px;
-  }
   .home__category-content .swiper-container .swiper-wrapper {
     width: 100%;
   }
@@ -1387,27 +1384,104 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  cursor: pointer;
+  overflow-y: scroll;
   z-index: 999;
 }
 .detailModal__inner {
+  overflow: hidden;
   background-color: #181818;
-  width: 65vw;
+  width: 60vw;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
   z-index: 1000;
   border-radius: 4px;
+  position: relative;
 }
-@media only screen and (max-width: 700px) {
+.detailModal__inner-background {
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.detailModal__inner-title {
+  padding-top: 300px;
+  padding-bottom: 150px;
+  padding-left: 50px;
+  padding-right: 20px;
+}
+.detailModal__inner-name {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 40px;
+  color: white;
+  max-width: 70%;
+}
+.detailModal__inner-btn {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.detailModal__inner-btnTrailer {
+  display: inline;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.detailModal__inner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.detailModal__inner-config {
+  display: flex;
+  align-items: center;
+}
+.detailModal__inner-btnAdd {
+  border: 3px solid white;
+  padding: 5px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin-left: 15px;
+}
+.detailModal__inner-btnAdd:nth-child(1) {
+  margin-left: 0px;
+}
+@media only screen and (max-width: 992px) {
   .detailModal__inner {
-    width: 75vw;
+    width: 90vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .detailModal__inner-title {
+    padding-left: 20px;
+  }
+  .detailModal__inner-name {
+    font-size: 20px;
+    max-width: 100%;
   }
 }
 @media only screen and (max-width: 500px) {
   .detailModal__inner {
     width: 90vw;
   }
+}
+@media only screen and (max-width: 407px) {
+  .detailModal__inner-config {
+    margin-top: 10px;
+  }
+}
+.detailModal__close {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 888;
+  cursor: pointer;
+  background-color: #181818;
+  padding: 5px 10px;
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=main.css.map */

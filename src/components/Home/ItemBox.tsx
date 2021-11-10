@@ -10,8 +10,8 @@ export default function ItemBox(props: { data?: IdataResults, mediaType: string 
     return (
         <Link 
         key={props.data?.id} 
-        to={{pathname:`/home/${props.data?.id}`, 
-        state: { background: location, mediaType:props.mediaType, }}}>
+        to={{pathname:`/home/${props.mediaType}/${props.data?.id}`, 
+        state: { background: location,}}}>
             <div className='itemBox'>
                 <div className='itemBox_cover'>
                     <img className='itemBox_img swiper-lazy'
