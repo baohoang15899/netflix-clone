@@ -132,11 +132,13 @@ export interface ImovieDetail {
     original_title?: string,
     overview?: string,
     release_date?: string,
-    runtime?: number,
+    runtime?: any,
     tagline?: string,
     genres?: IgenreData[],
     vote_average?: number,
-    vote_count?: number
+    vote_count?: number,
+    cast: IcastInfo[],
+    crew: Icrew[]
 }
 
 interface Icreated_by {
@@ -146,18 +148,72 @@ interface Icreated_by {
     name?: string
     profile_path?: string
 }
+
+interface IcastInfo {
+    adult: Boolean
+    cast_id: number
+    character: string
+    credit_id: string
+    gender: number
+    id: number
+    known_for_department: string
+    name: string
+    order: number
+    original_name: string
+    popularity: number
+    profile_path: string
+}
+
+export interface Irecommendation {
+    adult: Boolean
+    backdrop_path: string
+    genre_ids: Array<number>
+    id: number
+    media_type: string
+    original_language: string
+    original_title: string
+    original_name: string
+    overview: string
+    popularity: number
+    poster_path: string
+    release_date: string
+    title: string
+    video: Boolean
+    vote_average: number
+    vote_count: number
+    first_air_date:string
+    name:string
+}
+
+interface Icrew {
+    adult: Boolean
+    credit_id: string
+    department: string
+    gender: number
+    id: number
+    job: string
+    known_for_department: string
+    name: string
+    original_name: string
+    popularity: number
+    profile_path: string
+}
 export interface ItvDetail {
-    id?: number,
-    tagline?: string,
-    genres?: IgenreData[],
-    vote_average?: number,
-    vote_count?: number
-    first_air_date?: string,
-    name?: string,
-    original_name?: string,
-    last_air_date?: string,
-    number_of_episodes?: number,
-    number_of_seasons?: number,
-    created_by:Icreated_by[],
-    backdrop_path?: string,
+    id: number,
+    tagline: string,
+    genres: IgenreData[],
+    vote_average: number,
+    vote_count: number
+    first_air_date: string,
+    name: string,
+    original_name: string,
+    last_air_date: string,
+    number_of_episodes: number,
+    number_of_seasons: number,
+    created_by: Icreated_by[],
+    backdrop_path: string,
+    episode_run_time: Array<any>
+    overview: string,
+    cast: IcastInfo[],
+    crew: Icrew[]
 }

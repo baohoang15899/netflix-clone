@@ -1,0 +1,27 @@
+.recommendationBox{
+    background-color: #181818;
+    border-radius: 4px;
+    overflow: hidden;
+    &__banner{
+        background-position: center;
+        background-size: cover;
+        padding-bottom: 30px;
+        padding-top: 90px
+    }
+    &__title{
+        margin-top: 10px;
+        padding: 0px 10px;
+        @include font-semiBold(12px);
+    }
+    &__dateAdd{
+        margin-top: 10px;
+        padding: 0px 10px;
+        @include font-semiBold(14px)
+    }
+    &__overview{
+        margin-top: 10px;
+        padding: 0px 10px;
+        padding-bottom: 10px;
+        @include font-semiBold(14px,#777777)
+    }
+}

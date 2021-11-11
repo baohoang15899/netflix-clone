@@ -1,11 +1,12 @@
-import { getMovieDetail, getTvDetail } from 'api/Services';
+import { getMovieDetail, getRecommendShow, getTvDetail } from 'api/Services';
 import { UrlImage } from 'api/Urls';
-import { ImovieDetail, ItvDetail } from 'global/Home/Interfaces';
+import { ImovieDetail, Irecommendation, ItvDetail } from 'global/Home/Interfaces';
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faPlay, faList, faPlus, faHeart, faStar, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Btn from 'components/Home/DetailModalBtn'
+import RecommendBox from 'components/Home/RecommendationBox'
 
 export default function Index(props: any) {
     const history = useHistory()
@@ -13,14 +14,18 @@ export default function Index(props: any) {
     const [tv, setTv] = useState<ItvDetail>()
     const [movie, setMovie] = useState<ImovieDetail>()
     const [connect, setConnect] = useState<Boolean>()
+    const [recomCheck, setRecomCheck] = useState<Boolean>()
+    const [recommendation, setRecommendations] = useState<Array<Irecommendation>>()
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         if (props?.match?.params?.type === 'tv') {
             getTvDetail(props?.match?.params?.id, setTv, setConnect)
+            getRecommendShow(props?.match?.params?.id, props?.match?.params?.type, setRecomCheck, setRecommendations)
         }
         else if (props?.match?.params?.type === 'movie') {
             getMovieDetail(props?.match?.params?.id, setMovie, setConnect)
+            getRecommendShow(props?.match?.params?.id, props?.match?.params?.type, setRecomCheck, setRecommendations)
         }
         return () => { document.body.style.overflow = 'unset' }
     }, [])
@@ -30,62 +35,122 @@ export default function Index(props: any) {
             history.goBack()
         }
     }
-
     return (
         <div ref={ref} onClick={(e) => handleGoback(e)} className='detailModal'>
             <div className='detailModal__inner'>
-                <div onClick={()=> history.goBack()} className='detailModal__close'>
+                <div onClick={() => history.goBack()} className='detailModal__close'>
                     <Icon style={{
                         padding: '2px'
                     }} size="2x" icon={faTimes} />
                 </div>
                 {connect &&
-                    <div className='detailModal__inner-background'
-                        style={{
-                            backgroundImage: ` linear-gradient(
+                    <>
+                        <div className='detailModal__inner-background'
+                            style={{
+                                backgroundImage: ` linear-gradient(
                             0deg,rgba(0,0,0,1) 0,rgba(0,0,0,0) 100%),url(${movie ?
-                                    UrlImage.TRENDING_BACKGROUND + movie?.backdrop_path :
-                                    UrlImage.TRENDING_BACKGROUND + tv?.backdrop_path})`
-                        }}>
-                        <div className='detailModal__inner-title'>
-                            <h4 className='detailModal__inner-name'>
-                                {movie ? movie?.original_title : tv?.name}
-                            </h4>
-                            <div className='detailModal__inner-btn'>
-                                <div className='detailModal__inner-btnTrailer'>
-                                    <Icon style={{ marginRight: '10px' }} size="sm" icon={faPlay} />
-                                    <span>Trailer</span>
-                                </div>
-                                <div className='detailModal__inner-config'>
-                                    <Btn component={
-                                        <Icon
-                                            className="detailModal__inner-icon"
-                                            size="lg"
-                                            icon={faPlus} />
-                                    }
-                                    />
-                                    <Btn component={
-                                        <Icon
-                                            className="detailModal__inner-icon"
-                                            size="lg"
-                                            icon={faList} />
-                                    } />
-                                    <Btn component={
-                                        <Icon
-                                            className="detailModal__inner-icon"
-                                            size="lg"
-                                            icon={faHeart} />
-                                    } />
-                                    <Btn component={
-                                        <Icon
-                                            className="detailModal__inner-icon"
-                                            size="lg"
-                                            icon={faStar} />
-                                    } />
+                                        UrlImage.TRENDING_BACKGROUND + movie?.backdrop_path :
+                                        UrlImage.TRENDING_BACKGROUND + tv?.backdrop_path})`
+                            }}>
+                            <div className='detailModal__inner-title'>
+                                <h4 className='detailModal__inner-name'>
+                                    {movie ? movie?.original_title : tv?.name}
+                                </h4>
+                                <div className='detailModal__inner-btn'>
+                                    <div className='detailModal__inner-btnTrailer'>
+                                        <Icon style={{ marginRight: '10px' }} size="sm" icon={faPlay} />
+                                        <span>Trailer</span>
+                                    </div>
+                                    <div className='detailModal__inner-config'>
+                                        <Btn component={
+                                            <Icon
+                                                className="detailModal__inner-icon"
+                                                size="lg"
+                                                icon={faPlus} />
+                                        }
+                                        />
+                                        <Btn component={
+                                            <Icon
+                                                className="detailModal__inner-icon"
+                                                size="lg"
+                                                icon={faList} />
+                                        } />
+                                        <Btn component={
+                                            <Icon
+                                                className="detailModal__inner-icon"
+                                                size="lg"
+                                                icon={faHeart} />
+                                        } />
+                                        <Btn component={
+                                            <Icon
+                                                className="detailModal__inner-icon"
+                                                size="lg"
+                                                icon={faStar} />
+                                        } />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div className='detailModal__inner-info'>
+                            <div className='detailModal__inner-infoLeft'>
+                                <div className='detailModal__inner-date'>
+                                    <span className='detailModal__inner-release'>
+                                        {movie ? movie.release_date : tv?.first_air_date}</span>
+                                    <span className='detailModal__inner-runtime'>
+                                        {movie
+                                            ?
+                                            `${Math.floor(movie.runtime / 60)}h
+                                            ${movie.runtime % 60}p`
+                                            :
+                                            `${tv?.episode_run_time &&
+                                            Math.floor(tv?.episode_run_time[0] / 60)}h
+                                            ${tv?.episode_run_time && tv?.episode_run_time[0] % 60}p/ep`
+                                        }
+                                    </span>
+                                </div>
+                                <p className='detailModal__inner-overview'>{movie ? movie.overview : tv?.overview}</p>
+                            </div>
+                            <div className='detailModal__inner-infoRight'>
+                                <div className='detailModal__inner-actors'>
+                                    <span className='detailModal__inner-crewTitle'> Actors:{' '}</span>
+                                    {movie?.cast.filter((item, index) => index < 4)
+                                        ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })}
+                                    {tv?.cast.filter((item, index) => index < 4)
+                                        ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })}
+                                    <span style={{ color: 'white' }}>...</span>
+                                </div>
+                                <div className='detailModal__inner-genres'>
+                                    <span className='detailModal__inner-crewTitle'>
+                                        Genres:{' '}
+                                        {movie?.genres
+                                            ?.map((item, index) => {
+                                                if (index !== (movie.genres && movie.genres?.length - 1))
+                                                    return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                else
+                                                    return <span key={item.id} className='detailModal__inner-crewName'>{item.name}</span>
+                                            })}
+                                        {tv?.genres
+                                            ?.map((item, index) => {
+                                                if (index !== tv.genres?.length - 1)
+                                                    return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                else
+                                                    return <span key={item.id} className='detailModal__inner-crewName'>{item.name}</span>
+                                            })}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {recomCheck &&
+                            <div className='detailModal__inner-recommend'>
+                                <span className='detailModal__inner-recommendTitle'>Recommendation</span>
+                                <div className='detailModal__inner-recommendItem'>
+                                    {recommendation?.map(item => {
+                                        return <RecommendBox key={item.id} data={item} />
+                                    })}
+                                </div>
+                            </div>
+                        }
+                    </>
                 }
             </div>
         </div>

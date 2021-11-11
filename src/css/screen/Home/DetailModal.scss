@@ -9,7 +9,7 @@
     z-index: 999;
     &__inner{
         overflow: hidden;
-        background-color: #181818;
+        background-color: #000;
         width: 60vw;
         margin-top: 30px;
         margin-left: auto;
@@ -22,11 +22,29 @@
             background-size: cover;
             position: relative;
         }
-        &-title{
-            padding-top: 300px;
-            padding-bottom: 150px;
+        &-info{
+            margin-top: 10px;
             padding-left: 50px;
             padding-right: 20px;
+            margin-bottom: 20px;
+            display: flex;
+        }
+        &-recommend{
+            @extend .detailModal__inner-info;
+            display: block;
+        }
+        &-recommendTitle{
+            @include font-semiBold(24px);
+            margin-bottom: 10px;
+        }
+        &-date{
+            @include font-semiBold(16px)
+        }
+        &-title{
+            padding-top: 300px;
+            padding-left: 50px;
+            padding-right: 20px;
+            padding-bottom: 50px;
         }
         &-name{
             font-family: $font-archivo;
@@ -34,11 +52,44 @@
             color: white;
             max-width: 70%;
         }
+        &-infoLeft{
+            width: 100%;
+        }
+        &-infoRight{
+            padding-left: 20px;
+        }
+        &-genres{
+            margin-top: 15px;
+        }
+        &-crewTitle{
+            @include font-semiBold(14px,#777777)
+        }
+        &-crewName{
+            @include font-regular(14px)
+        }
         &-btn{
             margin-top: 10px;
             display: flex;
             align-items: center;
-            flex-wrap: wrap
+            flex-wrap: wrap;
+        }
+        &-recommendItem{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            column-gap: 10px;
+            row-gap: 10px;  
+            margin-top: 15px;
+            @include media(680){
+                grid-template-columns: repeat(2,1fr);
+            }
+            @include media(450){
+                grid-template-columns: repeat(1,1fr);
+            }
+        }
+        &-overview{
+            margin-top: 10px;
+            @include font-regular(14px);
+            line-height: 22px
         }
         &-btnTrailer{
             @extend .home__banner-btnTrailer;
@@ -56,6 +107,9 @@
             display: flex;
             align-items: center;
         }
+        &-release{
+            margin-right: 10px;
+        }
         &-btnAdd{
             border:3px solid white;
             padding: 5px 6px;
@@ -72,8 +126,22 @@
         @include media(992){
             width: 90vw;
         }
+        @include media(650){
+            &-recommendTitle{
+                @include font-semiBold(20px)
+            }
+            &-infoRight{
+                padding-left: initial;
+            }
+            &-info{
+                flex-direction: column;
+            }
+        }
         @include media(600){
             &-title{
+                padding-left: 20px;
+            }
+            &-info{
                 padding-left: 20px;
             }
             &-name{

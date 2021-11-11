@@ -86,22 +86,61 @@ export const getGenresTvRequest = () =>{
 
 export const getMovieDetail = async(id:string,cb:(e:any)=>void,connect:(e:Boolean)=>void) =>{
     try {
-        const url = await NAxios.get(`${Urls.MOVIE_DETAIL}${id}?api_key=${client_ID}`)
-        const data = url.data
-        cb(data)
+        const [info,crew] = await Promise.all([
+            NAxios.get(`${Urls.MOVIE_DETAIL}${id}?api_key=${client_ID}`),
+            NAxios.get(`${Urls.MOVIE_DETAIL}${id}/credits?api_key=${client_ID}`)
+        ])
+        const detail:ApiResponse = info
+        const actors:ApiResponse = crew
+        cb({...detail.data,...actors.data})
         connect(true)
     } catch (error) {
+        console.log(error);
         connect(false)
+    }
+}
+
+export const getRecommendShow = async(id:any,type:string,cb:(e:Boolean)=>void,cbdata:(e:any)=>void) =>{
+    try {
+        let url:ApiResponse
+        if (type === 'tv') {
+            url = await NAxios.get(`${Urls.TV_DETAIL}${id}/recommendations?api_key=${client_ID}`)
+            if (url.status === 200) {
+                cbdata(url.data.results)
+                cb(true)
+            }
+            else{
+                cb(false)
+            }
+        }
+        else if (type === 'movie'){
+            url = await NAxios.get(`${Urls.MOVIE_DETAIL}${id}/recommendations?api_key=${client_ID}`)
+            if (url.status === 200) {
+                cbdata(url.data.results)
+                cb(true)
+            }
+            else{
+                cb(false)
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        cb(false)
     }
 }
 
 export const getTvDetail = async(id:string,cb:(e:any)=>void,connect:(e:Boolean)=>void) =>{
     try {
-        const url = await NAxios.get(`${Urls.TV_DETAIL}${id}?api_key=${client_ID}`)
-        const data = url.data
-        cb(data)
+        const [info,crew] = await Promise.all([
+            NAxios.get(`${Urls.TV_DETAIL}${id}?api_key=${client_ID}`),
+            NAxios.get(`${Urls.TV_DETAIL}${id}/credits?api_key=${client_ID}`)
+        ])
+        const detail:ApiResponse = info
+        const actors:ApiResponse = crew
+        cb({...detail.data,...actors.data})
         connect(true)
     } catch (error) {
+        console.log(error);
         connect(false)
     }
 }
