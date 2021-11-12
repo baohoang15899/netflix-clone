@@ -24,14 +24,26 @@
         }
         &-info{
             margin-top: 10px;
-            padding-left: 50px;
-            padding-right: 20px;
+            // padding-left: 50px;
+            // padding-right: 20px;
             margin-bottom: 20px;
             display: flex;
         }
         &-recommend{
             @extend .detailModal__inner-info;
             display: block;
+            max-height: 150vh;
+            overflow: hidden;
+            &.add{
+                max-height: initial;
+            }
+        }
+        &-moreBtn{
+            position: relative;
+            z-index: 200;
+            margin-top: -15px;
+            height: 2px;
+            background-color: rgba(73, 72, 72, 0.6);
         }
         &-recommendTitle{
             @include font-semiBold(24px);
@@ -42,8 +54,8 @@
         }
         &-title{
             padding-top: 300px;
-            padding-left: 50px;
-            padding-right: 20px;
+            padding-left: 40px;
+            // padding-right: 20px;
             padding-bottom: 50px;
         }
         &-name{
@@ -102,6 +114,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            background-color: rgba(42,42,42,.6);
+            padding: 2px;
+        }
+        &-iconMore{
+            @extend .detailModal__inner-icon;
+            border-radius: 50%;
+        }
+        &-final{
+            padding-bottom: 30px;
         }
         &-config{
             display: flex;
@@ -110,8 +131,27 @@
         &-release{
             margin-right: 10px;
         }
+        &-infoWrapper{
+            padding: 0px 40px
+        }
+        &-iconWrapper{
+            @extend .detailModal__inner-btnAdd;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%)
+        }
+        &-moreInfo{
+            @include font-semiBold(20px);
+            margin-top: 35px;
+            position: relative;
+        }
+        &-finalInfoCategory{
+            @extend .detailModal__inner-crewTitle;
+            margin-top: 10px;
+        }
         &-btnAdd{
-            border:3px solid white;
+            background-color: rgba(42,42,42,.6);
+            border:2px solid rgba(255,255,255,.5);
             padding: 5px 6px;
             border-radius: 50%;
             cursor: pointer;
@@ -141,8 +181,8 @@
             &-title{
                 padding-left: 20px;
             }
-            &-info{
-                padding-left: 20px;
+            &-infoWrapper{
+                padding: 0px 20px;
             }
             &-name{
                 font-size: 20px;
@@ -169,4 +209,7 @@
         padding: 5px 10px;
         border-radius: 50%;
     }
+}
+.notFound{
+    @include font-semiBold(14px)
 }

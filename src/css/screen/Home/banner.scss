@@ -88,6 +88,10 @@
             &-overview{
                 @include font-regular(12px)
             }
+            &-title{
+                margin-top: 20px;
+                font-size: 35px;
+            }
         }
         @include media(400){
             &-btnDetail{

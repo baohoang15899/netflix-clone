@@ -8,7 +8,7 @@ const client_ID = '131c3841b70be2908cf7a3fabcaa002e'
 export interface ApiResponse {
     error?: object,
     data?: any,
-    status?:number
+    status?: number
 }
 
 
@@ -76,50 +76,55 @@ export const allMovieRequest = () => {
     return getAllRequest(arrRequest)
 }
 
-export const getGenresMovieRequest = () =>{
+export const getGenresMovieRequest = () => {
     return processRequest(NAxios.get(`${Urls.GENRE_MOVIE}api_key=${client_ID}`))
 }
 
-export const getGenresTvRequest = () =>{
+export const getGenresTvRequest = () => {
     return processRequest(NAxios.get(`${Urls.GENRE_TV}api_key=${client_ID}`))
 }
 
-export const getMovieDetail = async(id:string,cb:(e:any)=>void,connect:(e:Boolean)=>void) =>{
+export const getMovieDetail = async (id: string, cb: (e: any) => void, connect: (e: Boolean) => void, load: (e: Boolean) => void) => {
+    load(true)
     try {
-        const [info,crew] = await Promise.all([
+        const [info, crew] = await Promise.all([
             NAxios.get(`${Urls.MOVIE_DETAIL}${id}?api_key=${client_ID}`),
             NAxios.get(`${Urls.MOVIE_DETAIL}${id}/credits?api_key=${client_ID}`)
         ])
-        const detail:ApiResponse = info
-        const actors:ApiResponse = crew
-        cb({...detail.data,...actors.data})
+        const detail: ApiResponse = info
+        const actors: ApiResponse = crew
+        cb({ ...detail.data, ...actors.data })
         connect(true)
     } catch (error) {
         console.log(error);
         connect(false)
     }
+    finally {
+        load(false)
+    }
 }
 
-export const getRecommendShow = async(id:any,type:string,cb:(e:Boolean)=>void,cbdata:(e:any)=>void) =>{
+export const getRecommendShow = async (id: any, type: string, cb: (e: Boolean) => void, cbdata: (e: any) => void, load: (e: Boolean) => void) => {
+    load(true)
     try {
-        let url:ApiResponse
+        let url: ApiResponse
         if (type === 'tv') {
             url = await NAxios.get(`${Urls.TV_DETAIL}${id}/recommendations?api_key=${client_ID}`)
             if (url.status === 200) {
                 cbdata(url.data.results)
                 cb(true)
             }
-            else{
+            else {
                 cb(false)
             }
         }
-        else if (type === 'movie'){
+        else if (type === 'movie') {
             url = await NAxios.get(`${Urls.MOVIE_DETAIL}${id}/recommendations?api_key=${client_ID}`)
             if (url.status === 200) {
                 cbdata(url.data.results)
                 cb(true)
             }
-            else{
+            else {
                 cb(false)
             }
         }
@@ -127,50 +132,57 @@ export const getRecommendShow = async(id:any,type:string,cb:(e:Boolean)=>void,cb
         console.log(error);
         cb(false)
     }
+    finally {
+        load(false)
+    }
 }
 
-export const getTvDetail = async(id:string,cb:(e:any)=>void,connect:(e:Boolean)=>void) =>{
+export const getTvDetail = async (id: string, cb: (e: any) => void, connect: (e: Boolean) => void, load: (e: Boolean) => void) => {
+    load(true)
     try {
-        const [info,crew] = await Promise.all([
+        const [info, crew] = await Promise.all([
             NAxios.get(`${Urls.TV_DETAIL}${id}?api_key=${client_ID}`),
             NAxios.get(`${Urls.TV_DETAIL}${id}/credits?api_key=${client_ID}`)
         ])
-        const detail:ApiResponse = info
-        const actors:ApiResponse = crew
-        cb({...detail.data,...actors.data})
+        const detail: ApiResponse = info
+        const actors: ApiResponse = crew
+        cb({ ...detail.data, ...actors.data })
         connect(true)
     } catch (error) {
         console.log(error);
         connect(false)
     }
+    finally {
+        load(false)
+    }
 }
 
-export const getMovieByGenreRequest = async() => {
-    const genres:ApiResponse = await getGenresMovieRequest()
-    const data:Array<IdataResults> = []
+export const getMovieByGenreRequest = async () => {
+    const genres: ApiResponse = await getGenresMovieRequest()
+    const data: Array<IdataResults> = []
     if (genres.status === 200) {
         for (let i = 2; i < 8; i++) {
-            const singleMovie:ApiResponse = await processRequest(NAxios.get(`${Urls.MOVIE_BY_GENRE}api_key=${client_ID}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genres.data.genres[i].id}`))
+            const singleMovie: ApiResponse = await processRequest(NAxios.get(`${Urls.MOVIE_BY_GENRE}api_key=${client_ID}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genres.data.genres[i].id}`))
             if (singleMovie.status === 200) {
-                const movieData:any = {genre:genres.data.genres[i].name,...singleMovie.data}
+                const movieData: any = { genre: genres.data.genres[i].name, ...singleMovie.data }
                 data.push(movieData)
             }
         }
     }
-    return data 
+    return data
 }
 
-export const getTvByGenreRequest = async() => {
-    const genres:ApiResponse = await getGenresTvRequest()
-    const data:Array<IdataResults> = []
+export const getTvByGenreRequest = async () => {
+    const genres: ApiResponse = await getGenresTvRequest()
+    const data: Array<IdataResults> = []
     if (genres.status === 200) {
         for (let i = 0; i < 8; i++) {
-            const singleTv:ApiResponse = await processRequest(NAxios.get(`${Urls.TV_BY_GENRE}api_key=${client_ID}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genres.data.genres[i].id}`))
+            const singleTv: ApiResponse = await processRequest(NAxios.get(`${Urls.TV_BY_GENRE}api_key=${client_ID}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genres.data.genres[i].id}`))
             if (singleTv.status === 200) {
-                const tvData:any = {genre:genres.data.genres[i].name,...singleTv.data}
+                const tvData: any = { genre: genres.data.genres[i].name, ...singleTv.data }
                 data.push(tvData)
             }
         }
     }
-    return data 
+    return data
 }

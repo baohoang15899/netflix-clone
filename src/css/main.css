@@ -467,6 +467,11 @@ button {
   min-height: 150px;
 }
 
+.skeletonBanner {
+  width: 100%;
+  min-height: 350px;
+}
+
 .skeletonName {
   width: 15%;
   margin-bottom: 15px;
@@ -480,12 +485,19 @@ button {
   min-height: 200px;
 }
 
-.skeletonWrapper {
+.skeletonMultiBox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.skeletonWrapper, .skeletonMultiBox {
   padding: 0 50px;
   margin-bottom: 20px;
 }
 @media only screen and (max-width: 992px) {
-  .skeletonWrapper {
+  .skeletonWrapper, .skeletonMultiBox {
     padding: 0 10px;
   }
 }
@@ -1288,6 +1300,10 @@ button {
     font-family: "Montserrat", sans-serif;
     color: white;
   }
+  .home__banner-title {
+    margin-top: 20px;
+    font-size: 35px;
+  }
 }
 @media only screen and (max-width: 400px) {
   .home__banner-btnDetail {
@@ -1444,13 +1460,23 @@ button {
 }
 .detailModal__inner-info, .detailModal__inner-recommend {
   margin-top: 10px;
-  padding-left: 50px;
-  padding-right: 20px;
   margin-bottom: 20px;
   display: flex;
 }
 .detailModal__inner-recommend {
   display: block;
+  max-height: 150vh;
+  overflow: hidden;
+}
+.detailModal__inner-recommend.add {
+  max-height: initial;
+}
+.detailModal__inner-moreBtn {
+  position: relative;
+  z-index: 200;
+  margin-top: -15px;
+  height: 2px;
+  background-color: rgba(73, 72, 72, 0.6);
 }
 .detailModal__inner-recommendTitle {
   font-weight: 600;
@@ -1467,8 +1493,7 @@ button {
 }
 .detailModal__inner-title {
   padding-top: 300px;
-  padding-left: 50px;
-  padding-right: 20px;
+  padding-left: 40px;
   padding-bottom: 50px;
 }
 .detailModal__inner-name {
@@ -1486,7 +1511,7 @@ button {
 .detailModal__inner-genres {
   margin-top: 15px;
 }
-.detailModal__inner-crewTitle {
+.detailModal__inner-crewTitle, .detailModal__inner-finalInfoCategory {
   font-weight: 600;
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
@@ -1535,11 +1560,19 @@ button {
   cursor: pointer;
   margin-right: 15px;
 }
-.detailModal__inner-icon {
+.detailModal__inner-icon, .detailModal__inner-iconMore {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: rgba(42, 42, 42, 0.6);
+  padding: 2px;
+}
+.detailModal__inner-iconMore {
+  border-radius: 50%;
+}
+.detailModal__inner-final {
+  padding-bottom: 30px;
 }
 .detailModal__inner-config {
   display: flex;
@@ -1548,8 +1581,28 @@ button {
 .detailModal__inner-release {
   margin-right: 10px;
 }
-.detailModal__inner-btnAdd {
-  border: 3px solid white;
+.detailModal__inner-infoWrapper {
+  padding: 0px 40px;
+}
+.detailModal__inner-iconWrapper {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.detailModal__inner-moreInfo {
+  font-weight: 600;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  margin-top: 35px;
+  position: relative;
+}
+.detailModal__inner-finalInfoCategory {
+  margin-top: 10px;
+}
+.detailModal__inner-btnAdd, .detailModal__inner-iconWrapper {
+  background-color: rgba(42, 42, 42, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   padding: 5px 6px;
   border-radius: 50%;
   cursor: pointer;
@@ -1558,7 +1611,7 @@ button {
   position: relative;
   margin-left: 15px;
 }
-.detailModal__inner-btnAdd:nth-child(1) {
+.detailModal__inner-btnAdd:nth-child(1), .detailModal__inner-iconWrapper:nth-child(1) {
   margin-left: 0px;
 }
 @media only screen and (max-width: 992px) {
@@ -1584,8 +1637,8 @@ button {
   .detailModal__inner-title {
     padding-left: 20px;
   }
-  .detailModal__inner-info, .detailModal__inner-recommend {
-    padding-left: 20px;
+  .detailModal__inner-infoWrapper {
+    padding: 0px 20px;
   }
   .detailModal__inner-name {
     font-size: 20px;
@@ -1611,6 +1664,13 @@ button {
   background-color: #181818;
   padding: 5px 10px;
   border-radius: 50%;
+}
+
+.notFound {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */

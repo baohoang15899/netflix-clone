@@ -3,7 +3,6 @@ import { Irecommendation } from 'global/Home/Interfaces'
 import React from 'react'
 
 export default function RecommendationBox(props: { data: Irecommendation }) {
-    console.log(props.data);
     return (
         <div className="recommendationBox">
             {props?.data?.poster_path && props?.data?.backdrop_path &&

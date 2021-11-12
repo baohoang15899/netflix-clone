@@ -3,6 +3,11 @@
     min-height: 150px;
 }
 
+.skeletonBanner{
+    width: 100%;
+    min-height: 350px;
+}
+
 .skeletonName{
     width: 15%;
     margin-bottom: 15px;
@@ -16,6 +21,13 @@
     top: 50%;
     transform: translateY(-50%);
     min-height: 200px;
+}
+.skeletonMultiBox{
+    @extend .skeletonWrapper;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 10px;
+    row-gap: 10px;
 }
 .skeletonWrapper{
     padding: 0 50px;
