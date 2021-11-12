@@ -61,13 +61,13 @@ export default function Index(props: any) {
                         <div className='detailModal__inner-background'
                             style={{
                                 backgroundImage: ` linear-gradient(
-                            0deg,rgba(0,0,0,1) 0,rgba(0,0,0,0) 100%),url(${movie ?
+                            0deg,rgba(0,0,0,1) 0,rgba(0,0,0,0) 100%),url(${props?.match?.params?.type === 'movie' ?
                                         UrlImage.TRENDING_BACKGROUND + movie?.backdrop_path :
                                         UrlImage.TRENDING_BACKGROUND + tv?.backdrop_path})`
                             }}>
                             <div className='detailModal__inner-title'>
                                 <h4 className='detailModal__inner-name'>
-                                    {movie ? movie?.original_title : tv?.name}
+                                    {props?.match?.params?.type === 'movie' ? movie?.original_title : tv?.name ? tv?.name : tv?.original_name}
                                 </h4>
                                 <div className='detailModal__inner-btn'>
                                     <div className='detailModal__inner-btnTrailer'>
@@ -109,7 +109,7 @@ export default function Index(props: any) {
                                 <div className='detailModal__inner-infoLeft'>
                                     <div className='detailModal__inner-date'>
                                         <span className='detailModal__inner-release'>
-                                            {movie ? movie.release_date : tv?.first_air_date}</span>
+                                            {props?.match?.params?.type === 'movie' ? movie && movie.release_date : tv?.first_air_date}</span>
                                         <span className='detailModal__inner-runtime'>
                                             {props?.match?.params?.type === 'movie' ?
                                                 movie && movie?.runtime
@@ -132,29 +132,43 @@ export default function Index(props: any) {
                                 <div className='detailModal__inner-infoRight'>
                                     <div className='detailModal__inner-actors'>
                                         <span className='detailModal__inner-crewTitle'> Actors:{' '}</span>
-                                        {movie?.cast.filter((item, index) => index < 4)
-                                            ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })}
-                                        {tv?.cast.filter((item, index) => index < 4)
-                                            ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })}
+                                        {props?.match?.params?.type === 'movie' ?
+                                            movie && movie?.cast.length > 0 ? movie?.cast.filter((item, index) => index < 4)
+                                                ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })
+                                                :
+                                                <span className='detailModal__inner-crewName'>Not found</span>
+                                            :
+                                            tv && tv.cast.length > 0 ? tv?.cast.filter((item, index) => index < 4)
+                                                ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })
+                                                :
+                                                <span className='detailModal__inner-crewName'>Not found</span>
+                                        }
                                         <span style={{ color: 'white' }}>...</span>
                                     </div>
                                     <div className='detailModal__inner-genres'>
                                         <span className='detailModal__inner-crewTitle'>
                                             Genres:{' '}
-                                            {movie?.genres
-                                                ?.map((item, index) => {
-                                                    if (index !== (movie.genres && movie.genres?.length - 1))
-                                                        return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
-                                                    else
-                                                        return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                                })}
-                                            {tv?.genres
-                                                ?.map((item, index) => {
-                                                    if (index !== tv.genres?.length - 1)
-                                                        return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
-                                                    else
-                                                        return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                                })}
+                                            {props?.match?.params?.type === 'movie' ?
+                                                movie?.genres && movie.genres?.length > 0 ? movie?.genres
+                                                    ?.map((item, index) => {
+                                                        if (index !== (movie.genres && movie.genres?.length - 1))
+                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                        else
+                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                                    })
+                                                    :
+                                                    <span className='detailModal__inner-crewName'>Not found</span>
+                                                :
+                                                tv?.genres && tv?.genres.length > 0 ? tv?.genres
+                                                    ?.map((item, index) => {
+                                                        if (index !== tv.genres?.length - 1)
+                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                        else
+                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                                    })
+                                                    :
+                                                    <span className='detailModal__inner-crewName'>Not found</span>
+                                            }
                                         </span>
                                     </div>
                                 </div>
@@ -162,7 +176,7 @@ export default function Index(props: any) {
                         </div>
                     </>
                     :
-                    <SkeletonLoading banner={true}/>
+                    <SkeletonLoading banner={true} />
                 }
                 {recomCheck && !recomLoad ?
                     <div className='detailModal__inner-infoWrapper'>
@@ -171,7 +185,8 @@ export default function Index(props: any) {
                             <div className='detailModal__inner-recommendItem'>
                                 {recommendation && recommendation?.length > 0 ?
                                     recommendation?.map(item => {
-                                        return <RecommendBox key={item.id} data={item} />
+                                        if (item.backdrop_path && item.poster_path)
+                                            return <RecommendBox key={item.id} data={item} />
                                     })
                                     :
                                     <span className='notFound'>Recommendation not found.</span>
@@ -192,38 +207,52 @@ export default function Index(props: any) {
                         }
                     </div>
                     :
-                    <SkeletonLoading mutilBox={true}/>
+                    <SkeletonLoading mutilBox={true} />
                 }
                 {
                     connect && !detailLoad ?
                         <div className='detailModal__inner-infoWrapper'>
                             <div className='detailModal__inner-final'>
                                 <h6 className='detailModal__inner-moreInfo'>
-                                    More info about {movie ? movie?.original_title : tv?.name}
+                                    More info about {props?.match?.params?.type === 'movie' ? movie?.original_title : tv?.name ? tv?.name : tv?.original_name}
                                 </h6>
                                 <p className='detailModal__inner-finalInfoCategory'>Director:{' '}
-                                    {movie?.crew.filter(item => item.job === 'Director').map((item, index) => {
-                                        return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                    })}
-                                    {tv && <span className='detailModal__inner-crewName'>{tv.created_by[0].name}.</span>}
+                                    {props?.match?.params?.type === 'movie' ?
+                                        movie && movie?.crew.length > 0 ? movie?.crew.filter(item => item.job === 'Director').map((item, index) => {
+                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                        })
+                                            :
+                                            <span className='detailModal__inner-crewName'>Not found</span>
+                                        :
+                                        tv && tv.created_by.length > 0 ?
+                                            <span className='detailModal__inner-crewName'>
+                                                {tv.created_by[0].name}.</span> :
+                                            <span className='detailModal__inner-crewName'>Not found</span>
+                                    }
                                 </p>
                                 <p className='detailModal__inner-finalInfoCategory'>Actor:{' '}
-                                    {movie?.cast?.map((item, index) => {
-                                        if (index !== movie.cast?.length - 1) {
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
-                                        }
-                                        else {
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                        }
-                                    })}
-                                    {tv?.cast?.map((item, index) => {
-                                        if (index !== tv.cast?.length - 1) {
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
-                                        }
-                                        else {
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                        }
-                                    })
+                                    {props?.match?.params?.type === 'movie' ?
+                                        movie && movie.cast.length > 0 ? movie?.cast?.map((item, index) => {
+                                            if (index !== movie.cast?.length - 1) {
+                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                            }
+                                            else {
+                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                            }
+                                        })
+                                            :
+                                            <span className='detailModal__inner-crewName'>Not found</span>
+                                        :
+                                        tv && tv.cast.length > 0 ? tv?.cast?.map((item, index) => {
+                                            if (index !== tv.cast?.length - 1) {
+                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                            }
+                                            else {
+                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                            }
+                                        })
+                                            :
+                                            <span className='detailModal__inner-crewName'>Not found</span>
                                     }
                                 </p>
                                 <p className='detailModal__inner-finalInfoCategory'>Genre:{' '}{movie?.genres

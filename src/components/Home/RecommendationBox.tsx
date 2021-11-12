@@ -5,7 +5,7 @@ import React from 'react'
 export default function RecommendationBox(props: { data: Irecommendation }) {
     return (
         <div className="recommendationBox">
-            {props?.data?.poster_path && props?.data?.backdrop_path &&
+            {props?.data?.poster_path && props?.data?.backdrop_path ?
                 <>
                     <div className="recommendationBox__banner"
                         style={{
@@ -32,6 +32,7 @@ export default function RecommendationBox(props: { data: Irecommendation }) {
                         </p>
                     </div>
                 </>
+                : null
             }
         </div>
     )
