@@ -1316,13 +1316,13 @@ button {
   }
 }
 
-.home__wrapper {
+.home__wrapper, .Tvshow__wrapper {
   position: relative;
   z-index: 100;
   top: -120px;
 }
 @media only screen and (max-width: 992px) {
-  .home__wrapper {
+  .home__wrapper, .Tvshow__wrapper {
     top: 0px;
   }
 }
@@ -1671,6 +1671,13 @@ button {
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
   color: white;
+}
+
+.MediaWrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
 /*# sourceMappingURL=main.css.map */

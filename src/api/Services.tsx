@@ -63,6 +63,14 @@ export const getTrendingData = () => {
     return processRequest(NAxios.get(`${Urls.TRENDING}api_key=${client_ID}`))
 }
 
+export const getTrendingTvShow = () => {
+    return processRequest(NAxios.get(`${Urls.TRENDING_TVSHOW}api_key=${client_ID}`))
+}
+
+export const getTrendingMovie = () => {
+    return processRequest(NAxios.get(`${Urls.TRENDING_MOVIE}api_key=${client_ID}`))
+}
+
 export const logOut = (session_id: string) => {
     const formData: any = new FormData()
     formData.append("session_id", session_id)
@@ -83,6 +91,15 @@ export const getGenresMovieRequest = () => {
 export const getGenresTvRequest = () => {
     return processRequest(NAxios.get(`${Urls.GENRE_TV}api_key=${client_ID}`))
 }
+
+export const getTvShowByGenre = (id:string) =>{
+    return processRequest(NAxios.get(`${Urls.TV_BY_GENRE}api_key=${client_ID}&with_genres=${id}`))
+}
+
+export const getMovieByGenre = (id:string) =>{
+    return processRequest(NAxios.get(`${Urls.MOVIE_BY_GENRE}api_key=${client_ID}&with_genres=${id}`))
+}
+
 
 export const getMovieDetail = async (id: string, cb: (e: any) => void, connect: (e: Boolean) => void, load: (e: Boolean) => void) => {
     load(true)
@@ -186,3 +203,4 @@ export const getTvByGenreRequest = async () => {
     }
     return data
 }
+

@@ -1,0 +1,12 @@
+.Tvshow{
+    &__wrapper{
+        @extend .home__wrapper
+    }
+}
+
+.MediaWrapper{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    row-gap: 10px;
+    column-gap: 10px;
+}

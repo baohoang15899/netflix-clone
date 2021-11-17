@@ -2,14 +2,18 @@ import { getMovieDetail, getRecommendShow, getTvDetail } from 'api/Services';
 import { UrlImage } from 'api/Urls';
 import { ImovieDetail, Irecommendation, ItvDetail } from 'global/Home/Interfaces';
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faPlay, faList, faPlus, faHeart, faStar, faTimes, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import Btn from 'components/Home/DetailModalBtn'
 import RecommendBox from 'components/Home/RecommendationBox'
 import SkeletonLoading from 'components/Home/SkeletonLoading'
+interface IstateLocation {
+    background?: any
+}
 
 export default function Index(props: any) {
+    const location = useLocation<IstateLocation>()
     const history = useHistory()
     const ref = useRef<any>()
     const [tv, setTv] = useState<ItvDetail>()
@@ -44,14 +48,26 @@ export default function Index(props: any) {
 
     const handleGoback = (e: any) => {
         if (e.target.className === ref.current.className) {
-            history.goBack()
+            if (location?.state?.background) {
+                history.goBack()
+            }else{
+                history.push('/home')
+            }
         }
     }
+
+    const handleCloseBtn = () =>{
+        if (location?.state?.background) {
+            history.goBack()
+        }else{
+            history.push('/home')
+        }
+    } 
 
     return (
         <div ref={ref} onClick={(e) => handleGoback(e)} className='detailModal'>
             <div className='detailModal__inner'>
-                <div onClick={() => history.goBack()} className='detailModal__close'>
+                <div onClick={() => handleCloseBtn()} className='detailModal__close'>
                     <Icon style={{
                         padding: '2px'
                     }} size="2x" icon={faTimes} />

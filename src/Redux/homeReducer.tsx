@@ -7,6 +7,11 @@ const initState:IhomeReducer = {
         movies:{},
         tvShows:{}
     },
+    
+    allGenreMovie:[],
+    allGenreTvshow:[],
+    trendingTvshow:{},
+    trendingMovie:{},
     genresTv:[],
     genresMovie:[],
     allMovie:[],
@@ -60,16 +65,41 @@ const homeSlice = createSlice({
             state.genresMovie = payload
         },
         getGenresTvSuccess:(state,{payload})=>{
-            state.genresMovie = payload
+            state.genresTv = payload
         },
+        getTrendingTvshowRequest:()=>{},
+        getTrendingMovieRequest:()=>{},
         getTrendingRequest:()=>{},
         trendingDataSuccess:(state,{payload})=>{
             state.trending = payload
+        },
+        tredingTvshowSuccess:(state,{payload})=>{
+            state.trendingTvshow = payload
+        },
+        tredingMovieSuccess:(state,{payload})=>{
+            state.trendingMovie = payload
         },
         getTrendingMovieAndTvshowRequest:(state)=>{
         },
         getTrendingMovieAndTvshowDataSuccess:(state,{payload})=>{
             state.allMoviesTvshowsTrending = payload
+        },
+        getGenreMoviesRequest:(state,payload) => {},
+        getGenreTvshowsRequest:(state,payload) => {},
+        getGenreMoviesSuccess:(state,{payload})=>{
+            const filter = state.allGenreMovie.filter((item,index)=> item.id !== payload[index].id)
+            console.log(filter,'fil');
+            state.allGenreMovie = [...state.allGenreMovie,...payload]
+        },
+        getGenreTvshowsSuccess:(state,{payload})=>{
+            if (state.allGenreTvshow.length > 0) {
+                state.allGenreTvshow = [
+                    ...state.allGenreTvshow,
+                    ...state.allGenreTvshow.filter((item,index)=> item.id !== payload[index].id)
+                ]
+            }else{
+                state.allGenreTvshow = [...state.allGenreTvshow,...payload]
+            }
         }
     }
 })

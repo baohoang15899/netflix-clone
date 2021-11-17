@@ -10,7 +10,11 @@ export interface IhomeReducer {
     genresTv: IgenreData[]
     allMovie?: Imovie[],
     allTvshow: ItvShow[],
-    Loading: Iloading
+    Loading: Iloading,
+    trendingTvshow:any
+    trendingMovie:any
+    allGenreMovie:IdataResults[]
+    allGenreTvshow:IdataResults[]
 }
 
 interface Iloading {

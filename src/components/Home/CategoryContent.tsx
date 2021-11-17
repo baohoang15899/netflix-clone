@@ -16,7 +16,7 @@ export default function CategoryContent({ title, movies, tvShows, type }: Icateg
                             movies?.results?.map(item => {
                                 if (item.backdrop_path && item.poster_path) {
                                     return <SwiperSlide key={item.id}>
-                                        <Item mediaType={type} key={item.id} data={item} />
+                                        <Item slide={true} mediaType={type} key={item.id} data={item} />
                                     </SwiperSlide>
                                 }
                             })

@@ -18,7 +18,8 @@ import PrivateRoute from 'components/Home/PrivateRoute';
 import { authAction } from 'Redux/authReducer';
 import Loading from 'components/Loading'
 import Header from 'components/Home/Homeheader'
-
+import TvShow from 'screen/HomePage/Tvshow/Index'
+import { homeAction } from 'Redux/homeReducer'
 
 interface IstateLocation {
     background?: any
@@ -32,6 +33,13 @@ export default function App() {
         dispatch(authAction.getUser())
     }, [])
 
+    useEffect(()=>{
+        if (isLoggedIn) {
+            dispatch(homeAction.getGenresMovieRequest())
+            dispatch(homeAction.getGenresTvRequest())
+        }
+    },[isLoggedIn])
+
     let background = location?.state && location.state.background
     return (
         <div className='wrapper'>
@@ -43,6 +51,7 @@ export default function App() {
                         <Route exact path="/" component={AuthMainPage} />
                         <Route exact path="/sign-in" component={SignIn} />
                         <PrivateRoute path='/home' component={user && Home} auth={isLoggedIn} />
+                        <PrivateRoute path='/tvshow/:id' component={user && TvShow} auth={isLoggedIn} />
                     </Switch>
                     {!background &&
                         <Switch>

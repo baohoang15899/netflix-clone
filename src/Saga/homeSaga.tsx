@@ -1,5 +1,5 @@
-import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenreRequest, getTrendingData, getTvByGenreRequest } from 'api/Services'
-import { takeLatest, call, put, select, take, takeEvery,delay } from 'redux-saga/effects'
+import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenreRequest, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
+import { takeLatest, call, put, select, take, takeEvery, delay } from 'redux-saga/effects'
 import { homeAction } from 'Redux/homeReducer'
 
 interface Response {
@@ -37,7 +37,7 @@ function* getMovieandTvTrending() {
     } catch (error) {
         console.log(error);
     }
-    finally{
+    finally {
         yield put(homeAction.stopLoadingPopular())
     }
 }
@@ -64,7 +64,7 @@ function* getGenreTv() {
     } catch (error) {
         console.log(error);
     }
-    finally{
+    finally {
         yield put(homeAction.stopLoadingGenreTv())
     }
 }
@@ -98,13 +98,49 @@ function* getTvshows() {
     }
 }
 
+function* getTrendingTvShowData() {
+    try {
+        const res: Response = yield call(getTrendingTvShow)
+        if (res?.status === 200) {
+            yield put(homeAction.tredingTvshowSuccess(res.data))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function* getTrendingMovieData() {
+    try {
+        const res: Response = yield call(getTrendingMovie)
+        if (res?.status === 200) {
+            yield put(homeAction.tredingMovieSuccess(res.data))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function* getGenreTvshowData({payload}:any) {
+    try {
+        const res: Response = yield getTvShowByGenre(payload)
+        if (res?.status === 200) {
+            yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function* homeSaga() {
     yield takeLatest(homeAction.getTrendingRequest, getTrending)
     yield takeLatest(homeAction.getTrendingMovieAndTvshowRequest, getMovieandTvTrending)
     yield takeLatest(homeAction.getGenresMovieRequest, getGenreMovie)
     yield takeLatest(homeAction.getGenresTvRequest, getGenreTv)
     yield takeLatest(homeAction.getMoviesByGenreRequest, getMovie)
-    yield takeLatest(homeAction.getTvByGenreRequest,getTvshows)
+    yield takeLatest(homeAction.getTvByGenreRequest, getTvshows)
+    yield takeLatest(homeAction.getTrendingTvshowRequest, getTrendingTvShowData)
+    yield takeLatest(homeAction.getTrendingMovieRequest, getTrendingMovieData)
+    yield takeLatest(homeAction.getGenreTvshowsRequest,getGenreTvshowData)
 }
 
 export default homeSaga

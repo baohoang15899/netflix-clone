@@ -51,7 +51,7 @@ export default function Homeheader() {
                     </div>
                     <ul className='home__header-linkMobile'>
                         <Link className='home__header-link' to='/home'>Home</Link>
-                        <Link className='home__header-link' to='/home'>Tv shows</Link>
+                        <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
                         <Link className='home__header-link' to='/home'>Movies</Link>
                         <Link className='home__header-link' to='/home'>My list</Link>
                     </ul>
@@ -59,7 +59,7 @@ export default function Homeheader() {
                 <Logo custom={true} />
                 <ul className='home__header-menu'>
                     <Link className='home__header-link' to='/home'>Home</Link>
-                    <Link className='home__header-link' to='/home'>Tv shows</Link>
+                    <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
                     <Link className='home__header-link' to='/home'>Movies</Link>
                     <Link className='home__header-link' to='/home'>My list</Link>
                 </ul>

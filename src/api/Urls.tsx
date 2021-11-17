@@ -9,6 +9,8 @@ export enum Urls {
     CREATE_SESSION = 'authentication/session/new?',
     ACCOUNT = 'account?',
     TRENDING = 'trending/all/day?',
+    TRENDING_TVSHOW = 'trending/tv/day?',
+    TRENDING_MOVIE = 'trending/movie/day?',
     LOG_OUT = 'authentication/session?',
     MOVIE_DETAIL = 'movie/',
     TV_DETAIL = 'tv/',

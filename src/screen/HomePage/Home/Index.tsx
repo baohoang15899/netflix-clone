@@ -7,6 +7,7 @@ import CategoryContent from 'components/Home/CategoryContent'
 import { CategoryType } from 'global/Home/Type'
 import Skeleton from 'components/Home/SkeletonLoading'
 
+
 export default function Index() {
     const dispatch = useDispatch()
     const trendingShow = useSelector((state: RootReducerModel) => state.homeReducer.trending)
@@ -15,14 +16,12 @@ export default function Index() {
     const { popular, genreMovie, genreTv } = Loading
     const { results } = trendingShow
     const { movies, tvShows } = popularTvAndMovies
-
     useEffect(() => {
         dispatch(homeAction.getTrendingRequest())
         dispatch(homeAction.getTrendingMovieAndTvshowRequest())
         dispatch(homeAction.getMoviesByGenreRequest())
         dispatch(homeAction.getTvByGenreRequest())
     }, [])
-
     return (
         <div className='home'>
             <>
