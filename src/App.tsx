@@ -19,6 +19,7 @@ import { authAction } from 'Redux/authReducer';
 import Loading from 'components/Loading'
 import Header from 'components/Home/Homeheader'
 import TvShow from 'screen/HomePage/Tvshow/Index'
+import Movie from 'screen/HomePage/MoviePage/Index'
 import { homeAction } from 'Redux/homeReducer'
 
 interface IstateLocation {
@@ -37,6 +38,7 @@ export default function App() {
         if (isLoggedIn) {
             dispatch(homeAction.getGenresMovieRequest())
             dispatch(homeAction.getGenresTvRequest())
+            console.log('test run');
         }
     },[isLoggedIn])
 
@@ -52,6 +54,7 @@ export default function App() {
                         <Route exact path="/sign-in" component={SignIn} />
                         <PrivateRoute path='/home' component={user && Home} auth={isLoggedIn} />
                         <PrivateRoute path='/tvshow/:id' component={user && TvShow} auth={isLoggedIn} />
+                        <PrivateRoute path='/movie/:id' component={user && Movie} auth={isLoggedIn} />
                     </Switch>
                     {!background &&
                         <Switch>

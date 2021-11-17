@@ -21,7 +21,9 @@ interface Iloading {
     trending: Boolean,
     popular: Boolean,
     genreTv: Boolean,
-    genreMovie: Boolean
+    genreMovie: Boolean,
+    moviePage: Boolean,
+    tvShowPage: Boolean
 }
 interface IsingleMovie {
     genre?: string,

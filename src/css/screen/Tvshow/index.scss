@@ -9,4 +9,13 @@
     grid-template-columns: repeat(5,1fr);
     row-gap: 10px;
     column-gap: 10px;
+    @include media(992){
+        grid-template-columns: repeat(3,1fr);
+    }
+    @include media(550){
+        grid-template-columns: repeat(2,1fr);
+    }
+    @include media(400){
+        grid-template-columns: 1fr;
+    }
 }

@@ -5,14 +5,23 @@ import 'react-loading-skeleton/dist/skeleton.css'
 interface typeLoad {
     banner?: Boolean;
     mutilBox?: Boolean;
+    noTitle?: Boolean
 }
-export default function SkeletonLoading({ banner, mutilBox }: typeLoad) {
+export default function SkeletonLoading({ banner, mutilBox, noTitle }: typeLoad) {
     if (banner) {
         return (
             <SkeletonTheme baseColor="#202020" highlightColor="#444">
                 <div className='skeletonWrapper'>
                     <Skeleton className='skeletonBanner' />
                 </div>
+            </SkeletonTheme>
+        )
+    }
+
+    if (noTitle) {
+        return (
+            <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                <Skeleton className='skeleton' />
             </SkeletonTheme>
         )
     }

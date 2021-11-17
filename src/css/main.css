@@ -1650,7 +1650,7 @@ button {
     width: 90vw;
   }
 }
-@media only screen and (max-width: 407px) {
+@media only screen and (max-width: 384px) {
   .detailModal__inner-config {
     margin-top: 10px;
   }
@@ -1678,6 +1678,21 @@ button {
   grid-template-columns: repeat(5, 1fr);
   row-gap: 10px;
   column-gap: 10px;
+}
+@media only screen and (max-width: 992px) {
+  .MediaWrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 550px) {
+  .MediaWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 400px) {
+  .MediaWrapper {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

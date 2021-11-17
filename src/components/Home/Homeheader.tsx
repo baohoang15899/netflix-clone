@@ -52,7 +52,7 @@ export default function Homeheader() {
                     <ul className='home__header-linkMobile'>
                         <Link className='home__header-link' to='/home'>Home</Link>
                         <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                        <Link className='home__header-link' to='/home'>Movies</Link>
+                        <Link className='home__header-link' to='/movie/28'>Movies</Link>
                         <Link className='home__header-link' to='/home'>My list</Link>
                     </ul>
                 </div>
@@ -60,7 +60,7 @@ export default function Homeheader() {
                 <ul className='home__header-menu'>
                     <Link className='home__header-link' to='/home'>Home</Link>
                     <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                    <Link className='home__header-link' to='/home'>Movies</Link>
+                    <Link className='home__header-link' to='/movie/28'>Movies</Link>
                     <Link className='home__header-link' to='/home'>My list</Link>
                 </ul>
             </div>

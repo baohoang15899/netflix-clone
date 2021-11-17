@@ -1,4 +1,4 @@
-import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenreRequest, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
+import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
 import { takeLatest, call, put, select, take, takeEvery, delay } from 'redux-saga/effects'
 import { homeAction } from 'Redux/homeReducer'
 
@@ -129,6 +129,23 @@ function* getGenreTvshowData({payload}:any) {
     } catch (error) {
         console.log(error);
     }
+    finally{
+        yield put(homeAction.stopLoadingTvshowPage())
+    }
+}
+
+function* getGenreMovieData({payload}:any) {
+    try {
+        const res: Response = yield getMovieByGenre(payload)
+        if (res?.status === 200) {
+            yield put(homeAction.getGenreMoviesSuccess(res.data.results))
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        yield put(homeAction.stopLoadingMoviePage())
+    }
 }
 
 function* homeSaga() {
@@ -141,6 +158,7 @@ function* homeSaga() {
     yield takeLatest(homeAction.getTrendingTvshowRequest, getTrendingTvShowData)
     yield takeLatest(homeAction.getTrendingMovieRequest, getTrendingMovieData)
     yield takeLatest(homeAction.getGenreTvshowsRequest,getGenreTvshowData)
+    yield takeLatest(homeAction.getGenreMoviesRequest,getGenreMovieData)
 }
 
 export default homeSaga

@@ -5,6 +5,7 @@ import { homeAction } from 'Redux/homeReducer'
 import { RootReducerModel } from 'Redux/rootReducer'
 import Banner from 'components/Home/Banner'
 import ItemBox from 'components/Home/ItemBox'
+import SkeletonLoading from 'components/Home/SkeletonLoading'
 
 export default function Index(props: any) {
     const dispatch = useDispatch()
@@ -12,6 +13,7 @@ export default function Index(props: any) {
     const storeData = useSelector((state: RootReducerModel) => state.homeReducer)
     const { results } = trendingShow
     const { genresTv, allGenreTvshow } = storeData
+    const loading = useSelector((state: RootReducerModel) => state.homeReducer.Loading.tvShowPage)
     useEffect(() => {
         dispatch(homeAction.getTrendingTvshowRequest())
         dispatch(homeAction.getGenreTvshowsRequest({ id: props?.match?.params?.id }))
@@ -30,14 +32,17 @@ export default function Index(props: any) {
                         </div>
                     }
                     {
-                        allGenreTvshow &&
-                        <div className='MediaWrapper'>
-                            {allGenreTvshow.map(item => {
-                                if(item.backdrop_path && item.poster_path){
-                                    return <ItemBox slide={false} key={item.id} mediaType='tv' data={item} />
-                                }
-                            })}
-                        </div>
+                        loading ?
+                            <SkeletonLoading noTitle={true} />
+                            :
+                            allGenreTvshow &&
+                            <div className='MediaWrapper'>
+                                {allGenreTvshow.map(item => {
+                                    if (item.backdrop_path && item.poster_path) {
+                                        return <ItemBox slide={false} key={item.id} mediaType='tv' data={item} />
+                                    }
+                                })}
+                            </div>
                     }
                 </div>
             </div>

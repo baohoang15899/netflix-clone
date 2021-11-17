@@ -192,9 +192,8 @@
         @include media(500){
             width: 90vw;
         }
-        @include media(407){
+        @include media(384){
             &-config{
-                // // margin-left: -15px;
                 margin-top: 10px;
             }
         }
