@@ -15,15 +15,22 @@ export interface IhomeReducer {
     trendingMovie:any
     allGenreMovie:IdataResults[]
     allGenreTvshow:IdataResults[]
+    Page: Ipage
 }
 
+interface Ipage{
+    tvShow:number,
+    movie:number
+}
 interface Iloading {
     trending: Boolean,
     popular: Boolean,
     genreTv: Boolean,
     genreMovie: Boolean,
     moviePage: Boolean,
-    tvShowPage: Boolean
+    tvShowPage: Boolean,
+    movieMore: Boolean,
+    tvShowMore: Boolean
 }
 interface IsingleMovie {
     genre?: string,

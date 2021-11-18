@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { homeAction } from 'Redux/homeReducer'
 import { RootReducerModel } from 'Redux/rootReducer'
 import Banner from 'components/Home/Banner'
 import ItemBox from 'components/Home/ItemBox'
 import SkeletonLoading from 'components/Home/SkeletonLoading'
+import ObserveIntersection from 'global/ObserveIntersection'
 
 export default function Index(props: any) {
     const dispatch = useDispatch()
@@ -13,10 +14,20 @@ export default function Index(props: any) {
     const loading = useSelector((state: RootReducerModel) => state.homeReducer.Loading.moviePage)
     const { results } = trendingShow
     const { genresMovie, allGenreMovie } = storeData
+    const [lastElement, setLastElement] = useState<any>()
+
+    const page = ObserveIntersection(lastElement, loading)
+
     useEffect(() => {
         dispatch(homeAction.getTrendingMovieRequest())
-        dispatch(homeAction.getGenreMoviesRequest({ id: props?.match?.params?.id }))
+        return () =>{
+            dispatch(homeAction.clearMovie())
+        }
     }, [])
+
+    useEffect(() => {
+        dispatch(homeAction.getGenreMoviesRequest({ id: props?.match?.params?.id, page: page }))
+    }, [page])
 
     return (
         <div>
@@ -33,18 +44,26 @@ export default function Index(props: any) {
                             </div>
                         }
                         {
-                            loading ?
-                                <SkeletonLoading noTitle={true} />
-                                :
-                                allGenreMovie &&
-                                <div className='MediaWrapper'>
-                                    {allGenreMovie.map(item => {
-                                        if (item.backdrop_path && item.poster_path) {
+                            allGenreMovie &&
+                            <div className='MediaWrapper'>
+                                {allGenreMovie.map((item, index) => {
+                                    if (item.backdrop_path && item.poster_path) {
+                                        if (index === allGenreMovie.length - 1) {
+                                            return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType='movie' data={item} />
+                                        }
+                                        else {
                                             return <ItemBox slide={false} key={item.id} mediaType='movie' data={item} />
                                         }
-                                    })}
-                                </div>
+                                    }
+                                })}
+                            </div>
                         }
+                         {
+                        loading &&
+                        <div style={{marginTop:'20px'}}>
+                            <SkeletonLoading noTitle={true} />
+                        </div>
+                    }
                     </div>
                 </div>
             </div>

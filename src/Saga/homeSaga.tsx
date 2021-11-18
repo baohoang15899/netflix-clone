@@ -121,10 +121,13 @@ function* getTrendingMovieData() {
 }
 
 function* getGenreTvshowData({payload}:any) {
+    yield put(homeAction.startLoadingTvshowPage())
     try {
         const res: Response = yield getTvShowByGenre(payload)
         if (res?.status === 200) {
-            yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
+            if (payload.page < res.data.total_pages) {
+                yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
+            }
         }
     } catch (error) {
         console.log(error);
@@ -135,10 +138,13 @@ function* getGenreTvshowData({payload}:any) {
 }
 
 function* getGenreMovieData({payload}:any) {
+    yield put(homeAction.startLoadingMoviePage())
     try {
         const res: Response = yield getMovieByGenre(payload)
         if (res?.status === 200) {
-            yield put(homeAction.getGenreMoviesSuccess(res.data.results))
+            if (payload.page < res.data.total_pages) {
+                yield put(homeAction.getGenreMoviesSuccess(res.data.results))
+            }
         }
     } catch (error) {
         console.log(error);

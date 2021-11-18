@@ -38,7 +38,6 @@ export default function App() {
         if (isLoggedIn) {
             dispatch(homeAction.getGenresMovieRequest())
             dispatch(homeAction.getGenresTvRequest())
-            console.log('test run');
         }
     },[isLoggedIn])
 

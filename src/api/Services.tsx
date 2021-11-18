@@ -92,12 +92,12 @@ export const getGenresTvRequest = () => {
     return processRequest(NAxios.get(`${Urls.GENRE_TV}api_key=${client_ID}`))
 }
 
-export const getTvShowByGenre = (id:string) =>{
-    return processRequest(NAxios.get(`${Urls.TV_BY_GENRE}api_key=${client_ID}&with_genres=${id}`))
+export const getTvShowByGenre = ({id,page}:any) =>{
+    return processRequest(NAxios.get(`${Urls.TV_BY_GENRE}api_key=${client_ID}&with_genres=${id}&page=${page}`))
 }
 
-export const getMovieByGenre = (id:string) =>{
-    return processRequest(NAxios.get(`${Urls.MOVIE_BY_GENRE}api_key=${client_ID}&with_genres=${id}`))
+export const getMovieByGenre = ({id,page}:any) =>{
+    return processRequest(NAxios.get(`${Urls.MOVIE_BY_GENRE}api_key=${client_ID}&with_genres=${id}&page=${page}`))
 }
 
 

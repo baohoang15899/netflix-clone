@@ -5,7 +5,7 @@ import DefaultPoster from 'assets/image/defaultPoster.jpg'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Link, useLocation } from 'react-router-dom';
-export default function ItemBox(props: { data?: IdataResults, mediaType: string, slide?: Boolean }) {
+export default function ItemBox(props: { data?: IdataResults, mediaType: string, slide?: Boolean, cb?:(e:any)=>void}) {
     const location = useLocation();
     return (
         <Link
@@ -14,7 +14,7 @@ export default function ItemBox(props: { data?: IdataResults, mediaType: string,
                 pathname: `/home/${props.mediaType}/${props.data?.id}`,
                 state: { background: location, }
             }}>
-            <div className='itemBox'>
+            <div ref={props.cb} className='itemBox'>
                 <div className='itemBox_cover'>
                     {props.slide ?
                         <img className='itemBox_img swiper-lazy'

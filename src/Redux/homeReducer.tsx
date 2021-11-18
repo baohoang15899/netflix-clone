@@ -15,6 +15,10 @@ const initState:IhomeReducer = {
     genresMovie:[],
     allMovie:[],
     allTvshow:[],
+    Page:{
+        tvShow:0,
+        movie:0
+    },
     Loading:{
         trending:false,
         popular:false,
@@ -22,8 +26,9 @@ const initState:IhomeReducer = {
         genreMovie:false,
         moviePage:false,
         tvShowPage:false,
+        tvShowMore:false,
+        movieMore:false
     }
-
 }
 
 
@@ -32,8 +37,26 @@ const homeSlice = createSlice({
     name:'home',
     initialState: initState,
     reducers:{
+        clearTvShow:(state)=>{
+            state.allGenreTvshow = []
+        },
+        clearMovie:(state)=>{
+            state.allGenreMovie = []
+        },
+        getTvshowPage:(state,{payload})=>{
+            state.Page.tvShow = payload
+        },
+        getMoviePage:(state,{payload})=>{
+            state.Page.movie = payload
+        },
+        startLoadingMoviePage:(state)=>{
+            state.Loading.moviePage = true
+        },
         stopLoadingMoviePage:(state)=>{
             state.Loading.moviePage = false
+        },
+        startLoadingTvshowPage:(state)=>{
+            state.Loading.tvShowPage = true
         },
         stopLoadingTvshowPage:(state)=>{
             state.Loading.tvShowPage = false
@@ -95,25 +118,11 @@ const homeSlice = createSlice({
         getGenreTvshowsRequest:(state,payload) => {},
         getGenreMoviesSuccess:(state,{payload})=>{
             state.Loading.moviePage = true
-            if (state.allGenreMovie.length > 0) {
-                state.allGenreMovie = [
-                    ...state.allGenreMovie,
-                    ...state.allGenreMovie.filter((item,index)=> item.id !== payload[index].id)
-                ]
-            }else{
-                state.allGenreMovie = [...state.allGenreMovie,...payload]
-            }
+            state.allGenreMovie = [...state.allGenreMovie,...payload]
         },
         getGenreTvshowsSuccess:(state,{payload})=>{
-            state.Loading.tvShowPage = true
-            if (state.allGenreTvshow.length > 0) {
-                state.allGenreTvshow = [
-                    ...state.allGenreTvshow,
-                    ...state.allGenreTvshow.filter((item,index)=> item.id !== payload[index].id)
-                ]
-            }else{
-                state.allGenreTvshow = [...state.allGenreTvshow,...payload]
-            }
+            state.Loading.tvShowMore = true
+            state.allGenreTvshow = [...state.allGenreTvshow,...payload]
         }
     }
 })

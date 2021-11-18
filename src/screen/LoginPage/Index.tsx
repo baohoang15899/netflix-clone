@@ -107,6 +107,15 @@ export default function Index(props: any) {
                                     Your username or password not existed</p>
                             }
                             <p className="login__content-register">
+                                If you want to disconnect the app, go to the main 
+                                <a href="https://www.themoviedb.org/">
+                                <span>
+                                    Website,
+                                </span>
+                                </a>
+                                <span style ={{color:'#8c8c8c'}}>go to setting then choose the session, go to API tab and delete the app that you want to disconnect.</span>    
+                            </p>
+                            <p className="login__content-register">
                                 New to Netflix?
                                 <span
                                     onClick={() => {
@@ -121,7 +130,7 @@ export default function Index(props: any) {
                                     Sign up now.
                                 </span>
                             </p>
-                            <p className="login__content-more">This page is protected by Google reCAPTCHA to ensure you\'re not a bot.{!policy && <span onClick={() => setPolicy(true)}>Learn more .</span>}</p>
+                            <p className="login__content-more">This page is protected by Google reCAPTCHA to ensure you're not a bot.{!policy && <span onClick={() => setPolicy(true)}>Learn more .</span>}</p>
                             <p className={policy ? "login__content-policy show" : "login__content-policy"}>The information collected by Google reCAPTCHA is subject to the Google Privacy Policy and Terms of Service, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
                         </div>
                     </div>
