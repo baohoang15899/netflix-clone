@@ -17,6 +17,7 @@ export default function Index() {
     const { results } = trendingShow
     const { movies, tvShows } = popularTvAndMovies
     useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(homeAction.getTrendingRequest())
         dispatch(homeAction.getTrendingMovieAndTvshowRequest())
         dispatch(homeAction.getMoviesByGenreRequest())

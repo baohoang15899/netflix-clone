@@ -19,6 +19,7 @@ export default function Index(props: any) {
     const page = ObserveIntersection(lastElement, loading)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(homeAction.getTrendingMovieRequest())
         return () =>{
             dispatch(homeAction.clearMovie())
