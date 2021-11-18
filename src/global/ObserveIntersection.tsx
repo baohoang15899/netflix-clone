@@ -8,7 +8,7 @@ export default function ObserveIntersection(lastElement:any,loading?:Boolean) {
                 setPage(prev => prev + 1)
             }
         }
-    }, { threshold: 0.01 }))
+    }))
 
     useEffect(() => {
         const currentLastElement = observer.current
