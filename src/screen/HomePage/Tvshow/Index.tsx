@@ -28,8 +28,6 @@ export default function Index(props: any) {
     }, [])
 
     useEffect(() => {
-        console.log(page,'page');
-        
         dispatch(homeAction.getGenreTvshowsRequest({ id: idRef.current, page: page }))
     }, [page])
 
