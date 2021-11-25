@@ -21,6 +21,7 @@ export default function Index(props: any) {
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(homeAction.getTrendingMovieRequest())
+        dispatch(homeAction.clearMovie())
         return () =>{
             dispatch(homeAction.clearMovie())
         }

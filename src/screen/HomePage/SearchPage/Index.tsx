@@ -14,7 +14,7 @@ export default function Index(props: any) {
     const history = useHistory()
     useEffect(() => {
         if (props?.keyword.length < 1) {
-            history.push({ pathname: '/home' })
+            history.goBack()
         }
         const debounce = setTimeout(() => {
             dispatch(homeAction.getSearchRequest({ query: props?.match?.params?.keyword, page: 1 }))
