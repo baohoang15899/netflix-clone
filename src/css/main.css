@@ -1673,24 +1673,27 @@ button {
   color: white;
 }
 
-.MediaWrapper {
+.searchPage {
+  padding-top: 6%;
+}
+.MediaWrapper, .searchPage__grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 10px;
   column-gap: 10px;
 }
 @media only screen and (max-width: 992px) {
-  .MediaWrapper {
+  .MediaWrapper, .searchPage__grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media only screen and (max-width: 550px) {
-  .MediaWrapper {
+  .MediaWrapper, .searchPage__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 400px) {
-  .MediaWrapper {
+  .MediaWrapper, .searchPage__grid {
     grid-template-columns: 1fr;
   }
 }

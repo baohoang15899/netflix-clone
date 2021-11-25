@@ -8,6 +8,7 @@ import { faPlay, faList, faPlus, faHeart, faStar, faTimes, faChevronDown, faChev
 import Btn from 'components/Home/DetailModalBtn'
 import RecommendBox from 'components/Home/RecommendationBox'
 import SkeletonLoading from 'components/Home/SkeletonLoading'
+import { Link } from 'react-router-dom';
 interface IstateLocation {
     background?: any
 }
@@ -50,19 +51,19 @@ export default function Index(props: any) {
         if (e.target.className === ref.current.className) {
             if (location?.state?.background) {
                 history.goBack()
-            }else{
+            } else {
                 history.push('/home')
             }
         }
     }
 
-    const handleCloseBtn = () =>{
+    const handleCloseBtn = () => {
         if (location?.state?.background) {
             history.goBack()
-        }else{
+        } else {
             history.push('/home')
         }
-    } 
+    }
 
     return (
         <div ref={ref} onClick={(e) => handleGoback(e)} className='detailModal'>
@@ -168,9 +169,9 @@ export default function Index(props: any) {
                                                 movie?.genres && movie.genres?.length > 0 ? movie?.genres
                                                     ?.map((item, index) => {
                                                         if (index !== (movie.genres && movie.genres?.length - 1))
-                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                            return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
                                                         else
-                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                                            return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
                                                     })
                                                     :
                                                     <span className='detailModal__inner-crewName'>Not found</span>
@@ -178,9 +179,9 @@ export default function Index(props: any) {
                                                 tv?.genres && tv?.genres.length > 0 ? tv?.genres
                                                     ?.map((item, index) => {
                                                         if (index !== tv.genres?.length - 1)
-                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                            return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
                                                         else
-                                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                                            return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
                                                     })
                                                     :
                                                     <span className='detailModal__inner-crewName'>Not found</span>
@@ -271,20 +272,28 @@ export default function Index(props: any) {
                                             <span className='detailModal__inner-crewName'>Not found</span>
                                     }
                                 </p>
-                                <p className='detailModal__inner-finalInfoCategory'>Genre:{' '}{movie?.genres
-                                    ?.map((item, index) => {
-                                        if (index !== (movie.genres && movie.genres?.length - 1))
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
-                                        else
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                    })}
-                                    {tv?.genres
-                                        ?.map((item, index) => {
-                                            if (index !== tv.genres?.length - 1)
-                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
-                                            else
-                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
-                                        })}</p>
+                                <p className='detailModal__inner-finalInfoCategory'>Genre:{' '}
+                                    {props?.match?.params?.type === 'movie' ?
+                                        movie?.genres && movie.genres?.length > 0 ? movie?.genres
+                                            ?.map((item, index) => {
+                                                if (index !== (movie.genres && movie.genres?.length - 1))
+                                                    return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
+                                                else
+                                                    return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
+                                            })
+                                            :
+                                            <span className='detailModal__inner-crewName'>Not found</span>
+                                        :
+                                        tv?.genres && tv?.genres.length > 0 ? tv?.genres
+                                            ?.map((item, index) => {
+                                                if (index !== tv.genres?.length - 1)
+                                                    return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
+                                                else
+                                                    return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
+                                            })
+                                            :
+                                            <span className='detailModal__inner-crewName'>Not found</span>
+                                    }</p>
                             </div>
                         </div>
                         :

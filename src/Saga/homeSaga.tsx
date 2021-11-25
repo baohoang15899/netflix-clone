@@ -1,4 +1,4 @@
-import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
+import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getSearchData, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
 import { takeLatest, call, put, select, take, takeEvery, delay } from 'redux-saga/effects'
 import { homeAction } from 'Redux/homeReducer'
 
@@ -120,7 +120,7 @@ function* getTrendingMovieData() {
     }
 }
 
-function* getGenreTvshowData({payload}:any) {
+function* getGenreTvshowData({ payload }: any) {
     yield put(homeAction.startLoadingTvshowPage())
     try {
         const res: Response = yield getTvShowByGenre(payload)
@@ -132,12 +132,12 @@ function* getGenreTvshowData({payload}:any) {
     } catch (error) {
         console.log(error);
     }
-    finally{
+    finally {
         yield put(homeAction.stopLoadingTvshowPage())
     }
 }
 
-function* getGenreMovieData({payload}:any) {
+function* getGenreMovieData({ payload }: any) {
     yield put(homeAction.startLoadingMoviePage())
     try {
         const res: Response = yield getMovieByGenre(payload)
@@ -149,8 +149,25 @@ function* getGenreMovieData({payload}:any) {
     } catch (error) {
         console.log(error);
     }
-    finally{
+    finally {
         yield put(homeAction.stopLoadingMoviePage())
+    }
+}
+
+function* searchRequest({ payload }: any) {
+    yield put(homeAction.startSearchLoad())
+    try {
+        const res: Response = yield getSearchData(payload)
+        if (res.status === 200) {
+            if (payload.page < res.data.total_pages) {
+                yield put(homeAction.getSearchSuccess(res.data.results))
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally {
+        yield put(homeAction.stopSearchLoad())
     }
 }
 
@@ -163,8 +180,9 @@ function* homeSaga() {
     yield takeLatest(homeAction.getTvByGenreRequest, getTvshows)
     yield takeLatest(homeAction.getTrendingTvshowRequest, getTrendingTvShowData)
     yield takeLatest(homeAction.getTrendingMovieRequest, getTrendingMovieData)
-    yield takeLatest(homeAction.getGenreTvshowsRequest,getGenreTvshowData)
-    yield takeLatest(homeAction.getGenreMoviesRequest,getGenreMovieData)
+    yield takeLatest(homeAction.getGenreTvshowsRequest, getGenreTvshowData)
+    yield takeLatest(homeAction.getGenreMoviesRequest, getGenreMovieData)
+    yield takeLatest(homeAction.getSearchRequest, searchRequest)
 }
 
 export default homeSaga

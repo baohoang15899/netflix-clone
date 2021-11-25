@@ -7,6 +7,7 @@ const initState:IhomeReducer = {
         movies:{},
         tvShows:{}
     },
+    search:[],
     allGenreMovie:[],
     allGenreTvshow:[],
     trendingTvshow:{},
@@ -27,7 +28,8 @@ const initState:IhomeReducer = {
         moviePage:false,
         tvShowPage:false,
         tvShowMore:false,
-        movieMore:false
+        movieMore:false,
+        searchLoad:false
     }
 }
 
@@ -120,8 +122,21 @@ const homeSlice = createSlice({
             state.Loading.moviePage = true
             state.allGenreMovie = [...state.allGenreMovie,...payload]
         },
-        getGenreTvshowsSuccess:(state,{payload})=>{
+        getSearchRequest:(state,payload)=>{},
+        stopSearchLoad:(state)=>{
+            state.Loading.searchLoad = false
+        },
+        startSearchLoad:(state)=>{
             state.Loading.tvShowMore = true
+        },
+        clearSearchData:(state) =>{
+            state.search = []
+        },
+        getSearchSuccess:(state,{payload})=>{
+            state.Loading.searchLoad = true
+            state.search = payload
+        },
+        getGenreTvshowsSuccess:(state,{payload})=>{
             state.allGenreTvshow = [...state.allGenreTvshow,...payload]
         }
     }

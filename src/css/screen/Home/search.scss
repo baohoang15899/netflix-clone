@@ -1,0 +1,6 @@
+.searchPage{
+    padding-top: 6%;
+    &__grid{
+        @extend .MediaWrapper;
+    }
+}

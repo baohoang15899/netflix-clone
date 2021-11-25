@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthMainPage from 'screen/AuthMainPage/Index'
 import SignIn from 'screen/LoginPage/Index'
 import Home from 'screen/HomePage/Home/Index'
@@ -11,6 +11,7 @@ import {
     Link,
     Redirect,
     useLocation,
+    useHistory
 } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootReducerModel } from 'Redux/rootReducer';
@@ -20,6 +21,7 @@ import Loading from 'components/Loading'
 import Header from 'components/Home/Homeheader'
 import TvShow from 'screen/HomePage/Tvshow/Index'
 import Movie from 'screen/HomePage/MoviePage/Index'
+import Search from 'screen/HomePage/SearchPage/Index'
 import { homeAction } from 'Redux/homeReducer'
 
 interface IstateLocation {
@@ -30,21 +32,42 @@ export default function App() {
     const { isLoggedIn, isLoading, user } = useSelector((state: RootReducerModel) => state.authReducer)
     const dispatch = useDispatch()
     const location = useLocation<IstateLocation>()
+    const [keyword, setKeyword] = useState<string>(location.pathname.includes('search')?location.pathname.split('/')[2] :'')
+    const history = useHistory()
     useEffect(() => {
         dispatch(authAction.getUser())
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isLoggedIn) {
             dispatch(homeAction.getGenresMovieRequest())
             dispatch(homeAction.getGenresTvRequest())
         }
-    },[isLoggedIn])
+    }, [isLoggedIn])
 
+    useEffect(() => {
+        if (keyword.length > 0) {
+            history.push({
+                pathname: `/search/${keyword}`,
+            })
+        }
+        else{
+            setKeyword('')
+        }
+    }, [keyword])
+
+    
     let background = location?.state && location.state.background
+
+    useEffect(()=>{
+        if(!location.pathname.includes('search') && !background){
+            setKeyword('')
+        }
+    },[location])
+
     return (
         <div className='wrapper'>
-            {isLoggedIn && user && <Header/>} 
+            {isLoggedIn && user && <Header cb={setKeyword} keyword={keyword} />}
             {isLoading ?
                 <Loading /> :
                 <>
@@ -52,8 +75,9 @@ export default function App() {
                         <Route exact path="/" component={AuthMainPage} />
                         <Route exact path="/sign-in" component={SignIn} />
                         <PrivateRoute path='/home' component={user && Home} auth={isLoggedIn} />
-                        <PrivateRoute path='/tvshow/:id' component={user && TvShow} auth={isLoggedIn} />
-                        <PrivateRoute path='/movie/:id' component={user && Movie} auth={isLoggedIn} />
+                        <PrivateRoute path='/tvshow/:id' component={(props: any) => user && <TvShow key={window.location.hash} {...props} />} auth={isLoggedIn} />
+                        <PrivateRoute path='/movie/:id' component={(props: any) => user && <Movie key={window.location.hash} {...props} />} auth={isLoggedIn} />
+                        <PrivateRoute path='/search/:keyword' component={(props: any) => user && <Search keyword={keyword} {...props} />} auth={isLoggedIn} />
                     </Switch>
                     {!background &&
                         <Switch>

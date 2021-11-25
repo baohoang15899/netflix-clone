@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import Logo from 'components/Logo'
-import { Link } from 'react-router-dom'
+import { Link,Redirect } from 'react-router-dom'
 import DefaultAvatar from 'assets/image/avatar.png'
 import { UrlImage } from 'api/Urls'
 import ClickOutSide from 'global/ClickOutSide'
@@ -10,7 +10,7 @@ import { authAction } from 'Redux/authReducer'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
 
-export default function Homeheader() {
+export default function Homeheader({cb,keyword}:any) {
     const { user, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
     const [show, setShow] = useState<Boolean>(false)
     const [menuMobile, setMenuMobile] = useState<Boolean>(false)
@@ -33,6 +33,7 @@ export default function Homeheader() {
         document.addEventListener("scroll",handleScroll)
         return () => document.removeEventListener("scroll",handleScroll)
     },[window.scrollY])
+
     return (
         <div className={showHeader ? 'home__header add' : 'home__header'}>
             <div ref={mobileRef} className='home__header-left'>
@@ -66,12 +67,12 @@ export default function Homeheader() {
             </div>
             <div className="home__header-mobileSearchGroup">
                 <Icon icon={faSearch} />
-                <input placeholder='Movie, Tvshow, Actor' className='home__header-search mobile' type='text' />
+                <input value={keyword} onChange={(e)=>cb(e.target.value)} placeholder='Movie, Tvshow, Actor' className='home__header-search mobile' type='text' />
             </div>
             <div className='home__header-right'>
                 <div className={showSearch ? 'home__header-searchGroup show' : 'home__header-searchGroup'}>
                     <Icon onClick={() => { setShowSearch(!showSearch) }} style={{ cursor: 'pointer' }} icon={faSearch} />
-                    <input placeholder='Movie, Tvshow, Actor' className={showSearch ? 'home__header-search show' : 'home__header-search'} type='text' />
+                    <input value={keyword} onChange={(e)=>cb(e.target.value)} placeholder='Movie, Tvshow, Actor' className={showSearch ? 'home__header-search show' : 'home__header-search'} type='text' />
                 </div>
                 <div className='home__header-avatarGroup'>
                     <div className='home__header-avatar'>

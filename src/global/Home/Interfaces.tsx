@@ -13,6 +13,7 @@ export interface IhomeReducer {
     Loading: Iloading,
     trendingTvshow:any
     trendingMovie:any
+    search:IdataResults[]
     allGenreMovie:IdataResults[]
     allGenreTvshow:IdataResults[]
     Page: Ipage
@@ -30,7 +31,8 @@ interface Iloading {
     moviePage: Boolean,
     tvShowPage: Boolean,
     movieMore: Boolean,
-    tvShowMore: Boolean
+    tvShowMore: Boolean,
+    searchLoad:Boolean
 }
 interface IsingleMovie {
     genre?: string,
@@ -136,6 +138,7 @@ export interface IdataResults {
     release_date?: string,
     video?: Boolean,
     title?: string,
+    media_type:string
 }
 
 export interface ImovieDetail {
