@@ -8,7 +8,6 @@ import Question from './Question'
 import Footer from 'components/Auth/Footer'
 export default function Index(props:any) {
     const { isLoggedIn } = useSelector((state: RootReducerModel) => state.authReducer)
-    console.log(props?.location,'auth');
     if (isLoggedIn) return <Redirect to={{pathname:props?.location?.state?.from?.pathname ? props.location.state.from.pathname : '/home'}}/> 
     return (
         <>

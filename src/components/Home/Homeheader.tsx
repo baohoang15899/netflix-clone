@@ -12,14 +12,23 @@ import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export default function Homeheader({cb,keyword}:any) {
     const { user, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
-    const [show, setShow] = useState<Boolean>(false)
     const [menuMobile, setMenuMobile] = useState<Boolean>(false)
     const [showSearch, setShowSearch] = useState<Boolean>(false)
     const [showHeader,setShowHeader] = useState<Boolean>(false)
-    const ref = useRef<any>(null)
     const mobileRef = useRef<any>()
     const dispatch = useDispatch()
-    ClickOutSide(mobileRef, setMenuMobile)
+ 
+    useEffect(() => {
+        function handleClickOutside(event: any) {
+            if (mobileRef.current && !mobileRef.current.contains(event.target)) {
+                setMenuMobile(false)
+            }    
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [])
 
     useEffect(()=>{
         const handleScroll = () =>{

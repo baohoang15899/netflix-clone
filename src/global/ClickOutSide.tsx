@@ -1,6 +1,8 @@
 
 import React, { useEffect } from 'react'
 export default function ClickOutSide(ref : any, cb:(e:Boolean) => void) {
+    console.log('ok');
+    
     useEffect(() => {
         function handleClickOutside(event: any) {
             if (ref.current && !ref.current.contains(event.target)) {
@@ -11,5 +13,5 @@ export default function ClickOutSide(ref : any, cb:(e:Boolean) => void) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref]);
+    }, []);
 }

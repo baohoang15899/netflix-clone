@@ -22,19 +22,23 @@ export default function Index(props: any) {
         window.scrollTo(0, 0)
         dispatch(homeAction.getTrendingMovieRequest())
         dispatch(homeAction.clearMovie())
-        return () =>{
+        return () => {
             dispatch(homeAction.clearMovie())
         }
     }, [])
 
     useEffect(() => {
+        dispatch(homeAction.clearMovie())
+    }, [props?.match?.params?.id])
+
+    useEffect(() => {
         dispatch(homeAction.getGenreMoviesRequest({ id: props?.match?.params?.id, page: page }))
-    }, [page])
+    }, [page, props?.match?.params?.id])
 
     return (
         <div>
             <div className="Tvshow">
-                <Banner data={results && results[0]} />
+                <Banner id={props?.match?.params?.id} genreMenu={true} data={results && results[0]} />
                 <div className='Tvshow__wrapper'>
                     <div className="container">
                         {
@@ -60,14 +64,16 @@ export default function Index(props: any) {
                                 })}
                             </div>
                         }
-                         {
-                        loading &&
-                        <div style={{marginTop:'20px'}}>
-                            <SkeletonLoading noTitle={true} />
-                        </div>
-                    }
                     </div>
                 </div>
+                {
+                    loading &&
+                    <div style={{ marginTop: '10px' }}>
+                        <div className='container'>
+                            <SkeletonLoading noTitle={true} />
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     )

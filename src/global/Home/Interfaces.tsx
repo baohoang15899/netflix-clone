@@ -76,7 +76,9 @@ interface Ibanner {
 }
 
 export interface IbannerData {
-    data: Ibanner
+    data: Ibanner,
+    genreMenu?: Boolean
+    id?:string
 }
 
 export interface ItrendingMovieTv {

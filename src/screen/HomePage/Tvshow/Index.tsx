@@ -18,7 +18,7 @@ export default function Index(props: any) {
     const loading = useSelector((state: RootReducerModel) => state.homeReducer.Loading.tvShowPage)
     const idRef = useRef(props?.match?.params?.id)
 
-    const page = ObserveIntersection(lastElement,loading)
+    const page = ObserveIntersection(lastElement, loading)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -30,12 +30,16 @@ export default function Index(props: any) {
     }, [])
 
     useEffect(() => {
-        dispatch(homeAction.getGenreTvshowsRequest({ id: idRef.current, page: page }))
-    }, [page])
+        dispatch(homeAction.clearTvShow())
+    }, [props?.match?.params?.id])
+
+    useEffect(() => {
+        dispatch(homeAction.getGenreTvshowsRequest({ id: props?.match?.params?.id, page: page }))
+    }, [page, props?.match?.params?.id])
 
     return (
         <div className="Tvshow">
-            <Banner data={results && results[0]} />
+            <Banner id={props?.match?.params?.id} genreMenu={true} data={results && results[0]} />
             <div className='Tvshow__wrapper'>
                 <div className="container">
                     {
@@ -61,14 +65,16 @@ export default function Index(props: any) {
                             })}
                         </div>
                     }
-                    {
-                        loading &&
-                        <div style={{marginTop:'20px'}}>
-                            <SkeletonLoading noTitle={true} />
-                        </div>
-                    }
                 </div>
             </div>
+            {
+                loading &&
+                <div style={{ marginTop: '10px' }}>
+                    <div className='container'>
+                        <SkeletonLoading noTitle={true} />
+                    </div>
+                </div>
+            }
         </div>
     )
 }

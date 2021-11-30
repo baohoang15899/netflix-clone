@@ -32,7 +32,7 @@ export default function App() {
     const { isLoggedIn, isLoading, user } = useSelector((state: RootReducerModel) => state.authReducer)
     const dispatch = useDispatch()
     const location = useLocation<IstateLocation>()
-    const [keyword, setKeyword] = useState<string>(location.pathname.includes('search')?location.pathname.split('/')[2] :'')
+    const [keyword, setKeyword] = useState<string>(location.pathname.includes('search') ? location.pathname.split('/')[2] : '')
     const history = useHistory()
     useEffect(() => {
         dispatch(authAction.getUser())
@@ -51,19 +51,19 @@ export default function App() {
                 pathname: `/search/${keyword}`,
             })
         }
-        else{
+        else {
             setKeyword('')
         }
     }, [keyword])
 
-    
+
     let background = location?.state && location.state.background
 
-    useEffect(()=>{
-        if(!location.pathname.includes('search') && !background){
+    useEffect(() => {
+        if (!location.pathname.includes('search') && !background) {
             setKeyword('')
         }
-    },[location])
+    }, [location])
 
     return (
         <div className='wrapper'>
@@ -75,8 +75,8 @@ export default function App() {
                         <Route exact path="/" component={AuthMainPage} />
                         <Route exact path="/sign-in" component={SignIn} />
                         <PrivateRoute path='/home' component={user && Home} auth={isLoggedIn} />
-                        <PrivateRoute path='/tvshow/:id' component={(props: any) => user && <TvShow key={window.location.hash} {...props} />} auth={isLoggedIn} />
-                        <PrivateRoute path='/movie/:id' component={(props: any) => user && <Movie key={window.location.hash} {...props} />} auth={isLoggedIn} />
+                        <PrivateRoute path='/tvshow/:id' component={user && TvShow} auth={isLoggedIn} />
+                        <PrivateRoute path='/movie/:id' component={user && Movie} auth={isLoggedIn} />
                         <PrivateRoute path='/search/:keyword' component={(props: any) => user && <Search keyword={keyword} {...props} />} auth={isLoggedIn} />
                     </Switch>
                     {!background &&
