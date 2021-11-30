@@ -1801,7 +1801,7 @@ button {
 }
 
 .searchPage {
-  padding-top: 6%;
+  padding-top: 100px;
 }
 .MediaWrapper, .searchPage__grid {
   display: grid;
