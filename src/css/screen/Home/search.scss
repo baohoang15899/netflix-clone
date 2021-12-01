@@ -3,4 +3,9 @@
     &__grid{
         @extend .MediaWrapper;
     }
+    &__notFound{
+        @include font-bold(16px);
+        text-align: center;
+        padding: 100px 0px;
+    }
 }

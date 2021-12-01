@@ -1559,7 +1559,7 @@ button {
   }
 }
 
-.detailModal {
+.detailModal, .modalTrailer {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.7);
   top: 0;
@@ -1692,7 +1692,6 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(42, 42, 42, 0.6);
   padding: 2px;
 }
 .detailModal__inner-iconMore {
@@ -1803,6 +1802,57 @@ button {
 .searchPage {
   padding-top: 100px;
 }
+.searchPage__notFound {
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  text-align: center;
+  padding: 100px 0px;
+}
+
+.modalTrailer {
+  z-index: 10001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease-in-out 0.2s;
+}
+.modalTrailer.add {
+  opacity: 1;
+  visibility: visible;
+}
+.modalTrailer__iframe {
+  width: 70vw;
+  height: 90vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media only screen and (max-width: 500px) {
+  .modalTrailer__iframe {
+    width: 85vw;
+    height: 55vh;
+  }
+}
+.modalTrailer__notFound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease-in-out 0.2s;
+}
+.modalTrailer__notFound.add {
+  opacity: 1;
+  visibility: visible;
+}
+
 .MediaWrapper, .searchPage__grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
