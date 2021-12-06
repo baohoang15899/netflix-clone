@@ -20,7 +20,7 @@ export default function Index(props: any) {
                 setPage(prev => prev + 1)
             }
         }
-    }, { rootMargin: '200px' }))
+    }, { rootMargin: '20px' }))
 
     useEffect(() => {
         const currentLastElement = observer.current
@@ -40,8 +40,8 @@ export default function Index(props: any) {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(homeAction.clearSearchData())
         setPage(1)
+        dispatch(homeAction.clearSearchData())
     }, [props?.match?.params?.keyword])
 
 
@@ -52,11 +52,11 @@ export default function Index(props: any) {
                     <div className='searchPage__grid'>
                         {search.map((item, index) => {
                             if (item.media_type !== 'person' && item.backdrop_path && item.poster_path) {
-                                if (search.length - 1 === index) {
-                                    return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType={item.media_type} data={item} />
+                                if (index === search.length - 1) {
+                                    return <ItemBox cb={setLastElement} slide={false} key={index} mediaType={item.media_type} data={item} />
                                 }
                                 else {
-                                    return <ItemBox slide={false} key={item.id} mediaType={item.media_type} data={item} />
+                                    return <ItemBox slide={false} key={index} mediaType={item.media_type} data={item} />
                                 }
                             }
                         })
