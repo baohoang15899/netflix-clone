@@ -9,6 +9,8 @@ import Btn from 'components/Home/DetailModalBtn'
 import RecommendBox from 'components/Home/RecommendationBox'
 import SkeletonLoading from 'components/Home/SkeletonLoading'
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { homeAction } from 'Redux/homeReducer';
 interface IstateLocation {
     background?: any
 }
@@ -25,6 +27,8 @@ export default function Index(props: any) {
     const [more, setMore] = useState<Boolean>(false)
     const [detailLoad, setDetailLoad] = useState<Boolean>(false)
     const [recomLoad, setRecomLoad] = useState<Boolean>(false)
+    const dispatch = useDispatch()
+
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         if (props?.match?.params?.type === 'tv') {
@@ -57,6 +61,10 @@ export default function Index(props: any) {
         }
     }
 
+    const openTrailerModal = () => {
+        dispatch(homeAction.openModal({id:props?.match?.params?.id, media_type:props?.match?.params?.type}))
+    }
+
     const handleCloseBtn = () => {
         if (location?.state?.background) {
             history.goBack()
@@ -87,7 +95,7 @@ export default function Index(props: any) {
                                     {props?.match?.params?.type === 'movie' ? movie?.original_title : tv?.name ? tv?.name : tv?.original_name}
                                 </h4>
                                 <div className='detailModal__inner-btn'>
-                                    <div className='detailModal__inner-btnTrailer'>
+                                    <div onClick={() => openTrailerModal()} className='detailModal__inner-btnTrailer'>
                                         <Icon style={{ marginRight: '10px' }} size="sm" icon={faPlay} />
                                         <span>Trailer</span>
                                     </div>
@@ -151,12 +159,12 @@ export default function Index(props: any) {
                                         <span className='detailModal__inner-crewTitle'> Actors:{' '}</span>
                                         {props?.match?.params?.type === 'movie' ?
                                             movie && movie?.cast.length > 0 ? movie?.cast.filter((item, index) => index < 4)
-                                                ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })
+                                                ?.map((item,index) => { return <span key={index} className='detailModal__inner-crewName'>{item.name},{' '}</span> })
                                                 :
                                                 <span className='detailModal__inner-crewName'>Not found</span>
                                             :
                                             tv && tv.cast.length > 0 ? tv?.cast.filter((item, index) => index < 4)
-                                                ?.map(item => { return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span> })
+                                                ?.map((item,index) => { return <span key={index} className='detailModal__inner-crewName'>{item.name},{' '}</span> })
                                                 :
                                                 <span className='detailModal__inner-crewName'>Not found</span>
                                         }
@@ -169,9 +177,9 @@ export default function Index(props: any) {
                                                 movie?.genres && movie.genres?.length > 0 ? movie?.genres
                                                     ?.map((item, index) => {
                                                         if (index !== (movie.genres && movie.genres?.length - 1))
-                                                            return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
+                                                            return <Link to={`/movie/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
                                                         else
-                                                            return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
+                                                            return <Link to={`/movie/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name}.</Link>
                                                     })
                                                     :
                                                     <span className='detailModal__inner-crewName'>Not found</span>
@@ -179,9 +187,9 @@ export default function Index(props: any) {
                                                 tv?.genres && tv?.genres.length > 0 ? tv?.genres
                                                     ?.map((item, index) => {
                                                         if (index !== tv.genres?.length - 1)
-                                                            return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
+                                                            return <Link to={`/tvshow/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
                                                         else
-                                                            return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
+                                                            return <Link to={`/tvshow/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name}.</Link>
                                                     })
                                                     :
                                                     <span className='detailModal__inner-crewName'>Not found</span>
@@ -201,9 +209,9 @@ export default function Index(props: any) {
                             <span className='detailModal__inner-recommendTitle'>Recommendation</span>
                             <div className='detailModal__inner-recommendItem'>
                                 {recommendation && recommendation?.length > 0 ?
-                                    recommendation?.map(item => {
+                                    recommendation?.map((item,index) => {
                                         if (item.backdrop_path && item.poster_path)
-                                            return <RecommendBox key={item.id} data={item} />
+                                            return <RecommendBox key={index} data={item} />
                                     })
                                     :
                                     <span className='notFound'>Recommendation not found.</span>
@@ -236,7 +244,7 @@ export default function Index(props: any) {
                                 <p className='detailModal__inner-finalInfoCategory'>Director:{' '}
                                     {props?.match?.params?.type === 'movie' ?
                                         movie && movie?.crew.length > 0 ? movie?.crew.filter(item => item.job === 'Director').map((item, index) => {
-                                            return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                            return <span key={index} className='detailModal__inner-crewName'>{item.name}.</span>
                                         })
                                             :
                                             <span className='detailModal__inner-crewName'>Not found</span>
@@ -251,10 +259,10 @@ export default function Index(props: any) {
                                     {props?.match?.params?.type === 'movie' ?
                                         movie && movie.cast.length > 0 ? movie?.cast?.map((item, index) => {
                                             if (index !== movie.cast?.length - 1) {
-                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                return <span key={index} className='detailModal__inner-crewName'>{item.name},{' '}</span>
                                             }
                                             else {
-                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                                return <span key={index} className='detailModal__inner-crewName'>{item.name}.</span>
                                             }
                                         })
                                             :
@@ -262,10 +270,10 @@ export default function Index(props: any) {
                                         :
                                         tv && tv.cast.length > 0 ? tv?.cast?.map((item, index) => {
                                             if (index !== tv.cast?.length - 1) {
-                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</span>
+                                                return <span key={index} className='detailModal__inner-crewName'>{item.name},{' '}</span>
                                             }
                                             else {
-                                                return <span key={item.id} className='detailModal__inner-crewName'>{item.name}.</span>
+                                                return <span key={index} className='detailModal__inner-crewName'>{item.name}.</span>
                                             }
                                         })
                                             :
@@ -277,9 +285,9 @@ export default function Index(props: any) {
                                         movie?.genres && movie.genres?.length > 0 ? movie?.genres
                                             ?.map((item, index) => {
                                                 if (index !== (movie.genres && movie.genres?.length - 1))
-                                                    return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
+                                                    return <Link to={`/movie/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
                                                 else
-                                                    return <Link to={`/movie/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
+                                                    return <Link to={`/movie/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name}.</Link>
                                             })
                                             :
                                             <span className='detailModal__inner-crewName'>Not found</span>
@@ -287,9 +295,9 @@ export default function Index(props: any) {
                                         tv?.genres && tv?.genres.length > 0 ? tv?.genres
                                             ?.map((item, index) => {
                                                 if (index !== tv.genres?.length - 1)
-                                                    return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
+                                                    return <Link to={`/tvshow/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name},{' '}</Link>
                                                 else
-                                                    return <Link to={`/tvshow/${item.id}`} key={item.id} className='detailModal__inner-crewName'>{item.name}.</Link>
+                                                    return <Link to={`/tvshow/${item.id}`} key={index} className='detailModal__inner-crewName'>{item.name}.</Link>
                                             })
                                             :
                                             <span className='detailModal__inner-crewName'>Not found</span>

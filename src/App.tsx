@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import AuthMainPage from 'screen/AuthMainPage/Index'
 import SignIn from 'screen/LoginPage/Index'
 import Home from 'screen/HomePage/Home/Index'
 import Modal from 'screen/HomePage/DetailModal/Index'
 import Footer from 'components/Auth/Footer'
 import {
-    HashRouter as Router,
     Switch,
     Route,
-    Link,
-    Redirect,
     useLocation,
     useHistory
 } from "react-router-dom";
@@ -23,6 +20,7 @@ import TvShow from 'screen/HomePage/Tvshow/Index'
 import Movie from 'screen/HomePage/MoviePage/Index'
 import Search from 'screen/HomePage/SearchPage/Index'
 import { homeAction } from 'Redux/homeReducer'
+import TrailerModal from 'screen/HomePage/TrailerModal/Index'
 
 interface IstateLocation {
     background?: any
@@ -32,8 +30,8 @@ export default function App() {
     const { isLoggedIn, isLoading, user } = useSelector((state: RootReducerModel) => state.authReducer)
     const dispatch = useDispatch()
     const location = useLocation<IstateLocation>()
-    const [keyword, setKeyword] = useState<string>(location.pathname.includes('search') ? location.pathname.split('/')[2] : '')
-    const history = useHistory()
+
+
     useEffect(() => {
         dispatch(authAction.getUser())
     }, [])
@@ -45,29 +43,12 @@ export default function App() {
         }
     }, [isLoggedIn])
 
-    useEffect(() => {
-        if (keyword.length > 0) {
-            history.push({
-                pathname: `/search/${keyword}`,
-            })
-        }
-        else {
-            setKeyword('')
-        }
-    }, [keyword])
-
-
     let background = location?.state && location.state.background
-
-    useEffect(() => {
-        if (!location.pathname.includes('search') && !background) {
-            setKeyword('')
-        }
-    }, [location])
 
     return (
         <div className='wrapper'>
-            {isLoggedIn && user && <Header cb={setKeyword} keyword={keyword} />}
+            {isLoggedIn && user && <Header background = {background}/>}
+            {isLoggedIn && <TrailerModal/>}
             {isLoading ?
                 <Loading /> :
                 <>
@@ -77,11 +58,11 @@ export default function App() {
                         <PrivateRoute path='/home' component={user && Home} auth={isLoggedIn} />
                         <PrivateRoute path='/tvshow/:id' component={user && TvShow} auth={isLoggedIn} />
                         <PrivateRoute path='/movie/:id' component={user && Movie} auth={isLoggedIn} />
-                        <PrivateRoute path='/search/:keyword' component={(props: any) => user && <Search keyword={keyword} {...props} />} auth={isLoggedIn} />
+                        <PrivateRoute path='/search/:keyword' component={user && Search} auth={isLoggedIn} />
                     </Switch>
                     {!background &&
                         <Switch>
-                            <PrivateRoute path='/home/:type/:id' component={(props: any) => <Modal key={window.location.hash} {...props} />} auth={isLoggedIn} />
+                            <PrivateRoute path='/home/:type/:id' component={Modal} auth={isLoggedIn} />
                         </Switch>
                     }
                 </>

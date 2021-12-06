@@ -1,12 +1,13 @@
 import { UrlImage } from 'api/Urls'
 import { IbannerData } from 'global/Home/Interfaces'
-import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faPlay, faExclamationCircle, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { Link, useLocation } from 'react-router-dom'
 import ClickOutSide from 'global/ClickOutSide'
+import { homeAction } from 'Redux/homeReducer'
 
 export default function Banner({ data, genreMenu, id }: IbannerData) {
     const location = useLocation()
@@ -14,7 +15,9 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
     const { genresTv, genresMovie } = genres
     const [showHeader, setShowHeader] = useState<Boolean>(false)
     const [menu, setMenu] = useState<Boolean>(false)
+    const [index,setIndex] = useState<any>(genreMenu && window.location.hash.split('/') && window.location.hash.split('/')[2])
     const ref = useRef<any>()
+    const dispatch = useDispatch()
     useEffect(() => {
         if (genreMenu) {
             const handleScroll = () => {
@@ -50,12 +53,16 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
         setMenu(prev => !prev)
     }
 
+    const handleActive =(e: any) => {
+        setIndex(e)
+    }
+
     return (
         <div className='home__banner'
             style={data && {
                 backgroundImage: `
                 linear-gradient(
-                    0deg,rgba(0,0,0,1) 0,rgba(0,0,0,0) 100%),
+                    0deg,rgba(0,0,0,1) 0,rgba(0,0,0,0.4) 100%),
                   url(${UrlImage.TRENDING_BACKGROUND}${data.backdrop_path})`
             }}>
             {
@@ -72,20 +79,22 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
                                         <ul className={menu ? 'genreBar__submenu add' : 'genreBar__submenu'}>
                                             {
                                                 data.media_type === 'tv' ?
-                                                    genresTv?.map(item => {
+                                                    genresTv?.map((item) => {
                                                         return <Link
+                                                            onClick={() => handleActive(item.id)}
+                                                            style={index == item.id ? {color:'#b3b3b3'} : {color:'white'}}
                                                             className='genreBar__link'
-                                                            onClick={() => window.scrollTo(0, 0)}
                                                             key={item.id}
                                                             to={`/tvshow/${item.id}`}>
                                                             {item.name}
                                                         </Link>
                                                     })
                                                     :
-                                                    genresMovie?.map(item => {
+                                                    genresMovie?.map((item) => {
                                                         return <Link
                                                             className='genreBar__link'
-                                                            onClick={() => window.scrollTo(0, 0)}
+                                                            onClick={() => handleActive(item.id)}
+                                                            style={index == item.id ? {color:'#b3b3b3'} : {color:'white'}}
                                                             key={item.id}
                                                             to={`/movie/${item.id}`}>
                                                             {item.name}
@@ -109,7 +118,7 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
                                 {data.overview && data.overview}
                             </p>
                             <div className='home__banner-btnGroup'>
-                                <div className='home__banner-btnTrailer'>
+                                <div onClick={() => dispatch(homeAction.openModal({ id: data.id, media_type: data.media_type }))} className='home__banner-btnTrailer'>
                                     <Icon style={{ marginRight: '10px' }} size="sm" icon={faPlay} />
                                     <span>Trailer</span>
                                 </div>

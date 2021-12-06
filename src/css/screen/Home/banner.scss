@@ -18,7 +18,7 @@
         }
         .genreBar{
             position:fixed;
-            padding-top: 90px;
+            padding-top: 110px;
             width: 100%;
             max-width: 1920px;
             z-index: 15;
@@ -28,7 +28,7 @@
                 padding: 2% 0px;
                 background-color: #0f0f0f;
                 @include media(992){
-                    padding: 27px 0px;
+                    padding: 42px 0px;
                 }
                 @include media(375){
                     padding: 40px 0px;

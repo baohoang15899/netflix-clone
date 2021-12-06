@@ -11,17 +11,39 @@ export interface IhomeReducer {
     allMovie?: Imovie[],
     allTvshow: ItvShow[],
     Loading: Iloading,
-    trendingTvshow:any
-    trendingMovie:any
-    search:IdataResults[]
-    allGenreMovie:IdataResults[]
-    allGenreTvshow:IdataResults[]
+    trendingTvshow: any
+    trendingMovie: any
+    search: IdataResults[]
+    allGenreMovie: IdataResults[]
+    allGenreTvshow: IdataResults[]
     Page: Ipage
+    modal: Imodal
 }
 
-interface Ipage{
-    tvShow:number,
-    movie:number
+interface IvideoResults {
+    id: string
+    iso_639_1: string
+    iso_3166_1: string
+    key: string
+    name: string
+    official: Boolean
+    published_at: string
+    site: string
+    size: number
+    type: string
+}
+export interface Ivideo {
+    id: number
+    results: IvideoResults[]
+}
+interface Imodal {
+    status: Boolean
+    id: string
+    media_type: string
+}
+interface Ipage {
+    tvShow: number,
+    movie: number
 }
 interface Iloading {
     trending: Boolean,
@@ -32,7 +54,7 @@ interface Iloading {
     tvShowPage: Boolean,
     movieMore: Boolean,
     tvShowMore: Boolean,
-    searchLoad:Boolean
+    searchLoad: Boolean
 }
 interface IsingleMovie {
     genre?: string,
@@ -78,7 +100,7 @@ interface Ibanner {
 export interface IbannerData {
     data: Ibanner,
     genreMenu?: Boolean
-    id?:string
+    id?: string
 }
 
 export interface ItrendingMovieTv {
@@ -140,7 +162,7 @@ export interface IdataResults {
     release_date?: string,
     video?: Boolean,
     title?: string,
-    media_type:string
+    media_type: string
 }
 
 export interface ImovieDetail {
@@ -199,8 +221,8 @@ export interface Irecommendation {
     video: Boolean
     vote_average: number
     vote_count: number
-    first_air_date:string
-    name:string
+    first_air_date: string
+    name: string
 }
 
 interface Icrew {

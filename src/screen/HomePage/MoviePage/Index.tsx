@@ -28,6 +28,7 @@ export default function Index(props: any) {
     }, [])
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(homeAction.clearMovie())
     }, [props?.match?.params?.id])
 

@@ -2,27 +2,29 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import Logo from 'components/Logo'
-import { Link,Redirect } from 'react-router-dom'
+import { Link, useHistory,useLocation } from 'react-router-dom'
 import DefaultAvatar from 'assets/image/avatar.png'
 import { UrlImage } from 'api/Urls'
-import ClickOutSide from 'global/ClickOutSide'
 import { authAction } from 'Redux/authReducer'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { homeAction } from 'Redux/homeReducer'
 
-export default function Homeheader({cb,keyword}:any) {
+export default function Homeheader({background}:any) {
     const { user, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
     const [menuMobile, setMenuMobile] = useState<Boolean>(false)
     const [showSearch, setShowSearch] = useState<Boolean>(false)
-    const [showHeader,setShowHeader] = useState<Boolean>(false)
+    const [showHeader, setShowHeader] = useState<Boolean>(false)
+    const [text, setText] = useState<string>('')
     const mobileRef = useRef<any>()
+    const history = useHistory()
     const dispatch = useDispatch()
- 
+    const location = useLocation()
     useEffect(() => {
         function handleClickOutside(event: any) {
             if (mobileRef.current && !mobileRef.current.contains(event.target)) {
                 setMenuMobile(false)
-            }    
+            }
         }
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -30,18 +32,49 @@ export default function Homeheader({cb,keyword}:any) {
         };
     }, [])
 
-    useEffect(()=>{
-        const handleScroll = () =>{
+    useEffect(() => {
+        if (!location.pathname.includes('search') && !background) {
+           setText('')
+        }
+    }, [location])
+
+    useEffect(() => {
+        const handleScroll = () => {
             if (window.scrollY > 0) {
                 setShowHeader(true)
             }
-            else{
+            else {
                 setShowHeader(false)
             }
         }
-        document.addEventListener("scroll",handleScroll)
-        return () => document.removeEventListener("scroll",handleScroll)
-    },[window.scrollY])
+        document.addEventListener("scroll", handleScroll)
+        return () => document.removeEventListener("scroll", handleScroll)
+    }, [window.scrollY])
+
+    const regexCheck = (text:string) =>{
+        const pattern = /[/,?~<>]/
+        const res = pattern.test(text)
+        let result = res ? text.replace(pattern,'') : text
+        return result
+    }
+
+    const handleSearch = () => {
+        if (text.length > 0) {
+            const res = regexCheck(text)
+            if (res.length > 0) {
+                history.push({pathname:`/search/${res}`})
+            }
+        }
+    }
+
+    const handleEnter = (e:any) =>{
+        if (text.length > 0 && e.key === 'Enter') {
+            const res = regexCheck(text)
+            if (res.length > 0) {
+                history.push({pathname:`/search/${res}`})
+            }
+        }
+    }
 
     return (
         <div className={showHeader ? 'home__header add' : 'home__header'}>
@@ -76,12 +109,14 @@ export default function Homeheader({cb,keyword}:any) {
             </div>
             <div className="home__header-mobileSearchGroup">
                 <Icon icon={faSearch} />
-                <input value={keyword} onChange={(e)=>cb(e.target.value)} placeholder='Movie, Tvshow, Actor' className='home__header-search mobile' type='text' />
+                <input onKeyDown={(e) => handleEnter(e)} value={text} onChange={(e) => setText(e.target.value)} placeholder='Movie, Tvshow, Actor' className='home__header-search mobile' type='text' />
+                <button onClick={() => handleSearch()} className='home__header-searchBtnMobile'>Search</button>
             </div>
             <div className='home__header-right'>
                 <div className={showSearch ? 'home__header-searchGroup show' : 'home__header-searchGroup'}>
                     <Icon onClick={() => { setShowSearch(!showSearch) }} style={{ cursor: 'pointer' }} icon={faSearch} />
-                    <input value={keyword} onChange={(e)=>cb(e.target.value)} placeholder='Movie, Tvshow, Actor' className={showSearch ? 'home__header-search show' : 'home__header-search'} type='text' />
+                    <input onKeyDown={(e) => handleEnter(e)} value={text} onChange={(e) => setText(e.target.value)} placeholder='Movie, Tvshow, Actor' className={showSearch ? 'home__header-search show' : 'home__header-search'} type='text' />
+                    <button onClick={() => handleSearch()} className='home__header-searchBtn'>Search</button>
                 </div>
                 <div className='home__header-avatarGroup'>
                     <div className='home__header-avatar'>

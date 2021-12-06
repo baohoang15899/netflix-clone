@@ -30,6 +30,11 @@ const initState:IhomeReducer = {
         tvShowMore:false,
         movieMore:false,
         searchLoad:false
+    },
+    modal:{
+        status:false,
+        id:'',
+        media_type:''
     }
 }
 
@@ -127,17 +132,26 @@ const homeSlice = createSlice({
             state.Loading.searchLoad = false
         },
         startSearchLoad:(state)=>{
-            state.Loading.tvShowMore = true
+            state.Loading.searchLoad = true
         },
         clearSearchData:(state) =>{
             state.search = []
         },
         getSearchSuccess:(state,{payload})=>{
-            state.Loading.searchLoad = true
-            state.search = payload
+            state.search = [...state.search,...payload]
         },
         getGenreTvshowsSuccess:(state,{payload})=>{
             state.allGenreTvshow = [...state.allGenreTvshow,...payload]
+        },
+        openModal:(state,{payload}) => {
+            state.modal.status = true 
+            state.modal.id = payload.id
+            state.modal.media_type = payload.media_type 
+        },
+        closeModal:(state) =>{
+            state.modal.id = ''
+            state.modal.media_type = ''
+            state.modal.status = false
         }
     }
 })
