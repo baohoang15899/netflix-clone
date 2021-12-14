@@ -177,7 +177,6 @@ function* favoriteMovieRequest({ payload }: any) {
         const res: Response = yield getFavorite(payload)
         if (res.status === 200) {
             if (payload.page <= res.data.total_pages) {
-                console.log(res,payload.type);
                 yield put(homeAction.getMovieFavoriteSuccess(res.data.results))
             }
         }
@@ -195,7 +194,6 @@ function* favoriteTvRequest({ payload }: any) {
         const res: Response = yield getFavorite(payload)
         if (res.status === 200) {
             if (payload.page <= res.data.total_pages) {
-                console.log(res,payload.type);
                 yield put(homeAction.getTvFavoriteSuccess(res.data.results))
             }
         }
