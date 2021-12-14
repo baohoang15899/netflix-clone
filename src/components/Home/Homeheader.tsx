@@ -97,6 +97,7 @@ export default function Homeheader({background}:any) {
                         <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
                         <Link className='home__header-link' to='/movie/28'>Movies</Link>
                         <Link className='home__header-link' to='/home'>My list</Link>
+                        <Link className='home__header-link' to='/favorite'>Favorite</Link>
                     </ul>
                 </div>
                 <Logo custom={true} />
@@ -105,6 +106,7 @@ export default function Homeheader({background}:any) {
                     <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
                     <Link className='home__header-link' to='/movie/28'>Movies</Link>
                     <Link className='home__header-link' to='/home'>My list</Link>
+                    <Link className='home__header-link' to='/favorite'>Favorite</Link>
                 </ul>
             </div>
             <div className="home__header-mobileSearchGroup">

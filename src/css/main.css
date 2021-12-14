@@ -540,6 +540,28 @@ button {
   color: #777777;
 }
 
+.errTextCenter {
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.errTextPaddingCenter {
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  padding-top: 200px;
+  padding-bottom: 100px;
+}
+
 .banner, .login {
   position: relative;
   background-position: center;
@@ -1572,6 +1594,9 @@ button {
   }
 }
 @media only screen and (max-width: 992px) {
+  .home__category-content .swiper-container .swiper-pagination .swiper-pagination-bullet {
+    display: none;
+  }
   .home__category-content .swiper-container .swiper-button-next, .home__category-content .swiper-container .swiper-button-prev {
     opacity: 1;
     visibility: visible;
@@ -1767,11 +1792,10 @@ button {
 .detailModal__inner-btnAdd, .detailModal__inner-iconWrapper {
   background-color: rgba(42, 42, 42, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 5px 6px;
   border-radius: 50%;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   position: relative;
   margin-left: 15px;
 }
@@ -1814,7 +1838,7 @@ button {
     width: 90vw;
   }
 }
-@media only screen and (max-width: 384px) {
+@media only screen and (max-width: 339px) {
   .detailModal__inner-config {
     margin-top: 10px;
   }
@@ -1889,6 +1913,43 @@ button {
 .modalTrailer__notFound.add {
   opacity: 1;
   visibility: visible;
+}
+
+.favorite {
+  padding-top: 100px;
+}
+.favorite__tab {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.favorite__tab-movie, .favorite__tab-tv {
+  transition: all ease-in-out 0.2s;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .favorite__tab-movie:hover, .favorite__tab-tv:hover {
+    color: #b3b3b3;
+  }
+}
+.favorite__tab-movie.add, .add.favorite__tab-tv {
+  color: #b3b3b3;
+}
+.favorite__tab-movie.add::after, .add.favorite__tab-tv::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #b3b3b3;
+  bottom: -10px;
+  left: 0;
+  z-index: 15;
+}
+.favorite__tab-tv {
+  margin-right: initial;
 }
 
 .MediaWrapper, .searchPage__grid {

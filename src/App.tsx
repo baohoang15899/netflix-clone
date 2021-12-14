@@ -19,6 +19,7 @@ import Header from 'components/Home/Homeheader'
 import TvShow from 'screen/HomePage/Tvshow/Index'
 import Movie from 'screen/HomePage/MoviePage/Index'
 import Search from 'screen/HomePage/SearchPage/Index'
+import Favorite from 'screen/HomePage/FavoritePage/Index'
 import { homeAction } from 'Redux/homeReducer'
 import TrailerModal from 'screen/HomePage/TrailerModal/Index'
 
@@ -59,6 +60,7 @@ export default function App() {
                         <PrivateRoute path='/tvshow/:id' component={user && TvShow} auth={isLoggedIn} />
                         <PrivateRoute path='/movie/:id' component={user && Movie} auth={isLoggedIn} />
                         <PrivateRoute path='/search/:keyword' component={user && Search} auth={isLoggedIn} />
+                        <PrivateRoute path='/favorite' component={user && Favorite} auth={isLoggedIn} />
                     </Switch>
                     {!background &&
                         <Switch>

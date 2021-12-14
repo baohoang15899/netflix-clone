@@ -151,11 +151,10 @@
         &-btnAdd{
             background-color: rgba(42,42,42,.6);
             border:2px solid rgba(255,255,255,.5);
-            padding: 5px 6px;
             border-radius: 50%;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             position: relative;
             margin-left: 15px;
             &:nth-child(1){
@@ -191,7 +190,7 @@
         @include media(500){
             width: 90vw;
         }
-        @include media(384){
+        @include media(339){
             &-config{
                 margin-top: 10px;
             }

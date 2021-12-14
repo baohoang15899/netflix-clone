@@ -39,41 +39,49 @@ export default function Index(props: any) {
     }, [page, props?.match?.params?.id])
 
     return (
-        <div className="Tvshow">
-            <Banner id={props?.match?.params?.id} genreMenu={true} data={results && results[0]} />
-            <div className='Tvshow__wrapper'>
-                <div className="container">
-                    {
-                        genresTv &&
-                        <div className="home__category-header">
-                            {genresTv.length > 0 &&
-                                genresTv.filter(item => item.id == props?.match?.params?.id)[0].name
+        <div>
+            {genresTv.some(item => item.id == props?.match?.params?.id) ?
+                <div className="Tvshow">
+                    <Banner id={props?.match?.params?.id} genreMenu={true} data={results && results[0]} />
+                    <div className='Tvshow__wrapper'>
+                        <div className="container">
+                            {
+                                genresTv &&
+                                <div className="home__category-header">
+                                    {genresTv.length > 0 &&
+                                        genresTv.filter(item => item.id == props?.match?.params?.id)[0].name
+                                    }
+                                </div>
+                            }
+                            {
+                                allGenreTvshow &&
+                                <div className='MediaWrapper'>
+                                    {allGenreTvshow.map((item, index) => {
+                                        if (item.backdrop_path && item.poster_path) {
+                                            if (index === allGenreTvshow.length - 1) {
+                                                return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType='tv' data={item} />
+                                            }
+                                            else {
+                                                return <ItemBox slide={false} key={item.id} mediaType='tv' data={item} />
+                                            }
+                                        }
+                                    })}
+                                </div>
                             }
                         </div>
-                    }
+                    </div>
                     {
-                        allGenreTvshow &&
-                        <div className='MediaWrapper'>
-                            {allGenreTvshow.map((item, index) => {
-                                if (item.backdrop_path && item.poster_path) {
-                                    if (index === allGenreTvshow.length - 1) {
-                                        return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType='tv' data={item} />
-                                    }
-                                    else {
-                                        return <ItemBox slide={false} key={item.id} mediaType='tv' data={item} />
-                                    }
-                                }
-                            })}
+                        loading &&
+                        <div style={{ marginTop: '10px' }}>
+                            <div className='container'>
+                                <SkeletonLoading noTitle={true} />
+                            </div>
                         </div>
                     }
                 </div>
-            </div>
-            {
-                loading &&
-                <div style={{ marginTop: '10px' }}>
-                    <div className='container'>
-                        <SkeletonLoading noTitle={true} />
-                    </div>
+                :
+                <div className='errTextPaddingCenter'>
+                    <span>Genre not found</span>
                 </div>
             }
         </div>

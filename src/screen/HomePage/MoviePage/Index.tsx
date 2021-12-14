@@ -38,44 +38,50 @@ export default function Index(props: any) {
 
     return (
         <div>
-            <div className="Tvshow">
-                <Banner id={props?.match?.params?.id} genreMenu={true} data={results && results[0]} />
-                <div className='Tvshow__wrapper'>
-                    <div className="container">
-                        {
-                            genresMovie &&
-                            <div className="home__category-header">
-                                {genresMovie.length > 0 &&
-                                    genresMovie.filter(item => item.id == props?.match?.params?.id)[0].name
-                                }
-                            </div>
-                        }
-                        {
-                            allGenreMovie &&
-                            <div className='MediaWrapper'>
-                                {allGenreMovie.map((item, index) => {
-                                    if (item.backdrop_path && item.poster_path) {
-                                        if (index === allGenreMovie.length - 1) {
-                                            return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType='movie' data={item} />
-                                        }
-                                        else {
-                                            return <ItemBox slide={false} key={item.id} mediaType='movie' data={item} />
-                                        }
+            {genresMovie.some(item => item.id == props?.match?.params?.id) ?
+                <div className="Tvshow">
+                    <Banner id={props?.match?.params?.id} genreMenu={true} data={results && results[0]} />
+                    <div className='Tvshow__wrapper'>
+                        <div className="container">
+                            {
+                                genresMovie &&
+                                <div className="home__category-header">
+                                    {genresMovie.length > 0 &&
+                                        genresMovie.filter(item => item.id == props?.match?.params?.id)[0].name
                                     }
-                                })}
-                            </div>
-                        }
-                    </div>
-                </div>
-                {
-                    loading &&
-                    <div style={{ marginTop: '10px' }}>
-                        <div className='container'>
-                            <SkeletonLoading noTitle={true} />
+                                </div>
+                            }
+                            {
+                                allGenreMovie &&
+                                <div className='MediaWrapper'>
+                                    {allGenreMovie.map((item, index) => {
+                                        if (item.backdrop_path && item.poster_path) {
+                                            if (index === allGenreMovie.length - 1) {
+                                                return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType='movie' data={item} />
+                                            }
+                                            else {
+                                                return <ItemBox slide={false} key={item.id} mediaType='movie' data={item} />
+                                            }
+                                        }
+                                    })}
+                                </div>
+                            }
                         </div>
                     </div>
-                }
-            </div>
+                    {
+                        loading &&
+                        <div style={{ marginTop: '10px' }}>
+                            <div className='container'>
+                                <SkeletonLoading noTitle={true} />
+                            </div>
+                        </div>
+                    }
+                </div>
+                :
+                <div className='errTextPaddingCenter'>
+                    <span>Genre not found</span>
+                </div>
+            }
         </div>
     )
 }

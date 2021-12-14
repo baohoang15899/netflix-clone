@@ -85,6 +85,11 @@
                     }
                 }
                 @include media(992){
+                    .swiper-pagination{
+                        .swiper-pagination-bullet{
+                            display: none;
+                        }
+                    }
                     .swiper-button-next{
                         opacity: 1;
                         visibility: visible;

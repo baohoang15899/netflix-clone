@@ -1,8 +1,13 @@
 import React from 'react'
 
-export default function DetailModalBtn({component:Component}:any) {
+interface btnModal {
+    component:any,
+    onClick?:() => void
+}
+
+export default function DetailModalBtn({component:Component,onClick}:btnModal) {
     return (
-        <div className='detailModal__inner-btnAdd'>
+        <div onClick={onClick} className='detailModal__inner-btnAdd'>
             {Component}
         </div>
     )

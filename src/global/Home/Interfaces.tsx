@@ -16,6 +16,8 @@ export interface IhomeReducer {
     search: IdataResults[]
     allGenreMovie: IdataResults[]
     allGenreTvshow: IdataResults[]
+    movieFavorite:ImovieDetail[]
+    tvFavorite:ItvDetail[]
     Page: Ipage
     modal: Imodal
 }
@@ -54,7 +56,9 @@ interface Iloading {
     tvShowPage: Boolean,
     movieMore: Boolean,
     tvShowMore: Boolean,
-    searchLoad: Boolean
+    searchLoad: Boolean,
+    tvFavorite: Boolean,
+    movieFavorite: Boolean
 }
 interface IsingleMovie {
     genre?: string,
@@ -256,4 +260,11 @@ export interface ItvDetail {
     overview: string,
     cast: IcastInfo[],
     crew: Icrew[]
+}
+
+export interface ImediaState {
+    favorite: boolean
+    id: number
+    rated: boolean
+    watchlist: boolean
 }

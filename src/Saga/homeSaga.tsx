@@ -1,4 +1,4 @@
-import { allMovieRequest, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getSearchData, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
+import { allMovieRequest, getFavorite, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getSearchData, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
 import { takeLatest, call, put, select, take, takeEvery, delay } from 'redux-saga/effects'
 import { homeAction } from 'Redux/homeReducer'
 
@@ -125,7 +125,7 @@ function* getGenreTvshowData({ payload }: any) {
     try {
         const res: Response = yield getTvShowByGenre(payload)
         if (res?.status === 200) {
-            if (payload.page < res.data.total_pages) {
+            if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
             }
         }
@@ -142,7 +142,7 @@ function* getGenreMovieData({ payload }: any) {
     try {
         const res: Response = yield getMovieByGenre(payload)
         if (res?.status === 200) {
-            if (payload.page < res.data.total_pages) {
+            if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getGenreMoviesSuccess(res.data.results))
             }
         }
@@ -159,7 +159,7 @@ function* searchRequest({ payload }: any) {
     try {
         const res: Response = yield getSearchData(payload)
         if (res.status === 200) {
-            if (payload.page < res.data.total_pages) {
+            if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getSearchSuccess(res.data.results))
             }
         }
@@ -168,6 +168,42 @@ function* searchRequest({ payload }: any) {
     }
     finally {
         yield put(homeAction.stopSearchLoad())
+    }
+}
+
+function* favoriteMovieRequest({ payload }: any) {
+    yield put(homeAction.startMovieFavoriteLoad())
+    try {
+        const res: Response = yield getFavorite(payload)
+        if (res.status === 200) {
+            if (payload.page <= res.data.total_pages) {
+                console.log(res,payload.type);
+                yield put(homeAction.getMovieFavoriteSuccess(res.data.results))
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally {
+        yield put(homeAction.stopMovieFavoriteLoad())
+    }
+}
+
+function* favoriteTvRequest({ payload }: any) {
+    yield put(homeAction.startTvFavoriteLoad())
+    try {
+        const res: Response = yield getFavorite(payload)
+        if (res.status === 200) {
+            if (payload.page <= res.data.total_pages) {
+                console.log(res,payload.type);
+                yield put(homeAction.getTvFavoriteSuccess(res.data.results))
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    finally {
+        yield put(homeAction.stopTvFavoriteLoad())
     }
 }
 
@@ -183,6 +219,8 @@ function* homeSaga() {
     yield takeLatest(homeAction.getGenreTvshowsRequest, getGenreTvshowData)
     yield takeLatest(homeAction.getGenreMoviesRequest, getGenreMovieData)
     yield takeLatest(homeAction.getSearchRequest, searchRequest)
+    yield takeLatest(homeAction.getMovieFavoriteRequest,favoriteMovieRequest)
+    yield takeLatest(homeAction.getTvFavoriteRequest,favoriteTvRequest)
 }
 
 export default homeSaga
