@@ -125,6 +125,10 @@ function* getGenreTvshowData({ payload }: any) {
     try {
         const res: Response = yield getTvShowByGenre(payload)
         if (res?.status === 200) {
+            if (payload.page === 1) {
+                yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
+                return
+            }
             if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
             }
@@ -142,6 +146,10 @@ function* getGenreMovieData({ payload }: any) {
     try {
         const res: Response = yield getMovieByGenre(payload)
         if (res?.status === 200) {
+            if (payload.page === 1) {
+                yield put(homeAction.getGenreMoviesSuccess(res.data.results))
+                return
+            }
             if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getGenreMoviesSuccess(res.data.results))
             }
@@ -159,6 +167,10 @@ function* searchRequest({ payload }: any) {
     try {
         const res: Response = yield getSearchData(payload)
         if (res.status === 200) {
+            if (payload.page === 1) {
+                yield put(homeAction.getSearchSuccess(res.data.results))
+                return
+            }
             if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getSearchSuccess(res.data.results))
             }
