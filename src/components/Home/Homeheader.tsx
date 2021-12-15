@@ -16,6 +16,7 @@ export default function Homeheader({ background }: any) {
     const [showSearch, setShowSearch] = useState<Boolean>(false)
     const [showHeader, setShowHeader] = useState<Boolean>(false)
     const [text, setText] = useState<string>('')
+    const [index, setIndex] = useState<string>('1')
     const mobileRef = useRef<any>()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -76,6 +77,11 @@ export default function Homeheader({ background }: any) {
         }
     }
 
+    const handleClick = (e: any) => {
+        setIndex(e.target.id);
+    }
+
+
     return (
         <div className={showHeader ? 'home__header add' : 'home__header'}>
             <div ref={mobileRef} className='home__header-left'>
@@ -93,20 +99,20 @@ export default function Homeheader({ background }: any) {
                         <p className='home__header-logoutMobile'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())}>Log out</span> </p>
                     </div>
                     <ul className='home__header-linkMobile'>
-                        <Link id='1' className='home__header-link' to='/home'>Home</Link>
-                        <Link id='2' className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                        <Link id='3' className='home__header-link' to='/movie/28'>Movies</Link>
-                        <Link id='4' className='home__header-link' to='/home'>My list</Link>
-                        <Link id='5' className='home__header-link' to='/favorite'>Favorite</Link>
+                        <Link id='1' onClick={(e) => handleClick(e)} style={{ color: index === '1' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>Home</Link>
+                        <Link id='2' onClick={(e) => handleClick(e)} style={{ color: index === '2' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
+                        <Link id='3' onClick={(e) => handleClick(e)} style={{ color: index === '3' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/movie/28'>Movies</Link>
+                        <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>My list</Link>
+                        <Link id='5' onClick={(e) => handleClick(e)} style={{ color: index === '5' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
                     </ul>
                 </div>
                 <Logo custom={true} />
                 <ul className='home__header-menu'>
-                    <Link id='1' className='home__header-link' to='/home'>Home</Link>
-                    <Link id='2' className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                    <Link id='3' className='home__header-link' to='/movie/28'>Movies</Link>
-                    <Link id='4' className='home__header-link' to='/home'>My list</Link>
-                    <Link id='5' className='home__header-link' to='/favorite'>Favorite</Link>
+                    <Link id='1' onClick={(e) => handleClick(e)} style={{ color: index === '1' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>Home</Link>
+                    <Link id='2' onClick={(e) => handleClick(e)} style={{ color: index === '2' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
+                    <Link id='3' onClick={(e) => handleClick(e)} style={{ color: index === '3' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/movie/28'>Movies</Link>
+                    <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>My list</Link>
+                    <Link id='5' onClick={(e) => handleClick(e)} style={{ color: index === '5' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
                 </ul>
             </div>
             <div className="home__header-mobileSearchGroup">
