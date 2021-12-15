@@ -8,14 +8,26 @@
         padding-bottom: 30px;
         padding-top: 90px
     }
+    &__block{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 10px;
+    }
     &__title{
         margin-top: 10px;
-        padding: 0px 10px;
         @include font-semiBold(12px);
+    }
+    &__favorite{
+        cursor: pointer;
+        transition: color ease-in-out 0.1s;
+        color: #fff;
+        &.add{
+            color: #e50914;
+        }
     }
     &__dateAdd{
         margin-top: 10px;
-        padding: 0px 10px;
         @include font-semiBold(14px)
     }
     &__overview{

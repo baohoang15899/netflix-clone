@@ -1,5 +1,8 @@
 .favorite{
-    padding-top: 100px;
+    padding-top: 80px;
+    @include media(438){
+        padding-top: 110px
+    }
     &__tab{
         @include font-regular(16px);
         &-movie{
@@ -29,6 +32,20 @@
         &-tv{
             @extend .favorite__tab-movie;
             margin-right: initial;
+        }
+    }
+    &__content{
+        padding-top: 30px;
+        &-movie{
+            @extend .MediaWrapper;
+            opacity: 0;
+            transition: all ease-in-out 0.2s;
+            &.add{
+                opacity: 1;
+            }       
+        }
+        &-tv{
+            @extend .favorite__content-movie
         }
     }
 }

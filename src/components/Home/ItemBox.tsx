@@ -1,11 +1,11 @@
 import { UrlImage } from 'api/Urls';
 import { IdataResults } from 'global/Home/Interfaces'
-import React, { useRef, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import DefaultPoster from 'assets/image/defaultPoster.jpg'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Link, useLocation } from 'react-router-dom';
-export default function ItemBox(props: { data?: IdataResults, mediaType: string, slide?: Boolean, cb?:(e:any)=>void}) {
+function ItemBox(props: { data?: IdataResults, mediaType: string, slide?: Boolean, cb?:(e:any)=>void}) {
     const location = useLocation();
     return (
         <Link
@@ -29,3 +29,4 @@ export default function ItemBox(props: { data?: IdataResults, mediaType: string,
         </Link>
     )
 }
+export default memo(ItemBox)

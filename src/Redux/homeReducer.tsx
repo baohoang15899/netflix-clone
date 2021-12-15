@@ -40,7 +40,9 @@ const initState: IhomeReducer = {
         status: false,
         id: '',
         media_type: ''
-    }
+    },
+    resetPageMovie:{},
+    resetPageTv:{}
 }
 
 
@@ -49,6 +51,10 @@ const homeSlice = createSlice({
     name: 'home',
     initialState: initState,
     reducers: {
+        clearFavorite:(state) =>{
+            state.movieFavorite = []
+            state.tvFavorite = []
+        },
         clearTvShow: (state) => {
             state.allGenreTvshow = []
         },
@@ -174,14 +180,35 @@ const homeSlice = createSlice({
 
         },
         getMovieFavoriteSuccess: (state, { payload }) => {
-            state.movieFavorite = [state.movieFavorite, ...payload]
+            state.movieFavorite = [...state.movieFavorite, ...payload]
         },
         getTvFavoriteRequest: (state, payload) => {
 
         },
         getTvFavoriteSuccess: (state, { payload }) => {
-            state.tvFavorite = [state.tvFavorite, ...payload]
-        }
+            state.tvFavorite = [...state.tvFavorite, ...payload]
+        },
+        refreshMovieFavoriteRequest:(state,payload) =>{
+
+        },
+        refreshTvFavoriteRequest:(state,payload) =>{
+
+        },
+        refreshMovieFavoriteSuccess:(state,{payload}) =>{
+            state.movieFavorite = payload
+        },
+        refreshTvFavoriteSuccess:(state,{payload}) =>{
+            state.tvFavorite = payload
+        },
+        markFavoriteRequest:(state,{payload})=>{
+
+        },
+        resetPageMovie:(state,{payload}) =>{
+            state.resetPageMovie = {...payload}
+        },
+        resetPageTv:(state,{payload}) =>{
+            state.resetPageTv = {...payload}
+        },
     }
 })
 

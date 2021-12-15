@@ -3,6 +3,13 @@ export interface IprivateRouter {
     auth: Boolean
 }
 
+export interface ImarkFavorite {
+    media_type:string 
+    media_id:number
+    favorite:boolean 
+    account_id:string
+}
+
 export interface IhomeReducer {
     trending: any
     allMoviesTvshowsTrending: ItrendingMovieTv
@@ -16,10 +23,12 @@ export interface IhomeReducer {
     search: IdataResults[]
     allGenreMovie: IdataResults[]
     allGenreTvshow: IdataResults[]
-    movieFavorite:ImovieDetail[]
-    tvFavorite:ItvDetail[]
+    movieFavorite:IdataResults[]
+    tvFavorite:IdataResults[]
     Page: Ipage
     modal: Imodal
+    resetPageMovie:any
+    resetPageTv:any
 }
 
 interface IvideoResults {

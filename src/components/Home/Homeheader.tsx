@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import Logo from 'components/Logo'
-import { Link, useHistory,useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import DefaultAvatar from 'assets/image/avatar.png'
 import { UrlImage } from 'api/Urls'
 import { authAction } from 'Redux/authReducer'
@@ -10,7 +10,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { homeAction } from 'Redux/homeReducer'
 
-export default function Homeheader({background}:any) {
+export default function Homeheader({ background }: any) {
     const { user, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
     const [menuMobile, setMenuMobile] = useState<Boolean>(false)
     const [showSearch, setShowSearch] = useState<Boolean>(false)
@@ -34,7 +34,7 @@ export default function Homeheader({background}:any) {
 
     useEffect(() => {
         if (!location.pathname.includes('search') && !background) {
-           setText('')
+            setText('')
         }
     }, [location])
 
@@ -51,10 +51,10 @@ export default function Homeheader({background}:any) {
         return () => document.removeEventListener("scroll", handleScroll)
     }, [window.scrollY])
 
-    const regexCheck = (text:string) =>{
+    const regexCheck = (text: string) => {
         const pattern = /[/,?~<>]/
         const res = pattern.test(text)
-        let result = res ? text.replace(pattern,'') : text
+        let result = res ? text.replace(pattern, '') : text
         return result
     }
 
@@ -62,16 +62,16 @@ export default function Homeheader({background}:any) {
         if (text.length > 0) {
             const res = regexCheck(text)
             if (res.length > 0) {
-                history.push({pathname:`/search/${res}`})
+                history.push({ pathname: `/search/${res}` })
             }
         }
     }
 
-    const handleEnter = (e:any) =>{
+    const handleEnter = (e: any) => {
         if (text.length > 0 && e.key === 'Enter') {
             const res = regexCheck(text)
             if (res.length > 0) {
-                history.push({pathname:`/search/${res}`})
+                history.push({ pathname: `/search/${res}` })
             }
         }
     }
@@ -93,20 +93,20 @@ export default function Homeheader({background}:any) {
                         <p className='home__header-logoutMobile'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())}>Log out</span> </p>
                     </div>
                     <ul className='home__header-linkMobile'>
-                        <Link className='home__header-link' to='/home'>Home</Link>
-                        <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                        <Link className='home__header-link' to='/movie/28'>Movies</Link>
-                        <Link className='home__header-link' to='/home'>My list</Link>
-                        <Link className='home__header-link' to='/favorite'>Favorite</Link>
+                        <Link id='1' className='home__header-link' to='/home'>Home</Link>
+                        <Link id='2' className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
+                        <Link id='3' className='home__header-link' to='/movie/28'>Movies</Link>
+                        <Link id='4' className='home__header-link' to='/home'>My list</Link>
+                        <Link id='5' className='home__header-link' to='/favorite'>Favorite</Link>
                     </ul>
                 </div>
                 <Logo custom={true} />
                 <ul className='home__header-menu'>
-                    <Link className='home__header-link' to='/home'>Home</Link>
-                    <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                    <Link className='home__header-link' to='/movie/28'>Movies</Link>
-                    <Link className='home__header-link' to='/home'>My list</Link>
-                    <Link className='home__header-link' to='/favorite'>Favorite</Link>
+                    <Link id='1' className='home__header-link' to='/home'>Home</Link>
+                    <Link id='2' className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
+                    <Link id='3' className='home__header-link' to='/movie/28'>Movies</Link>
+                    <Link id='4' className='home__header-link' to='/home'>My list</Link>
+                    <Link id='5' className='home__header-link' to='/favorite'>Favorite</Link>
                 </ul>
             </div>
             <div className="home__header-mobileSearchGroup">

@@ -28,7 +28,7 @@ export default function Index(props: any) {
     const [more, setMore] = useState<Boolean>(false)
     const [detailLoad, setDetailLoad] = useState<Boolean>(false)
     const [recomLoad, setRecomLoad] = useState<Boolean>(false)
-    const [favorite, setFavorite] = useState(false)
+    const [favorite, setFavorite] = useState(true)
     const user = useSelector((state: RootReducerModel) => state.authReducer.user)
     const [mediaStateInfo, setMediaStateInfo] = useState<ImediaState>()
     const dispatch = useDispatch()
@@ -54,8 +54,11 @@ export default function Index(props: any) {
                 setRecommendations, setRecomLoad)
             mediaState(props?.match?.params?.type, parseInt(props?.match?.params?.id), setMediaStateInfo)
         }
-        return () => { document.body.style.overflow = 'unset' }
+        return () => {
+            document.body.style.overflow = 'unset'
+        }
     }, [])
+
 
     useEffect(() => {
         if (mediaStateInfo?.favorite) {
@@ -91,11 +94,20 @@ export default function Index(props: any) {
     const handleFavorite = () => {
         if (favorite) {
             setFavorite(false)
-            markFavorite(props?.match?.params?.type, parseInt(props?.match?.params?.id), !favorite, user.id)
+            dispatch(homeAction.markFavoriteRequest({
+                media_type: props?.match?.params?.type, 
+                media_id: parseInt(props?.match?.params?.id),
+                favorite: false, 
+                account_id: user.id}))
+            // markFavorite(props?.match?.params?.type, parseInt(props?.match?.params?.id), false, user.id, setMarkLoad)
         }
         else {
             setFavorite(true)
-            markFavorite(props?.match?.params?.type, parseInt(props?.match?.params?.id), !favorite, user.id)
+            dispatch(homeAction.markFavoriteRequest({
+                media_type: props?.match?.params?.type, 
+                media_id: parseInt(props?.match?.params?.id),
+                favorite: true, 
+                account_id: user.id}))
         }
     }
     return (

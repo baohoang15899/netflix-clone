@@ -76,6 +76,7 @@ button {
   max-width: 1920px;
   margin: auto;
   overflow: hidden;
+  background-color: #000000;
 }
 
 @media screen and (max-width: 992px) {
@@ -422,10 +423,11 @@ button {
 }
 
 .itemBox {
-  padding: 0px 2px;
+  margin: 0px 2px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 4px;
 }
 .itemBox::after {
   content: "";
@@ -441,7 +443,6 @@ button {
 }
 .itemBox_img {
   max-width: 100%;
-  border-radius: 4px;
   max-height: 150px;
   aspect-ratio: 19/10;
   -webkit-aspect-ratio: 19/10;
@@ -513,17 +514,29 @@ button {
   padding-bottom: 30px;
   padding-top: 90px;
 }
+.recommendationBox__block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
 .recommendationBox__title {
   margin-top: 10px;
-  padding: 0px 10px;
   font-weight: 600;
   font-size: 12px;
   font-family: "Montserrat", sans-serif;
   color: white;
 }
+.recommendationBox__favorite {
+  cursor: pointer;
+  transition: color ease-in-out 0.1s;
+  color: #fff;
+}
+.recommendationBox__favorite.add {
+  color: #e50914;
+}
 .recommendationBox__dateAdd {
   margin-top: 10px;
-  padding: 0px 10px;
   font-weight: 600;
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
@@ -560,6 +573,15 @@ button {
   color: white;
   padding-top: 200px;
   padding-bottom: 100px;
+}
+
+.errTextPaddingCenterEqual {
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  padding: 50px 0px;
 }
 
 .banner, .login {
@@ -1862,7 +1884,7 @@ button {
 }
 
 .searchPage {
-  padding-top: 100px;
+  padding-top: 120px;
 }
 .searchPage__notFound {
   font-weight: 700;
@@ -1916,7 +1938,12 @@ button {
 }
 
 .favorite {
-  padding-top: 100px;
+  padding-top: 80px;
+}
+@media only screen and (max-width: 438px) {
+  .favorite {
+    padding-top: 110px;
+  }
 }
 .favorite__tab {
   font-weight: 400;
@@ -1951,25 +1978,34 @@ button {
 .favorite__tab-tv {
   margin-right: initial;
 }
-
-.MediaWrapper, .searchPage__grid {
+.favorite__content {
+  padding-top: 30px;
+}
+.favorite__content-movie, .favorite__content-tv {
+  opacity: 0;
+  transition: all ease-in-out 0.2s;
+}
+.favorite__content-movie.add, .add.favorite__content-tv {
+  opacity: 1;
+}
+.MediaWrapper, .searchPage__grid, .favorite__content-movie, .favorite__content-tv {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 10px;
-  column-gap: 10px;
+  column-gap: 2px;
 }
 @media only screen and (max-width: 992px) {
-  .MediaWrapper, .searchPage__grid {
+  .MediaWrapper, .searchPage__grid, .favorite__content-movie, .favorite__content-tv {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media only screen and (max-width: 550px) {
-  .MediaWrapper, .searchPage__grid {
+  .MediaWrapper, .searchPage__grid, .favorite__content-movie, .favorite__content-tv {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 400px) {
-  .MediaWrapper, .searchPage__grid {
+  .MediaWrapper, .searchPage__grid, .favorite__content-movie, .favorite__content-tv {
     grid-template-columns: 1fr;
   }
 }

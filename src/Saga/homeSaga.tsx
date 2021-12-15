@@ -1,4 +1,4 @@
-import { allMovieRequest, getFavorite, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getSearchData, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre } from 'api/Services'
+import { allMovieRequest, getFavorite, getGenresMovieRequest, getGenresTvRequest, getMovieByGenre, getMovieByGenreRequest, getSearchData, getTrendingData, getTrendingMovie, getTrendingTvShow, getTvByGenreRequest, getTvShowByGenre, markFavorite } from 'api/Services'
 import { takeLatest, call, put, select, take, takeEvery, delay } from 'redux-saga/effects'
 import { homeAction } from 'Redux/homeReducer'
 
@@ -125,7 +125,7 @@ function* getGenreTvshowData({ payload }: any) {
     try {
         const res: Response = yield getTvShowByGenre(payload)
         if (res?.status === 200) {
-            if (payload.page <= res.data.total_pages) {
+            if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
             }
         }
@@ -142,7 +142,7 @@ function* getGenreMovieData({ payload }: any) {
     try {
         const res: Response = yield getMovieByGenre(payload)
         if (res?.status === 200) {
-            if (payload.page <= res.data.total_pages) {
+            if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getGenreMoviesSuccess(res.data.results))
             }
         }
@@ -159,7 +159,7 @@ function* searchRequest({ payload }: any) {
     try {
         const res: Response = yield getSearchData(payload)
         if (res.status === 200) {
-            if (payload.page <= res.data.total_pages) {
+            if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getSearchSuccess(res.data.results))
             }
         }
@@ -176,7 +176,11 @@ function* favoriteMovieRequest({ payload }: any) {
     try {
         const res: Response = yield getFavorite(payload)
         if (res.status === 200) {
-            if (payload.page <= res.data.total_pages) {
+            if (payload.page === 1) {
+                yield put(homeAction.getMovieFavoriteSuccess(res.data.results))
+                return
+            }
+            if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getMovieFavoriteSuccess(res.data.results))
             }
         }
@@ -193,7 +197,11 @@ function* favoriteTvRequest({ payload }: any) {
     try {
         const res: Response = yield getFavorite(payload)
         if (res.status === 200) {
-            if (payload.page <= res.data.total_pages) {
+            if (payload.page === 1) {
+                yield put(homeAction.getTvFavoriteSuccess(res.data.results))
+                return
+            }
+            if (payload.page < res.data.total_pages) {
                 yield put(homeAction.getTvFavoriteSuccess(res.data.results))
             }
         }
@@ -202,6 +210,56 @@ function* favoriteTvRequest({ payload }: any) {
     }
     finally {
         yield put(homeAction.stopTvFavoriteLoad())
+    }
+}
+
+function* refreshFavorite({ payload }: any) {
+    try {
+        const res: Response = yield getFavorite(payload)
+        if (res.status === 200) {
+            if (payload.type === 'movies') {
+                yield put(homeAction.refreshMovieFavoriteSuccess(res.data.results))
+            }
+            else if (payload.type === 'tv') {
+                yield put(homeAction.refreshTvFavoriteSuccess(res.data.results))
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function* markFavoriteSuccess({ payload }: any) {
+    try {
+        const res: Response = yield markFavorite(payload)
+        if (res.status === 200 || res.status === 201) {
+            if (res.data.status_code === 13 && payload.favorite === false) {
+                let type = payload.media_type === 'movie' ? 'movies' : 'tv'
+                const resRefresh: Response = yield getFavorite({ type: type, account_id: payload.account_id, page: 1 })
+                if (payload.media_type === 'movie') {
+                    yield put(homeAction.resetPageMovie(payload))
+                    yield put(homeAction.refreshMovieFavoriteSuccess(resRefresh.data.results))
+                }
+                else if (payload.media_type === 'tv') {
+                    yield put(homeAction.resetPageTv(payload))
+                    yield put(homeAction.refreshTvFavoriteSuccess(resRefresh.data.results))
+                }
+            }
+            else if (res.data.status_code === 1 && payload.favorite === true) {
+                let type = payload.media_type === 'movie' ? 'movies' : 'tv'
+                const resRefresh: Response = yield getFavorite({ type: type, account_id: payload.account_id, page: 1 })
+                if (payload.media_type === 'movie') {
+                    yield put(homeAction.resetPageMovie(payload))
+                    yield put(homeAction.refreshMovieFavoriteSuccess(resRefresh.data.results))
+                }
+                else if (payload.media_type === 'tv') {
+                    yield put(homeAction.resetPageTv(payload))
+                    yield put(homeAction.refreshTvFavoriteSuccess(resRefresh.data.results))
+                }
+            }
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -217,8 +275,11 @@ function* homeSaga() {
     yield takeLatest(homeAction.getGenreTvshowsRequest, getGenreTvshowData)
     yield takeLatest(homeAction.getGenreMoviesRequest, getGenreMovieData)
     yield takeLatest(homeAction.getSearchRequest, searchRequest)
-    yield takeLatest(homeAction.getMovieFavoriteRequest,favoriteMovieRequest)
-    yield takeLatest(homeAction.getTvFavoriteRequest,favoriteTvRequest)
+    yield takeLatest(homeAction.getMovieFavoriteRequest, favoriteMovieRequest)
+    yield takeLatest(homeAction.getTvFavoriteRequest, favoriteTvRequest)
+    yield takeLatest(homeAction.refreshTvFavoriteRequest, refreshFavorite)
+    yield takeLatest(homeAction.refreshMovieFavoriteRequest, refreshFavorite)
+    yield takeLatest(homeAction.markFavoriteRequest, markFavoriteSuccess)
 }
 
 export default homeSaga

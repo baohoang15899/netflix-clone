@@ -1,9 +1,9 @@
 .itemBox{
-    padding: 0px 2px;
+    margin: 0px 2px;
     position: relative;
     cursor: pointer;
     overflow: hidden;
-
+    border-radius: 4px;
     &::after{
         content: '';
         position:absolute;
@@ -18,7 +18,6 @@
     }
     &_img{
         max-width: 100%;
-        border-radius: 4px;
         max-height: 150px;
         aspect-ratio: 19/10;
         -webkit-aspect-ratio: 19/10;

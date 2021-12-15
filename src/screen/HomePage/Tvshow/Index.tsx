@@ -1,5 +1,5 @@
-import { getTrendingTvShow } from 'api/Services'
-import React, { useEffect, useRef, useState } from 'react'
+import { getTrendingTvShow, getTvShowByGenre } from 'api/Services'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { homeAction } from 'Redux/homeReducer'
 import { RootReducerModel } from 'Redux/rootReducer'
@@ -14,11 +14,25 @@ export default function Index(props: any) {
     const storeData = useSelector((state: RootReducerModel) => state.homeReducer)
     const { results } = trendingShow
     const { genresTv, allGenreTvshow } = storeData
-    const [lastElement, setLastElement] = useState<any>()
     const loading = useSelector((state: RootReducerModel) => state.homeReducer.Loading.tvShowPage)
-    const idRef = useRef(props?.match?.params?.id)
+    const [totalPage,setTotalPage] = useState()
+    const observer = useRef<any>()
+    const [page,setPage] = useState(1)
 
-    const page = ObserveIntersection(lastElement, loading)
+    const lastElement = useCallback(element => {
+        if (loading) return
+        if (observer.current) observer.current.disconnect()
+        observer.current = new IntersectionObserver(item => {
+            if (item[0].isIntersecting) {
+                if (totalPage) {
+                    if (page < totalPage) {
+                        setPage(prev => prev + 1)
+                    }   
+                }
+            }
+        }, { rootMargin: '100px' })
+        if (element) observer.current.observe(element)
+    }, [loading, totalPage])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -28,6 +42,12 @@ export default function Index(props: any) {
             dispatch(homeAction.clearTvShow())
         }
     }, [])
+
+    useEffect(() =>{
+        getTvShowByGenre({ id: props?.match?.params?.id, page: page }).then(data => {
+            setTotalPage(data.data.total_pages)
+        })
+    },[])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -59,7 +79,7 @@ export default function Index(props: any) {
                                     {allGenreTvshow.map((item, index) => {
                                         if (item.backdrop_path && item.poster_path) {
                                             if (index === allGenreTvshow.length - 1) {
-                                                return <ItemBox cb={setLastElement} slide={false} key={item.id} mediaType='tv' data={item} />
+                                                return <ItemBox cb={lastElement} slide={false} key={item.id} mediaType='tv' data={item} />
                                             }
                                             else {
                                                 return <ItemBox slide={false} key={item.id} mediaType='tv' data={item} />
@@ -71,12 +91,13 @@ export default function Index(props: any) {
                         </div>
                     </div>
                     {
-                        loading &&
-                        <div style={{ marginTop: '10px' }}>
+                        loading ?
+                        <div style={{ marginTop: '30px' }}>
                             <div className='container'>
                                 <SkeletonLoading noTitle={true} />
                             </div>
                         </div>
+                        : null
                     }
                 </div>
                 :
