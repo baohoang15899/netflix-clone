@@ -20,6 +20,7 @@ export default function Index() {
 
     const lastElement = useCallback(element => {
         if (index === '1') {
+            // console.log('run');
             if (Loading.movieFavorite) return
             if (observer.current) observer.current.disconnect()
             observer.current = new IntersectionObserver(item => {
@@ -27,6 +28,8 @@ export default function Index() {
                     if (totalPage) {
                         // console.log(pageMovie, totalPage,'movie');
                         if (pageMovie < totalPage) {
+                            // console.log('alo');
+                            // console.log('run');
                             setPageMovie(prev => prev + 1)
                         }
                     }
@@ -49,7 +52,7 @@ export default function Index() {
             }, { rootMargin: '200px' })
             if (element) observer.current.observe(element)
         }
-    }, [index, Loading.movieFavorite, Loading.tvFavorite, totalPage])
+    }, [index,totalPage,Loading.tvFavorite,Loading.movieFavorite])
 
 
     const handleClick = (e: any) => {
@@ -66,10 +69,10 @@ export default function Index() {
 
     useEffect(() => {
         // console.log(resetPageMovie,resetPageTv);
-        dispatch(homeAction.clearFavorite())
-        window.scrollTo(0, 0)
         setPageMovie(1)
         setPageTv(1)
+        dispatch(homeAction.clearFavorite())
+        window.scrollTo(0, 0)
         dispatch(homeAction.getTvFavoriteRequest(
             { type: 'tv', account_id: user.id, page: 1 }
         ))
@@ -80,15 +83,17 @@ export default function Index() {
 
 
     useEffect(() => {
+        setTotalPage(0)
         getFavorite({ type: index === '1' ? 'movies' : 'tv', account_id: user.id, page: 1 }).then(data => {
             setTotalPage(data.data.total_pages)
         })
     }, [index])
 
+
     useEffect(() => {
         dispatch(homeAction.getMovieFavoriteRequest(
             { type: 'movies', account_id: user.id, page: pageMovie }
-        ))
+        ))   
     }, [pageMovie])
 
     useEffect(() => {
@@ -97,6 +102,7 @@ export default function Index() {
         ))
     }, [pageTv])
 
+    
 
     return (
         <div className='favorite'>

@@ -129,7 +129,7 @@ function* getGenreTvshowData({ payload }: any) {
                 yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
                 return
             }
-            if (payload.page < res.data.total_pages) {
+            else if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
             }
         }
@@ -150,7 +150,7 @@ function* getGenreMovieData({ payload }: any) {
                 yield put(homeAction.getGenreMoviesSuccess(res.data.results))
                 return
             }
-            if (payload.page < res.data.total_pages) {
+            else if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getGenreMoviesSuccess(res.data.results))
             }
         }
@@ -171,7 +171,7 @@ function* searchRequest({ payload }: any) {
                 yield put(homeAction.getSearchSuccess(res.data.results))
                 return
             }
-            if (payload.page < res.data.total_pages) {
+            else if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getSearchSuccess(res.data.results))
             }
         }
@@ -187,12 +187,13 @@ function* favoriteMovieRequest({ payload }: any) {
     yield put(homeAction.startMovieFavoriteLoad())
     try {
         const res: Response = yield getFavorite(payload)
+        // console.log(res,'res');
         if (res.status === 200) {
             if (payload.page === 1) {
                 yield put(homeAction.getMovieFavoriteSuccess(res.data.results))
                 return
             }
-            if (payload.page < res.data.total_pages) {
+            else if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getMovieFavoriteSuccess(res.data.results))
             }
         }
@@ -213,7 +214,7 @@ function* favoriteTvRequest({ payload }: any) {
                 yield put(homeAction.getTvFavoriteSuccess(res.data.results))
                 return
             }
-            if (payload.page < res.data.total_pages) {
+            if (payload.page <= res.data.total_pages) {
                 yield put(homeAction.getTvFavoriteSuccess(res.data.results))
             }
         }
