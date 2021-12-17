@@ -57,6 +57,10 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
         setIndex(e)
     }
 
+    const handleGoTop = () =>{
+        window.scrollTo(0,0)
+    }
+
     return (
         <div className='home__banner'
             style={data && {
@@ -72,7 +76,7 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
                         <div className={showHeader ? 'genreBar add' : 'genreBar'}>
                             <div className='container'>
                                 <div className='genreBar__wrapper'>
-                                    <h5 className='genreBar__mediatype'>{data.media_type === 'tv' ? 'Tv show' : 'movie'}</h5>
+                                    <h5 onClick={() => handleGoTop()} className='genreBar__mediatype'>{data.media_type === 'tv' ? 'Tv show' : 'movie'}</h5>
                                     <div ref={ref} onClick={() => handleClick()} className='genreBar__group'>
                                         <span className='genreBar__genres'>Genres</span>
                                         <Icon size="sm" icon={faCaretDown} />

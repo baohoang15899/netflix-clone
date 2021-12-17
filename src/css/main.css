@@ -1386,6 +1386,7 @@ button {
   font-family: "Montserrat", sans-serif;
   color: white;
   text-transform: uppercase;
+  cursor: pointer;
 }
 @media only screen and (max-width: 800px) {
   .home__banner .genreBar__mediatype {

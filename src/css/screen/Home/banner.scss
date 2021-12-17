@@ -84,6 +84,7 @@
             &__mediatype{
                @include font-regular(20px);
                text-transform: uppercase;
+               cursor: pointer;
                @include media(800){
                 font-size: 16px
             } 
