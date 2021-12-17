@@ -15,7 +15,7 @@ export default function Index() {
     const dispatch = useDispatch()
     const [pageMovie, setPageMovie] = useState<number>(1)
     const [pageTv, setPageTv] = useState<number>(1)
-    const [totalPage, setTotalPage] = useState<number>()
+    const [totalPage, setTotalPage] = useState<number>(0)
     const observer = useRef<any>()
 
     const lastElement = useCallback(element => {

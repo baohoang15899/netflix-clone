@@ -15,7 +15,7 @@ export default function Index(props: any) {
     const loading = useSelector((state: RootReducerModel) => state.homeReducer.Loading.moviePage)
     const { results } = trendingShow
     const { genresMovie, allGenreMovie } = storeData
-    const [totalPage,setTotalPage] = useState()
+    const [totalPage,setTotalPage] = useState<number>(0)
     const observer = useRef<any>()
     const [page,setPage] = useState(1)
 
@@ -44,10 +44,11 @@ export default function Index(props: any) {
     }, [])
 
     useEffect(() =>{
-        getMovieByGenre({ id: props?.match?.params?.id, page: page }).then(data => {          
+        setTotalPage(0)
+        getMovieByGenre({ id: props?.match?.params?.id, page: 1 }).then(data => {          
             setTotalPage(data.data.total_pages)
         })
-    },[])
+    },[props?.match?.params?.id])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -55,6 +56,7 @@ export default function Index(props: any) {
     }, [props?.match?.params?.id])
 
     useEffect(() => {
+        // console.log(totalPage,'total');
         dispatch(homeAction.getGenreMoviesRequest({ id: props?.match?.params?.id, page: page }))
     }, [page, props?.match?.params?.id])
 

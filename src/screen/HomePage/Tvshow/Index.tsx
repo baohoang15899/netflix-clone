@@ -15,9 +15,9 @@ export default function Index(props: any) {
     const { results } = trendingShow
     const { genresTv, allGenreTvshow } = storeData
     const loading = useSelector((state: RootReducerModel) => state.homeReducer.Loading.tvShowPage)
-    const [totalPage,setTotalPage] = useState()
+    const [totalPage, setTotalPage] = useState<number>(0)
     const observer = useRef<any>()
-    const [page,setPage] = useState(1)
+    const [page, setPage] = useState(1)
 
     const lastElement = useCallback(element => {
         if (loading) return
@@ -27,7 +27,7 @@ export default function Index(props: any) {
                 if (totalPage) {
                     if (page < totalPage) {
                         setPage(prev => prev + 1)
-                    }   
+                    }
                 }
             }
         }, { rootMargin: '100px' })
@@ -43,11 +43,12 @@ export default function Index(props: any) {
         }
     }, [])
 
-    useEffect(() =>{
-        getTvShowByGenre({ id: props?.match?.params?.id, page: page }).then(data => {
+    useEffect(() => {
+        setTotalPage(0)
+        getTvShowByGenre({ id: props?.match?.params?.id, page: 1 }).then(data => {
             setTotalPage(data.data.total_pages)
         })
-    },[])
+    }, [props?.match?.params?.id])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -92,12 +93,12 @@ export default function Index(props: any) {
                     </div>
                     {
                         loading ?
-                        <div style={{ marginTop: '30px' }}>
-                            <div className='container'>
-                                <SkeletonLoading noTitle={true} />
+                            <div style={{ marginTop: '30px' }}>
+                                <div className='container'>
+                                    <SkeletonLoading noTitle={true} />
+                                </div>
                             </div>
-                        </div>
-                        : null
+                            : null
                     }
                 </div>
                 :

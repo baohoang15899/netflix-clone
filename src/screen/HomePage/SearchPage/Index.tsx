@@ -13,7 +13,7 @@ export default function Index(props: any) {
     const load = useSelector((state: RootReducerModel) => state.homeReducer.Loading.searchLoad)
     const dispatch = useDispatch()
     const [page, setPage] = useState<number>(1)
-    const [totalPage, setTotalPage] = useState<number>()
+    const [totalPage, setTotalPage] = useState<number>(0)
     const observer = useRef<any>()
 
     const lastElement = useCallback(element => {
@@ -32,10 +32,11 @@ export default function Index(props: any) {
     }, [load, totalPage])
 
     useEffect(() => {
-        getSearchData({ query: props?.match?.params?.keyword, page: page }).then(data => {
+        setTotalPage(0)
+        getSearchData({ query: props?.match?.params?.keyword, page: 1 }).then(data => {
             setTotalPage(data.data.total_pages)
         })
-    }, [])
+    }, [props?.match?.params?.keyword])
 
     useEffect(() => {
         dispatch(homeAction.getSearchRequest({ query: props?.match?.params?.keyword, page: page }))
