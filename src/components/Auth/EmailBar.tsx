@@ -18,20 +18,30 @@ export default function EmailBar() {
         }
     }
 
+    const handleBlur = () => {
+        if (email?.length > 0) {
+            setPlaceholder(true)
+        }
+        else {
+            setPlaceholder(false)
+        }
+    }
+
     if(move) return <Redirect to={{pathname:'sign-in' ,state:email}} />
 
     return (
         <div className='emailBar'>
             <div className='inputWrapper'>
                 <input
-                    onBlur={() => setPlaceholder(false)}
+                    value={email}   
+                    onBlur={() => handleBlur()}
                     onFocus={() => setPlaceholder(true)}
                     onChange={(e) => setEmail(e.target.value.trim())}
                     className='inputWrapper__input'
                     onKeyDown={(e)=> handleKeyPress(e)}
                     type="text" />
                 <p className={
-                    placeholder ?
+                    placeholder || email.length > 0 ?
                         'inputWrapper__placeholder add' :
                         'inputWrapper__placeholder'}>
                     Username or phone
