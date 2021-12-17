@@ -1989,6 +1989,44 @@ button {
 .favorite__content-movie.add, .add.favorite__content-tv {
   opacity: 1;
 }
+.mylist {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.mylist__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mylist__header-title {
+  font-weight: 400;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+@media only screen and (max-width: 800px) {
+  .mylist__header-title {
+    font-size: 16px;
+  }
+}
+.mylist__header-btn {
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 4px;
+  background-color: rgba(117, 117, 117, 0.8);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+@media only screen and (max-width: 438px) {
+  .mylist {
+    padding-top: 120px;
+  }
+}
+
 .MediaWrapper, .searchPage__grid, .favorite__content-movie, .favorite__content-tv {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

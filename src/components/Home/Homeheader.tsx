@@ -102,8 +102,7 @@ export default function Homeheader({ background }: any) {
                         <Link id='1' onClick={(e) => handleClick(e)} style={{ color: index === '1' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>Home</Link>
                         <Link id='2' onClick={(e) => handleClick(e)} style={{ color: index === '2' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
                         <Link id='3' onClick={(e) => handleClick(e)} style={{ color: index === '3' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/movie/28'>Movies</Link>
-                        <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>My list</Link>
-                        <Link id='5' onClick={(e) => handleClick(e)} style={{ color: index === '5' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
+                        <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
                     </ul>
                 </div>
                 <Logo custom={true} />
@@ -111,8 +110,7 @@ export default function Homeheader({ background }: any) {
                     <Link id='1' onClick={(e) => handleClick(e)} style={{ color: index === '1' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>Home</Link>
                     <Link id='2' onClick={(e) => handleClick(e)} style={{ color: index === '2' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
                     <Link id='3' onClick={(e) => handleClick(e)} style={{ color: index === '3' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/movie/28'>Movies</Link>
-                    <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>My list</Link>
-                    <Link id='5' onClick={(e) => handleClick(e)} style={{ color: index === '5' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
+                    <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
                 </ul>
             </div>
             <div className="home__header-mobileSearchGroup">

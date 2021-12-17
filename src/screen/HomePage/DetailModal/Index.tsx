@@ -138,13 +138,6 @@ export default function Index(props: any) {
                                             <span>Trailer</span>
                                         </div>
                                         <div className='detailModal__inner-config'>
-                                            <Btn component={
-                                                <Icon
-                                                    className="detailModal__inner-icon"
-                                                    size="lg"
-                                                    icon={faPlus} />
-                                            }
-                                            />
                                             <Btn onClick={() => handleFavorite()} component={
                                                 <Icon
                                                     className="detailModal__inner-icon"
