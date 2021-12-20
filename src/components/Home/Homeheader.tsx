@@ -17,14 +17,9 @@ export default function Homeheader({ background }: any) {
     const [showHeader, setShowHeader] = useState<Boolean>(false)
     const [text, setText] = useState<string>('')
     const location = useLocation()
-    const [index, setIndex] = useState<string>('1')
     const mobileRef = useRef<any>()
     const history = useHistory()
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        if (location.pathname === '/account') setIndex('5')
-    }, [location])
 
     useEffect(() => {
         function handleClickOutside(event: any) {
@@ -82,10 +77,6 @@ export default function Homeheader({ background }: any) {
         }
     }
 
-    const handleClick = (e: any) => {
-        setIndex(e.target.id);
-    }
-
     return (
         <div className={showHeader ? 'home__header add' : 'home__header'}>
             <div ref={mobileRef} className='home__header-left'>
@@ -99,22 +90,22 @@ export default function Homeheader({ background }: any) {
                             </div>
                             <p className='home__header-username'>{user.name ? user.name : user.username}</p>
                         </div>
-                        <Link id='5' onClick={(e) => handleClick(e)} to='/account' className='home__header-detail'><span>Account</span></Link>
+                        <Link to='/account' className='home__header-detail'><span>Account</span></Link>
                         <p className='home__header-logoutMobile'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())}>Log out</span> </p>
                     </div>
                     <ul className='home__header-linkMobile'>
-                        <Link id='1' onClick={(e) => handleClick(e)} style={{ color: index === '1' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>Home</Link>
-                        <Link id='2' onClick={(e) => handleClick(e)} style={{ color: index === '2' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                        <Link id='3' onClick={(e) => handleClick(e)} style={{ color: index === '3' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/movie/28'>Movies</Link>
-                        <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
+                        <Link className='home__header-link' to='/home'>Home</Link>
+                        <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
+                        <Link className='home__header-link' to='/movie/28'>Movies</Link>
+                        <Link className='home__header-link' to='/favorite'>Favorite</Link>
                     </ul>
                 </div>
                 <Logo custom={true} />
                 <ul className='home__header-menu'>
-                    <Link id='1' onClick={(e) => handleClick(e)} style={{ color: index === '1' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/home'>Home</Link>
-                    <Link id='2' onClick={(e) => handleClick(e)} style={{ color: index === '2' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                    <Link id='3' onClick={(e) => handleClick(e)} style={{ color: index === '3' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/movie/28'>Movies</Link>
-                    <Link id='4' onClick={(e) => handleClick(e)} style={{ color: index === '4' ? '#b3b3b3' : 'white' }} className='home__header-link' to='/favorite'>Favorite</Link>
+                    <Link className='home__header-link' to='/home'>Home</Link>
+                    <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
+                    <Link className='home__header-link' to='/movie/28'>Movies</Link>
+                    <Link className='home__header-link' to='/favorite'>Favorite</Link>
                 </ul>
             </div>
             <div className="home__header-mobileSearchGroup">
@@ -136,7 +127,7 @@ export default function Homeheader({ background }: any) {
                     <span className="home__header-triangle"></span>
                     <p className='home__header-username'>{user.name ? user.name : user.username}</p>
                     <div className='home__header-dropdown'>
-                        <Link id='5' onClick={(e) => handleClick(e)} to='/account' className='home__header-detail'><span>Account</span></Link>
+                        <Link to='/account' className='home__header-detail'><span>Account</span></Link>
                         <p className='home__header-detail'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())} >Log out</span> </p>
                     </div>
                 </div>
