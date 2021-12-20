@@ -2027,6 +2027,194 @@ button {
   }
 }
 
+.account {
+  padding-top: 80px;
+}
+@media only screen and (max-width: 438px) {
+  .account {
+    padding-top: 110px;
+  }
+}
+.account__content {
+  position: relative;
+}
+.account__content-form {
+  border-radius: 4px;
+  background: rgba(27, 27, 27, 0.75);
+  padding: 30px;
+  max-width: 680px;
+  margin: 30px auto 60px auto;
+}
+@media only screen and (max-width: 696px) {
+  .account__content-form {
+    padding: 20px;
+  }
+}
+.account__content-formTitle, .account__content-stat, .account__content-upcomingTitle {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.account__content-upcomingTitle {
+  margin-bottom: 10px;
+  display: block;
+}
+.account__content-secondSection {
+  border-bottom: 1px solid #444343;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+.account__content-firstSection {
+  border-bottom: 1px solid #444343;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.account__content-stat {
+  margin-bottom: 10px;
+  display: block;
+}
+.account__content-avatarWrapper {
+  border-radius: 50%;
+  width: 15%;
+  height: 15%;
+  overflow: hidden;
+  border: 2px solid white;
+}
+@media only screen and (max-width: 450px) {
+  .account__content-avatarWrapper {
+    width: 25%;
+    height: 25%;
+  }
+}
+.account__content-number {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.account__content-detailUpcomingMovie {
+  display: flex;
+  align-items: center;
+}
+@media only screen and (max-width: 696px) {
+  .account__content-detailUpcomingMovie {
+    flex-direction: column;
+  }
+}
+.account__content-upcomimgImg {
+  width: 100%;
+  height: 100%;
+  margin-right: 10px;
+}
+@media only screen and (max-width: 696px) {
+  .account__content-upcomimgImg {
+    margin-bottom: 10px;
+  }
+}
+.account__content-infoTitle {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.account__content-infoDate {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.account__content-infoOverview {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.account__content-info {
+  flex-direction: column;
+}
+.account__content-statDetailTitle {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.account__content-statDetailTitle:nth-child(2) {
+  margin: 0px 5px;
+}
+@media only screen and (max-width: 450px) {
+  .account__content-statDetailTitle {
+    font-weight: 600;
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+}
+.account__content-loading {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  padding-bottom: 30px;
+  display: block;
+}
+.account__content-statDetailTotal {
+  font-weight: 600;
+  font-size: 44px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+@media only screen and (max-width: 450px) {
+  .account__content-statDetailTotal {
+    font-weight: 600;
+    font-size: 30px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+}
+.account__content-statDetail {
+  display: flex;
+  flex-direction: column;
+}
+.account__content-statDetail:nth-child(2) {
+  margin: 0px 5px;
+}
+.account__content-titleWrapper {
+  display: block;
+}
+.account__content-name, .account__content-country {
+  display: block;
+  margin-top: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+.account__content-avatar {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+@media only screen and (max-width: 418px) {
+  .account__content-name, .account__content-country {
+    font-weight: 400;
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+  .account__content-formTitle, .account__content-upcomingTitle, .account__content-stat {
+    font-weight: 600;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+  }
+}
+
 .MediaWrapper, .searchPage__grid, .favorite__content-movie, .favorite__content-tv {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

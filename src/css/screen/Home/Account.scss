@@ -1,0 +1,142 @@
+.account{
+    padding-top: 80px;
+    @include media(438){
+        padding-top: 110px
+    }
+    &__content{
+        position: relative;
+        &-form{
+            border-radius: 4px;
+            background: rgba(27, 27, 27, 0.75);
+            padding: 30px;
+            max-width: 680px;
+            margin: 30px auto 60px auto;
+            @include media(696){
+                padding: 20px
+            }
+        }
+        &-formTitle{
+            @include font-semiBold(16px)
+        }
+        &-upcomingTitle{
+            @extend .account__content-formTitle;
+            margin-bottom: 10px;
+            display: block;
+        }
+        &-secondSection{
+            border-bottom: 1px solid rgb(68, 67, 67);
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        &-firstSection{
+            border-bottom: 1px solid rgb(68, 67, 67);
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+        &-stat{
+            @extend .account__content-formTitle;
+            margin-bottom: 10px;
+            display: block;
+        }
+        &-avatarWrapper{
+            border-radius: 50%;
+            width: 15%;
+            height: 15%;
+            overflow: hidden;
+            border: 2px solid white;
+            @include media(450){
+                width: 25%;
+                height: 25%;
+            }
+        }
+        &-number{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        &-detailUpcomingMovie{
+            display: flex;
+            align-items: center;
+            @include media(696){
+                flex-direction: column;
+            }
+        }
+        &-upcomimgImg{
+            width: 100%;
+            height: 100%;
+            margin-right: 10px;
+            @include media(696){
+                margin-bottom: 10px;
+            }
+        }
+        &-infoTitle{
+            display: block;
+            @include font-semiBold(14px)
+        }
+        &-infoDate{
+            display: block;
+            @include font-regular(14px)
+        }
+        &-infoOverview{
+            display: block;
+            @include font-regular(12px)
+        }
+        &-info{
+            flex-direction: column;
+        }
+        &-statDetailTitle{
+            &:nth-child(2){
+                margin: 0px 5px;
+            }
+            @include font-semiBold(14px);
+            @include media(450){
+                @include font-semiBold(12px);
+            }
+        }
+        &-loading{
+            @include font-semiBold(14px);
+            padding-bottom: 30px;
+            display: block;
+        }
+        &-statDetailTotal{
+            @include font-semiBold(44px);
+            @include media(450){
+                @include font-semiBold(30px);
+            }
+        }
+        &-statDetail{
+            display: flex;
+            flex-direction: column;
+            &:nth-child(2){
+                margin: 0px 5px;
+            }
+        }
+        &-titleWrapper{
+            display: block;
+        }
+        &-name{
+            display: block;
+            margin-top: 5px;
+            @include font-regular(14px)
+        }
+        &-country{
+            @extend .account__content-name
+        }
+        &-avatar{
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+        }
+        @include media(418){
+            &-name{
+                @include font-regular(12px)
+            }
+            &-formTitle{
+                @include font-semiBold(14px)
+            }
+        }
+    }
+}

@@ -22,7 +22,8 @@ import Search from 'screen/HomePage/SearchPage/Index'
 import Favorite from 'screen/HomePage/FavoritePage/Index'
 import { homeAction } from 'Redux/homeReducer'
 import TrailerModal from 'screen/HomePage/TrailerModal/Index'
-
+import Account from 'screen/HomePage/AccountDetail/Index'
+import NotFound from 'screen/NotFound/Index'
 interface IstateLocation {
     background?: any
 }
@@ -61,6 +62,8 @@ export default function App() {
                         <PrivateRoute path='/movie/:id' component={user && Movie} auth={isLoggedIn} />
                         <PrivateRoute path='/search/:keyword' component={user && Search} auth={isLoggedIn} />
                         <PrivateRoute path='/favorite' component={user && Favorite} auth={isLoggedIn} />
+                        <PrivateRoute path='/account' component={user && Account} auth={isLoggedIn} />
+                        <Route path='*' exact={true} component={NotFound} />
                     </Switch>
                     {!background &&
                         <Switch>

@@ -7,8 +7,8 @@ import DefaultAvatar from 'assets/image/avatar.png'
 import { UrlImage } from 'api/Urls'
 import { authAction } from 'Redux/authReducer'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { homeAction } from 'Redux/homeReducer'
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
+
 
 export default function Homeheader({ background }: any) {
     const { user, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
@@ -16,11 +16,16 @@ export default function Homeheader({ background }: any) {
     const [showSearch, setShowSearch] = useState<Boolean>(false)
     const [showHeader, setShowHeader] = useState<Boolean>(false)
     const [text, setText] = useState<string>('')
+    const location = useLocation()
     const [index, setIndex] = useState<string>('1')
     const mobileRef = useRef<any>()
     const history = useHistory()
     const dispatch = useDispatch()
-    const location = useLocation()
+
+    useEffect(() => {
+        if (location.pathname === '/account') setIndex('5')
+    }, [location])
+
     useEffect(() => {
         function handleClickOutside(event: any) {
             if (mobileRef.current && !mobileRef.current.contains(event.target)) {
@@ -81,7 +86,6 @@ export default function Homeheader({ background }: any) {
         setIndex(e.target.id);
     }
 
-
     return (
         <div className={showHeader ? 'home__header add' : 'home__header'}>
             <div ref={mobileRef} className='home__header-left'>
@@ -95,7 +99,7 @@ export default function Homeheader({ background }: any) {
                             </div>
                             <p className='home__header-username'>{user.name ? user.name : user.username}</p>
                         </div>
-                        <Link to='/home' className='home__header-detail'><span>Account Detail</span></Link>
+                        <Link id='5' onClick={(e) => handleClick(e)} to='/account' className='home__header-detail'><span>Account</span></Link>
                         <p className='home__header-logoutMobile'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())}>Log out</span> </p>
                     </div>
                     <ul className='home__header-linkMobile'>
@@ -132,7 +136,7 @@ export default function Homeheader({ background }: any) {
                     <span className="home__header-triangle"></span>
                     <p className='home__header-username'>{user.name ? user.name : user.username}</p>
                     <div className='home__header-dropdown'>
-                        <Link to='/home' className='home__header-detail'><span>Account Detail</span></Link>
+                        <Link id='5' onClick={(e) => handleClick(e)} to='/account' className='home__header-detail'><span>Account</span></Link>
                         <p className='home__header-detail'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())} >Log out</span> </p>
                     </div>
                 </div>
