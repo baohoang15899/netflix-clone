@@ -139,6 +139,10 @@
             left: 50%;
             transform: translate(-50%,-50%)
         }
+        &-rating{
+            margin-top: 5px;
+            @include font-semiBold(14px);
+        }
         &-moreInfo{
             @include font-semiBold(20px);
             margin-top: 35px;

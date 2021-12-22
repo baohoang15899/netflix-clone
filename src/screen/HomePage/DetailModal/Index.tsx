@@ -149,6 +149,9 @@ export default function Index(props: any) {
         }
     }
 
+    console.log(movie);
+
+
     return (
         <div ref={ref} onClick={(e) => handleGoback(e)} className='detailModal'>
             {connect === true && !detailLoad &&
@@ -231,6 +234,9 @@ export default function Index(props: any) {
                                                 }
                                             </span>
                                         </div>
+                                        <span className='detailModal__inner-rating'>
+                                            Rating: {props?.match?.params?.type === 'movie' ? movie && movie.vote_average : tv?.vote_average}
+                                        </span>
                                         <p className='detailModal__inner-overview'>{movie ? movie.overview : tv?.overview}</p>
                                     </div>
                                     <div className='detailModal__inner-infoRight'>
