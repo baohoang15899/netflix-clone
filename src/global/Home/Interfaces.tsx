@@ -274,6 +274,6 @@ export interface ItvDetail {
 export interface ImediaState {
     favorite: boolean
     id: number
-    rated: boolean
+    rated: any
     watchlist: boolean
 }

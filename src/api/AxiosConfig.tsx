@@ -1,7 +1,8 @@
 import axios, { AxiosError } from 'axios'
 import { Urls } from './Urls'
+
 const NAxios = axios.create({
-    baseURL: Urls.BASE,
+    baseURL: Urls.BASE, 
     timeout: 30000,
     headers: {
         'Content-type': 'application/json',

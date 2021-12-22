@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import DefaultAvatar from 'assets/image/avatar.png'
 import { homeAction } from 'Redux/homeReducer';
-import { getFavorite, getRated, getUpcoming } from 'api/Services';
+import { ApiResponse, getFavorite, getRated, getUpcoming } from 'api/Services';
 import { IdataResults } from 'global/Home/Interfaces';
 import DefaultPoster from 'assets/image/defaultPoster.jpg'
 import SkeletonLoading from 'components/Home/SkeletonLoading';
@@ -14,7 +14,7 @@ const Info = (number: number, title: string) => {
     return (
         <div className='account__content-statDetail'>
             <span className='account__content-statDetailTitle'>{title}</span>
-            <span className='account__content-statDetailTotal'>{number}</span>
+            <span className='account__content-statDetailTotal'>{number ? number : 0}</span>
         </div>
     )
 }
@@ -28,27 +28,44 @@ export default function Index() {
     const [upcoming, setUpcoming] = useState<IdataResults>()
     const [load, setLoad] = useState<boolean>(false)
     const location = useLocation()
-    const getAll = () => {
+    const getAll = async () => {
         setLoad(true)
-        getFavorite({ type: 'movies', account_id: user.id, page: 1 })
-            .then(data => setTotalMovie(data.data.total_results))
-        getFavorite({ type: 'tv', account_id: user.id, page: 1 })
-            .then(data => setTotalTv(data.data.total_results))
-        getRated({ type: 'movies', account_id: user.id, page: 1 })
-            .then(data => setTotalMovieRated(data.data.total_results))
-        getRated({ type: 'tv', account_id: user.id, page: 1 })
-            .then(data => setTotalTvRated(data.data.total_results))
-        getUpcoming().then(data =>
-            setUpcoming(data.data.results && data.data.results[0])
-        ).finally(() => setLoad(false))
+        try {
+            const data: ApiResponse[] = await Promise.all([
+                getFavorite({ type: 'movies', account_id: user.id, page: 1 }),
+                getFavorite({ type: 'tv', account_id: user.id, page: 1 }),
+                getRated({ type: 'movies', account_id: user.id, page: 1 }),
+                getRated({ type: 'tv', account_id: user.id, page: 1 }),
+                getUpcoming()
+            ])
+            setTotalMovie(data[0].data.total_results)
+            setTotalTv(data[1].data.total_results)
+            setTotalMovieRated(data[2].data.total_results)
+            setTotalTvRated(data[3].data.total_results)
+            setUpcoming(data[4].data.results && data[4].data.results[0])
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setLoad(false)
+        }
+        // getFavorite({ type: 'movies', account_id: user.id, page: 1 })
+        //     .then(data => setTotalMovie(data.data.total_results))
+        // getFavorite({ type: 'tv', account_id: user.id, page: 1 })
+        //     .then(data => setTotalTv(data.data.total_results))
+        // getRated({ type: 'movies', account_id: user.id, page: 1 })
+        //     .then(data => setTotalMovieRated(data.data.total_results))
+        // getRated({ type: 'tv', account_id: user.id, page: 1 })
+        //     .then(data => setTotalTvRated(data.data.total_results))
+        // getUpcoming().then(data =>
+        //     setUpcoming(data.data.results && data.data.results[0])
+        // ).finally(() => setLoad(false))
     }
 
     useEffect(() => {
+        window.scrollTo(0,0)
         getAll()
     }, [])
-
-    console.log(upcoming);
-
 
     return (
         <div className='account'>
@@ -69,13 +86,15 @@ export default function Index() {
                             <span className='account__content-stat'>
                                 Stats
                             </span>
-                            {totalMovieRated && totalTvRated && totalTv && totalMovie ?
+                            {!load &&
                                 <div className='account__content-number'>
                                     {Info(totalMovie, 'Favorite Movies')}
                                     {Info(totalTv, 'Favorite Tvshow')}
                                     {Info(totalTvRated + totalMovieRated, 'Total Ratings')}
                                 </div>
-                                :
+                            }
+                            {
+                                load &&
                                 <span className='account__content-number'>Loading...</span>
                             }
                         </div>

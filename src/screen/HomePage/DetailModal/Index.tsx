@@ -1,10 +1,10 @@
-import { getMovieDetail, getRecommendShow, getTvDetail, markFavorite, mediaState } from 'api/Services';
+import { getMovieDetail, getRecommendShow, getTvDetail, markFavorite, mediaState, rateMedia, ratingDelete } from 'api/Services';
 import { UrlImage } from 'api/Urls';
 import { ImediaState, ImovieDetail, Irecommendation, ItvDetail } from 'global/Home/Interfaces';
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory, useLocation } from 'react-router';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import { faPlay, faList, faPlus, faHeart, faStar, faTimes, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faList, faPlus, faHeart, faStar, faStarHalf, faTimes, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import Btn from 'components/Home/DetailModalBtn'
 import RecommendBox from 'components/Home/RecommendationBox'
 import SkeletonLoading from 'components/Home/SkeletonLoading'
@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { homeAction } from 'Redux/homeReducer';
 import { RootReducerModel } from 'Redux/rootReducer';
+import Star from 'components/Home/Star';
 interface IstateLocation {
     background?: any
 }
@@ -20,6 +21,7 @@ export default function Index(props: any) {
     const location = useLocation<IstateLocation>()
     const history = useHistory()
     const ref = useRef<any>()
+    const ratingRef = useRef<any>()
     const [tv, setTv] = useState<ItvDetail>()
     const [movie, setMovie] = useState<ImovieDetail>()
     const [connect, setConnect] = useState<Boolean>()
@@ -29,8 +31,11 @@ export default function Index(props: any) {
     const [detailLoad, setDetailLoad] = useState<Boolean>(false)
     const [recomLoad, setRecomLoad] = useState<Boolean>(false)
     const [favorite, setFavorite] = useState(true)
+    const [showRating, setShowRating] = useState<boolean>(false)
     const user = useSelector((state: RootReducerModel) => state.authReducer.user)
     const [mediaStateInfo, setMediaStateInfo] = useState<ImediaState>()
+    const [ratingLoad, setRatingLoad] = useState<boolean>(false)
+    const [ratingValue, setRatingValue] = useState<number>(0)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -59,6 +64,28 @@ export default function Index(props: any) {
         }
     }, [])
 
+    useEffect(() => {
+        function handleClickOutside(event: any) {
+            if (ratingRef.current && !ratingRef.current.contains(event.target)) {
+                setShowRating(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (mediaStateInfo?.rated) {
+            if (mediaStateInfo?.rated.value > 0) {
+                setRatingValue(mediaStateInfo?.rated.value)
+            }
+        }
+        else {
+            setRatingValue(0)
+        }
+    }, [mediaStateInfo?.rated])
 
     useEffect(() => {
         if (mediaStateInfo?.favorite) {
@@ -91,25 +118,37 @@ export default function Index(props: any) {
         }
     }
 
+
     const handleFavorite = () => {
         if (favorite) {
             setFavorite(false)
             dispatch(homeAction.markFavoriteRequest({
-                media_type: props?.match?.params?.type, 
+                media_type: props?.match?.params?.type,
                 media_id: parseInt(props?.match?.params?.id),
-                favorite: false, 
-                account_id: user.id}))
+                favorite: false,
+                account_id: user.id
+            }))
             // markFavorite(props?.match?.params?.type, parseInt(props?.match?.params?.id), false, user.id, setMarkLoad)
         }
         else {
             setFavorite(true)
             dispatch(homeAction.markFavoriteRequest({
-                media_type: props?.match?.params?.type, 
+                media_type: props?.match?.params?.type,
                 media_id: parseInt(props?.match?.params?.id),
-                favorite: true, 
-                account_id: user.id}))
+                favorite: true,
+                account_id: user.id
+            }))
+        }
+
+    }
+
+    const handleDeleteRating = () => {
+        ratingDelete(props?.match?.params?.type, parseInt(props?.match?.params?.id))
+        if (ratingValue > 0) {
+            setRatingValue(0)
         }
     }
+
     return (
         <div ref={ref} onClick={(e) => handleGoback(e)} className='detailModal'>
             {connect === true && !detailLoad &&
@@ -146,12 +185,25 @@ export default function Index(props: any) {
                                                     color={favorite ? '#e50914' : 'white'}
                                                     icon={faHeart} />
                                             } />
-                                            <Btn component={
+                                            <div ref={ratingRef}
+                                                onClick={() => setShowRating(true)}
+                                                className='detailModal__inner-btnAdd'>
                                                 <Icon
                                                     className="detailModal__inner-icon"
                                                     size="lg"
+                                                    color={ratingValue > 0 ? 'rgb(247, 212, 17)' : 'white'}
                                                     icon={faStar} />
-                                            } />
+                                                <div className={showRating ? 'rating add' : 'rating'}>
+                                                    <Star
+                                                        deleteRating={handleDeleteRating}
+                                                        cbLoad={setRatingLoad}
+                                                        media_type={props?.match?.params?.type}
+                                                        media_id={parseInt(props?.match?.params?.id)}
+                                                        ratedValue={ratingValue}
+                                                        cb={setRatingValue}
+                                                        number={10} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

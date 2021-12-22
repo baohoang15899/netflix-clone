@@ -160,6 +160,67 @@
             &:nth-child(1){
                 margin-left: 0px;
             }
+            .rating{
+                border-radius: 4px;
+                background-color: rgb(63, 63, 63);
+                position: absolute;
+                left: 50%;
+                top: 100%;
+                transform: translateX(-50%);
+                margin-top: 10px;
+                display: flex;
+                opacity: 0;
+                visibility: hidden;
+                padding: 7px 5px;
+                &::after{
+                    content: '';
+                    width:8px;
+                    height: 8px;
+                    position: absolute;
+                    border-width: 4px;
+                    border-style: solid;
+                    border-color: transparent transparent rgb(63, 63, 63) transparent;
+                    top: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+                &__delete{
+                    margin-left: 5px;
+                    margin-right: 10px;
+                    transition: color ease-in-out 0.2s;
+                    @media (hover:hover){
+                      &:hover {
+                        color: rgb(117, 115, 115);
+                      }
+                    }
+                }
+                &__group{
+                    position: relative;
+                    display: flex;
+                    &:hover .rating__group-star{
+                        color: $yellow;
+                    }
+                    &-star{
+                        cursor: pointer;
+                        transition: color ease-in-out 0.2s;
+                        padding: 0px 3px;
+                        color: white;
+                        &:hover{
+                            color: white;
+                        }
+                        &:hover ~ .rating__group-star{
+                            color: white;
+                        }
+                        &.add{
+                            color: $yellow;
+                        }
+                    }
+                }
+                &.add{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
         }
         @include media(992){
             width: 90vw;

@@ -1825,6 +1825,67 @@ button {
 .detailModal__inner-btnAdd:nth-child(1), .detailModal__inner-iconWrapper:nth-child(1) {
   margin-left: 0px;
 }
+.detailModal__inner-btnAdd .rating, .detailModal__inner-iconWrapper .rating {
+  border-radius: 4px;
+  background-color: #3f3f3f;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  padding: 7px 5px;
+}
+.detailModal__inner-btnAdd .rating::after, .detailModal__inner-iconWrapper .rating::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent transparent #3f3f3f transparent;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.detailModal__inner-btnAdd .rating__delete, .detailModal__inner-iconWrapper .rating__delete {
+  margin-left: 5px;
+  margin-right: 10px;
+  transition: color ease-in-out 0.2s;
+}
+@media (hover: hover) {
+  .detailModal__inner-btnAdd .rating__delete:hover, .detailModal__inner-iconWrapper .rating__delete:hover {
+    color: #757373;
+  }
+}
+.detailModal__inner-btnAdd .rating__group, .detailModal__inner-iconWrapper .rating__group {
+  position: relative;
+  display: flex;
+}
+.detailModal__inner-btnAdd .rating__group:hover .rating__group-star, .detailModal__inner-iconWrapper .rating__group:hover .rating__group-star {
+  color: #f7d411;
+}
+.detailModal__inner-btnAdd .rating__group-star, .detailModal__inner-iconWrapper .rating__group-star {
+  cursor: pointer;
+  transition: color ease-in-out 0.2s;
+  padding: 0px 3px;
+  color: white;
+}
+.detailModal__inner-btnAdd .rating__group-star:hover, .detailModal__inner-iconWrapper .rating__group-star:hover {
+  color: white;
+}
+.detailModal__inner-btnAdd .rating__group-star:hover ~ .rating__group-star, .detailModal__inner-iconWrapper .rating__group-star:hover ~ .rating__group-star {
+  color: white;
+}
+.detailModal__inner-btnAdd .rating__group-star.add, .detailModal__inner-iconWrapper .rating__group-star.add {
+  color: #f7d411;
+}
+.detailModal__inner-btnAdd .rating.add, .detailModal__inner-iconWrapper .rating.add {
+  opacity: 1;
+  visibility: visible;
+}
 @media only screen and (max-width: 992px) {
   .detailModal__inner {
     width: 90vw;
