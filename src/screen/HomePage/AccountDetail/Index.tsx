@@ -102,7 +102,7 @@ export default function Index() {
                             upcoming && !load &&
                             <div className='account__content-upcoming'>
                                 <span className='account__content-upcomingTitle'>
-                                    Checkout Upcoming Movie
+                                    Checkout New Movie
                                 </span>
                                 <div className='account__content-detailUpcomingMovie'>
                                     <div className='account__content-upcomimgImg'>
