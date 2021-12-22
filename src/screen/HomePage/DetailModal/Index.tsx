@@ -149,9 +149,6 @@ export default function Index(props: any) {
         }
     }
 
-    console.log(movie);
-
-
     return (
         <div ref={ref} onClick={(e) => handleGoback(e)} className='detailModal'>
             {connect === true && !detailLoad &&
