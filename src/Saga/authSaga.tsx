@@ -16,10 +16,10 @@ function* loginSaga({ payload }: any) {
         const res: Response = yield call(LoginRequest)
         if (res.status === 200) {
             const token = res.data.request_token
-            const resLogin: Response = yield validateUsernamePassword(payload, token)
+            const resLogin: Response = yield call(validateUsernamePassword,payload,token)
             if (resLogin?.data?.success === true) {
                 yield put(authAction.accountExist())
-                const resSession: Response = yield createSessionId(resLogin?.data?.request_token)
+                const resSession: Response = yield call(createSessionId,resLogin?.data?.request_token)
                 if (resSession?.data?.success === true) {
                     // yield put(authAction.LoginSuccess())
                     yield localStorage.setItem('token', JSON.stringify(resSession?.data?.session_id))
@@ -47,7 +47,7 @@ function* getUserData() {
     const data: string = yield localStorage.getItem('token')
     try {
         if (data) {
-            const getUser: Response = yield getUserDetail(JSON.parse(data))
+            const getUser: Response = yield call(getUserDetail,JSON.parse(data))
             if (getUser.status === 200) {
                 yield put(authAction.LoginSuccess())
                 yield put(authAction.getMeRequest(getUser.data))

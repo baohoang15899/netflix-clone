@@ -71,7 +71,7 @@ function* getGenreTv() {
 
 function* getMovie() {
     yield put(homeAction.startLoadingGenreMovie())
-    const res: Response = yield getMovieByGenreRequest()
+    const res: Response = yield call(getMovieByGenreRequest)
     try {
         if (res) {
             yield put(homeAction.getMoviesByGenreSuccess(res))
@@ -85,7 +85,7 @@ function* getMovie() {
 }
 
 function* getTvshows() {
-    const res: Response = yield getTvByGenreRequest()
+    const res: Response = yield call (getTvByGenreRequest)
     try {
         if (res) {
             yield put(homeAction.getTvByGenreSuccess(res))
@@ -123,7 +123,7 @@ function* getTrendingMovieData() {
 function* getGenreTvshowData({ payload }: any) {
     yield put(homeAction.startLoadingTvshowPage())
     try {
-        const res: Response = yield getTvShowByGenre(payload)
+        const res: Response = yield call(getTvShowByGenre,payload)
         if (res?.status === 200) {
             if (payload.page === 1) {
                 yield put(homeAction.getGenreTvshowsSuccess(res.data.results))
@@ -144,7 +144,7 @@ function* getGenreTvshowData({ payload }: any) {
 function* getGenreMovieData({ payload }: any) {
     yield put(homeAction.startLoadingMoviePage())
     try {
-        const res: Response = yield getMovieByGenre(payload)
+        const res: Response = yield call (getMovieByGenre,payload)
         if (res?.status === 200) {
             if (payload.page === 1) {
                 yield put(homeAction.getGenreMoviesSuccess(res.data.results))
@@ -165,7 +165,7 @@ function* getGenreMovieData({ payload }: any) {
 function* searchRequest({ payload }: any) {
     yield put(homeAction.startSearchLoad())
     try {
-        const res: Response = yield getSearchData(payload)
+        const res: Response = yield call (getSearchData,payload)
         if (res.status === 200) {
             if (payload.page === 1) {
                 yield put(homeAction.getSearchSuccess(res.data.results))
@@ -186,7 +186,7 @@ function* searchRequest({ payload }: any) {
 function* favoriteMovieRequest({ payload }: any) {
     yield put(homeAction.startMovieFavoriteLoad())
     try {
-        const res: Response = yield getFavorite(payload)
+        const res: Response = yield call(getFavorite,payload)
         // console.log(res,'res');
         if (res.status === 200) {
             if (payload.page === 1) {
@@ -208,7 +208,7 @@ function* favoriteMovieRequest({ payload }: any) {
 function* favoriteTvRequest({ payload }: any) {
     yield put(homeAction.startTvFavoriteLoad())
     try {
-        const res: Response = yield getFavorite(payload)
+        const res: Response = yield call(getFavorite,payload)
         if (res.status === 200) {
             if (payload.page === 1) {
                 yield put(homeAction.getTvFavoriteSuccess(res.data.results))
@@ -228,7 +228,7 @@ function* favoriteTvRequest({ payload }: any) {
 
 function* refreshFavorite({ payload }: any) {
     try {
-        const res: Response = yield getFavorite(payload)
+        const res: Response = yield call(getFavorite,payload)
         if (res.status === 200) {
             if (payload.type === 'movies') {
                 yield put(homeAction.refreshMovieFavoriteSuccess(res.data.results))
@@ -244,11 +244,11 @@ function* refreshFavorite({ payload }: any) {
 
 function* markFavoriteSuccess({ payload }: any) {
     try {
-        const res: Response = yield markFavorite(payload)
+        const res: Response = yield call(markFavorite,payload)
         if (res.status === 200 || res.status === 201) {
             if (res.data.status_code === 13 && payload.favorite === false) {
                 let type = payload.media_type === 'movie' ? 'movies' : 'tv'
-                const resRefresh: Response = yield getFavorite({ type: type, account_id: payload.account_id, page: 1 })
+                const resRefresh: Response = yield call(getFavorite,{ type: type, account_id: payload.account_id, page: 1 })
                 if (payload.media_type === 'movie') {
                     yield put(homeAction.resetPageMovie(payload))
                     yield put(homeAction.refreshMovieFavoriteSuccess(resRefresh.data.results))
@@ -260,7 +260,7 @@ function* markFavoriteSuccess({ payload }: any) {
             }
             else if (res.data.status_code === 1 && payload.favorite === true) {
                 let type = payload.media_type === 'movie' ? 'movies' : 'tv'
-                const resRefresh: Response = yield getFavorite({ type: type, account_id: payload.account_id, page: 1 })
+                const resRefresh: Response = yield call (getFavorite,{ type: type, account_id: payload.account_id, page: 1 })
                 if (payload.media_type === 'movie') {
                     yield put(homeAction.resetPageMovie(payload))
                     yield put(homeAction.refreshMovieFavoriteSuccess(resRefresh.data.results))
