@@ -1,34 +1,34 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { IauthReducer } from 'global/Auth/Interfaces'
 
 const initState: IauthReducer = {
     isLoggedIn: false,
     isLoading: false,
     user: null,
-    accountExist:true,
-    btnDisable:false
+    accountExist: true,
+    btnDisable: false
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: initState,
     reducers: {
-        LoginRequest: (state,payload) => {},
-        LoginSuccess:(state)=>{
+        LoginRequest: (state, payload) => { },
+        LoginSuccess: (state) => {
             state.isLoggedIn = true
         },
-        logOutRequest:() =>{
+        logOutRequest: () => {
         },
-        logOutSuccess:(state)=>{
+        logOutSuccess: (state) => {
             state.isLoggedIn = false
         },
-        startDisableBtn:(state)=>{
-            state.btnDisable=true
+        startDisableBtn: (state) => {
+            state.btnDisable = true
         },
-        stopDisableBtn:(state)=>{
-            state.btnDisable=false
+        stopDisableBtn: (state) => {
+            state.btnDisable = false
         },
-        LoginFailed:(state)=>{
+        LoginFailed: (state) => {
             state.isLoggedIn = false
         },
         startLoading: (state) => {
@@ -40,13 +40,13 @@ const authSlice = createSlice({
         getMeRequest: (state, { payload }) => {
             state.user = payload
         },
-        accountNotExist:(state) =>{
+        accountNotExist: (state) => {
             state.accountExist = false
         },
-        accountExist:(state) =>{
+        accountExist: (state) => {
             state.accountExist = true
         },
-        getUser:() =>{}
+        getUser: () => { }
     }
 })
 

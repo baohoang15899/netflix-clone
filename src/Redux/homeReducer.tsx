@@ -1,6 +1,5 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
-import { getFavorite } from 'api/Services'
-import { IdataResults, IhomeReducer } from 'global/Home/Interfaces'
+import { createSlice } from '@reduxjs/toolkit'
+import { IhomeReducer } from 'global/Home/Interfaces'
 
 const initState: IhomeReducer = {
     trending: {},
@@ -33,16 +32,16 @@ const initState: IhomeReducer = {
         tvShowMore: false,
         movieMore: false,
         searchLoad: false,
-        movieFavorite:false,
-        tvFavorite:false,
+        movieFavorite: false,
+        tvFavorite: false,
     },
     modal: {
         status: false,
         id: '',
         media_type: ''
     },
-    resetPageMovie:{},
-    resetPageTv:{}
+    resetPageMovie: {},
+    resetPageTv: {}
 }
 
 
@@ -51,7 +50,7 @@ const homeSlice = createSlice({
     name: 'home',
     initialState: initState,
     reducers: {
-        clearFavorite:(state) =>{
+        clearFavorite: (state) => {
             state.movieFavorite = []
             state.tvFavorite = []
         },
@@ -164,16 +163,16 @@ const homeSlice = createSlice({
             state.modal.media_type = ''
             state.modal.status = false
         },
-        startMovieFavoriteLoad:(state) =>{
+        startMovieFavoriteLoad: (state) => {
             state.Loading.movieFavorite = true
         },
-        startTvFavoriteLoad:(state) =>{
+        startTvFavoriteLoad: (state) => {
             state.Loading.tvFavorite = true
         },
-        stopMovieFavoriteLoad:(state) =>{
+        stopMovieFavoriteLoad: (state) => {
             state.Loading.movieFavorite = false
         },
-        stopTvFavoriteLoad:(state) =>{
+        stopTvFavoriteLoad: (state) => {
             state.Loading.tvFavorite = false
         },
         getMovieFavoriteRequest: (state, payload) => {
@@ -188,26 +187,26 @@ const homeSlice = createSlice({
         getTvFavoriteSuccess: (state, { payload }) => {
             state.tvFavorite = [...state.tvFavorite, ...payload]
         },
-        refreshMovieFavoriteRequest:(state,payload) =>{
+        refreshMovieFavoriteRequest: (state, payload) => {
 
         },
-        refreshTvFavoriteRequest:(state,payload) =>{
+        refreshTvFavoriteRequest: (state, payload) => {
 
         },
-        refreshMovieFavoriteSuccess:(state,{payload}) =>{
+        refreshMovieFavoriteSuccess: (state, { payload }) => {
             state.movieFavorite = payload
         },
-        refreshTvFavoriteSuccess:(state,{payload}) =>{
+        refreshTvFavoriteSuccess: (state, { payload }) => {
             state.tvFavorite = payload
         },
-        markFavoriteRequest:(state,{payload})=>{
+        markFavoriteRequest: (state, { payload }) => {
 
         },
-        resetPageMovie:(state,{payload}) =>{
-            state.resetPageMovie = {...payload}
+        resetPageMovie: (state, { payload }) => {
+            state.resetPageMovie = { ...payload }
         },
-        resetPageTv:(state,{payload}) =>{
-            state.resetPageTv = {...payload}
+        resetPageTv: (state, { payload }) => {
+            state.resetPageTv = { ...payload }
         },
     }
 })

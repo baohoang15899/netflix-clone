@@ -1,4 +1,3 @@
-import { IprivateRouter } from 'global/Home/Interfaces'
 import React from 'react'
 import {
     Route,

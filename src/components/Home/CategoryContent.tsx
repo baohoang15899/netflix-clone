@@ -1,8 +1,7 @@
-import { IcategoryContent, IitemBox } from 'global/Home/Interfaces'
-import Slider from "react-slick";
+import { IcategoryContent } from 'global/Home/Interfaces'
 import React from 'react'
 import Item from './ItemBox'
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import { CategoryType } from 'global/Home/Type';
 import SliderComponent from 'global/SliderComponent'
 export default function CategoryContent({ title, movies, tvShows, type }: IcategoryContent) {

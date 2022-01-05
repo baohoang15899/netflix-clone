@@ -1,6 +1,5 @@
 import { createSessionId, getUserDetail, LoginRequest, logOut, validateUsernamePassword } from 'api/Services';
-import { ResponseType } from 'axios';
-import { takeLatest, call, put, select, take } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
 import { authAction } from 'Redux/authReducer'
 
 interface Response {

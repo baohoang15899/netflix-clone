@@ -1,8 +1,7 @@
 import { UrlImage } from 'api/Urls';
 import { IdataResults } from 'global/Home/Interfaces'
-import React, { memo, useRef, useState } from 'react'
+import React, { memo } from 'react'
 import DefaultPoster from 'assets/image/defaultPoster.jpg'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Link, useLocation } from 'react-router-dom';
 function ItemBox(props: { data?: IdataResults, mediaType: string, slide?: Boolean, cb?:(e:any)=>void}) {

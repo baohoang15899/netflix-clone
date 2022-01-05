@@ -7,8 +7,7 @@ import Footer from 'components/Auth/Footer'
 import {
     Switch,
     Route,
-    useLocation,
-    useHistory
+    useLocation
 } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootReducerModel } from 'Redux/rootReducer';

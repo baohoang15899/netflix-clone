@@ -1,7 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons'
-import Star from './Star'
+import React from 'react'
 interface btnModal {
     component: any,
     onClick?: () => void,

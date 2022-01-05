@@ -1,8 +1,5 @@
-import axios from 'axios';
-import { IcreateSessionService, IloginService } from 'global/Auth/Interfaces';
-import { IdataResults, IgenreData, ImarkFavorite, ImediaState, Ivideo } from 'global/Home/Interfaces';
-import { useDispatch } from 'react-redux';
-import { homeAction } from 'Redux/homeReducer';
+import {IloginService } from 'global/Auth/Interfaces';
+import { IdataResults, ImarkFavorite, ImediaState, Ivideo } from 'global/Home/Interfaces';
 import NAxios from './AxiosConfig';
 import { Urls } from './Urls'
 const client_ID = process.env.REACT_APP_CLIENT_KEY
