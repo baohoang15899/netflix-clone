@@ -32,7 +32,6 @@ export default function App() {
     const dispatch = useDispatch()
     const location = useLocation<IstateLocation>()
 
-
     useEffect(() => {
         dispatch(authAction.getUser())
     }, [])

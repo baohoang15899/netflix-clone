@@ -188,11 +188,15 @@ export default function Index(props: any) {
                                             <div ref={ratingRef}
                                                 onClick={() => setShowRating(true)}
                                                 className='detailModal__inner-btnAdd'>
-                                                <Icon
-                                                    className="detailModal__inner-icon"
-                                                    size="lg"
-                                                    color={ratingValue > 0 ? 'rgb(247, 212, 17)' : 'white'}
-                                                    icon={faStar} />
+                                                {ratingValue > 0 ?
+                                                    <span className='detailModal__inner-ratingValue'>{ratingValue}</span>
+                                                    :
+                                                    <Icon
+                                                        className="detailModal__inner-icon"
+                                                        size="lg"
+                                                        color={'white'}
+                                                        icon={faStar} />
+                                                }
                                                 <div className={showRating ? 'rating add' : 'rating'}>
                                                     <Star
                                                         deleteRating={handleDeleteRating}

@@ -14,6 +14,11 @@
                 margin-left: 5px;  
             }
         }
+        &-testing{
+            line-height: 25px;
+            margin-top: 10px;
+            @include font-regular(16px,"");
+        }
         &-more{
             margin: 10px 0px;
             @include font-regular(14px,$placeholder-color);

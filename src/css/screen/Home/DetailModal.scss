@@ -22,6 +22,13 @@
             background-size: cover;
             position: relative;
         }
+        &-ratingValue{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            @include font-bold(20px,rgb(247, 212, 17));
+        }
         &-info{
             margin-top: 10px;
             // padding-left: 50px;

@@ -2,17 +2,17 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducerModel } from 'Redux/rootReducer'
 import Logo from 'components/Logo'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import {NavLink, Link, useHistory, useLocation } from 'react-router-dom'
 import DefaultAvatar from 'assets/image/avatar.png'
 import { UrlImage } from 'api/Urls'
 import { authAction } from 'Redux/authReducer'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
+import ClickOutSide from 'global/ClickOutSide'
 
 
 export default function Homeheader({ background }: any) {
     const { user, btnDisable } = useSelector((state: RootReducerModel) => state.authReducer)
-    const [menuMobile, setMenuMobile] = useState<Boolean>(false)
     const [showSearch, setShowSearch] = useState<Boolean>(false)
     const [showHeader, setShowHeader] = useState<Boolean>(false)
     const [text, setText] = useState<string>('')
@@ -20,18 +20,7 @@ export default function Homeheader({ background }: any) {
     const mobileRef = useRef<any>()
     const history = useHistory()
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        function handleClickOutside(event: any) {
-            if (mobileRef.current && !mobileRef.current.contains(event.target)) {
-                setMenuMobile(false)
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [])
+    const menuMobile = ClickOutSide(mobileRef)
 
     useEffect(() => {
         if (!location.pathname.includes('search') && !background) {
@@ -80,7 +69,7 @@ export default function Homeheader({ background }: any) {
     return (
         <div className={showHeader ? 'home__header add' : 'home__header'}>
             <div ref={mobileRef} className='home__header-left'>
-                <Icon onClick={() => setMenuMobile(!menuMobile)} className='home__header-mobileBtn' icon={faBars} size="lg" />
+                <Icon className='home__header-mobileBtn' icon={faBars} size="lg"/>
                 <div className={menuMobile ? 'home__header-menuMobile open' : 'home__header-menuMobile'}>
                     <div className="home__header-detailMobile">
                         <div className='home__header-avatarMobile'>
@@ -94,18 +83,18 @@ export default function Homeheader({ background }: any) {
                         <p className='home__header-logoutMobile'><span onClick={() => !btnDisable && dispatch(authAction.logOutRequest())}>Log out</span> </p>
                     </div>
                     <ul className='home__header-linkMobile'>
-                        <Link className='home__header-link' to='/home'>Home</Link>
-                        <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                        <Link className='home__header-link' to='/movie/28'>Movies</Link>
-                        <Link className='home__header-link' to='/favorite'>Favorite</Link>
+                        <NavLink activeClassName='home__header-link add' className='home__header-link' to='/home'>Home</NavLink>
+                        <NavLink activeClassName='home__header-link add' className='home__header-link' to='/tvshow/10759'>Tv shows</NavLink>
+                        <NavLink activeClassName='home__header-link add' className='home__header-link' to='/movie/28'>Movies</NavLink>
+                        <NavLink activeClassName='home__header-link add' className='home__header-link' to='/favorite'>Favorite</NavLink>
                     </ul>
                 </div>
                 <Logo custom={true} />
                 <ul className='home__header-menu'>
-                    <Link className='home__header-link' to='/home'>Home</Link>
-                    <Link className='home__header-link' to='/tvshow/10759'>Tv shows</Link>
-                    <Link className='home__header-link' to='/movie/28'>Movies</Link>
-                    <Link className='home__header-link' to='/favorite'>Favorite</Link>
+                    <NavLink activeClassName='home__header-link add' className='home__header-link' to='/home'>Home</NavLink>
+                    <NavLink activeClassName='home__header-link add' className='home__header-link' to='/tvshow/10759'>Tv shows</NavLink>
+                    <NavLink activeClassName='home__header-link add' className='home__header-link' to='/movie/28'>Movies</NavLink>
+                    <NavLink activeClassName='home__header-link add' className='home__header-link' to='/favorite'>Favorite</NavLink>
                 </ul>
             </div>
             <div className="home__header-mobileSearchGroup">

@@ -14,10 +14,11 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
     const genres = useSelector((state: RootReducerModel) => state.homeReducer)
     const { genresTv, genresMovie } = genres
     const [showHeader, setShowHeader] = useState<Boolean>(false)
-    const [menu, setMenu] = useState<Boolean>(false)
     const [index,setIndex] = useState<any>(genreMenu && window.location.hash.split('/') && window.location.hash.split('/')[2])
     const ref = useRef<any>()
     const dispatch = useDispatch()
+    const menuStatus = ClickOutSide(ref)
+    
     useEffect(() => {
         if (genreMenu) {
             const handleScroll = () => {
@@ -34,24 +35,9 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
     }, [window.scrollY])
 
     useEffect(() => {
-        function handleClickOutside(event: any) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                setMenu(false)
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [])
-
-    useEffect(() => {
         setShowHeader(false)
     }, [id])
 
-    const handleClick = () => {
-        setMenu(prev => !prev)
-    }
 
     const handleActive =(e: any) => {
         setIndex(e)
@@ -77,10 +63,10 @@ export default function Banner({ data, genreMenu, id }: IbannerData) {
                             <div className='container'>
                                 <div className='genreBar__wrapper'>
                                     <h5 onClick={() => handleGoTop()} className='genreBar__mediatype'>{data.media_type === 'tv' ? 'Tv show' : 'movie'}</h5>
-                                    <div ref={ref} onClick={() => handleClick()} className='genreBar__group'>
+                                    <div ref={ref} className='genreBar__group'>
                                         <span className='genreBar__genres'>Genres</span>
                                         <Icon size="sm" icon={faCaretDown} />
-                                        <ul className={menu ? 'genreBar__submenu add' : 'genreBar__submenu'}>
+                                        <ul className={menuStatus? 'genreBar__submenu add' : 'genreBar__submenu'}>
                                             {
                                                 data.media_type === 'tv' ?
                                                     genresTv?.map((item) => {

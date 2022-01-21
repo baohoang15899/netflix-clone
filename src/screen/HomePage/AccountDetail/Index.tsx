@@ -75,7 +75,7 @@ export default function Index() {
                         <div className='account__content-firstSection'>
                             <div className='account__content-titleWrapper'>
                                 <span className='account__content-formTitle'>Account Detail</span>
-                                <span className='account__content-name'>{user.name ? user.name : user.username}</span>
+                                <span className='account__content-name'>Name: {user.name ? user.name : user.username}</span>
                                 <span className='account__content-country'>Country: {user.iso_3166_1 ? user.iso_3166_1 : 'unknown'}</span>
                             </div>
                             <div className='account__content-avatarWrapper'>

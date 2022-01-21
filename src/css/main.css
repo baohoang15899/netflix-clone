@@ -858,6 +858,15 @@ button {
   color: white;
   margin-left: 5px;
 }
+.login__content-testing {
+  line-height: 25px;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: "";
+  color: "";
+}
 .login__content-more {
   margin: 10px 0px;
   font-weight: 400;
@@ -1278,6 +1287,9 @@ button {
     margin-top: 8px;
   }
 }
+.home__header-link.add {
+  color: #b3b3b3;
+}
 
 .home__banner {
   width: 100%;
@@ -1670,6 +1682,17 @@ button {
   background-position: center;
   background-size: cover;
   position: relative;
+}
+.detailModal__inner-ratingValue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #f7d411;
+  color: #f7d411;
 }
 .detailModal__inner-info, .detailModal__inner-recommend {
   margin-top: 10px;
