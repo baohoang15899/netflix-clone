@@ -1864,6 +1864,7 @@ button {
   transform: translateX(-50%);
   margin-top: 10px;
   display: flex;
+  align-items: center;
   opacity: 0;
   visibility: hidden;
   padding: 7px 5px;
@@ -1916,6 +1917,19 @@ button {
   opacity: 1;
   visibility: visible;
 }
+@media only screen and (max-width: 406px) {
+  .detailModal__inner-btnAdd .rating, .detailModal__inner-iconWrapper .rating {
+    left: -60px;
+  }
+  .detailModal__inner-btnAdd .rating__group-star, .detailModal__inner-iconWrapper .rating__group-star {
+    font-size: 18px;
+  }
+  .detailModal__inner-btnAdd .rating::after, .detailModal__inner-iconWrapper .rating::after {
+    content: "";
+    border-color: transparent;
+    background-color: transparent;
+  }
+}
 @media only screen and (max-width: 992px) {
   .detailModal__inner {
     width: 90vw;
@@ -1950,11 +1964,6 @@ button {
 @media only screen and (max-width: 500px) {
   .detailModal__inner {
     width: 90vw;
-  }
-}
-@media only screen and (max-width: 339px) {
-  .detailModal__inner-config {
-    margin-top: 10px;
   }
 }
 .detailModal__close {

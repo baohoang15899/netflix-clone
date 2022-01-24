@@ -180,6 +180,7 @@
                 transform: translateX(-50%);
                 margin-top: 10px;
                 display: flex;
+                align-items: center;
                 opacity: 0;
                 visibility: hidden;
                 padding: 7px 5px;
@@ -232,6 +233,21 @@
                     visibility: visible;
                 }
             }
+            @include media(406){
+                .rating{
+                    left: -60px;
+                    &__group{
+                        &-star{
+                            font-size: 18px;
+                        }
+                    }
+                    &::after{
+                        content: '';
+                        border-color: transparent;
+                        background-color: transparent;
+                    }
+                }
+            }
         }
         @include media(992){
             width: 90vw;
@@ -262,11 +278,11 @@
         @include media(500){
             width: 90vw;
         }
-        @include media(339){
-            &-config{
-                margin-top: 10px;
-            }
-        }
+        // @include media(339){
+        //     &-config{
+        //         margin-top: 10px;
+        //     }
+        // }
     }
     &__close{
         position: absolute;
