@@ -23,6 +23,7 @@ import { homeAction } from 'Redux/homeReducer'
 import TrailerModal from 'screen/HomePage/TrailerModal/Index'
 import Account from 'screen/HomePage/AccountDetail/Index'
 import NotFound from 'screen/NotFound/Index'
+import { getCookie } from 'global/CookieConfig'
 interface IstateLocation {
     background?: any
 }

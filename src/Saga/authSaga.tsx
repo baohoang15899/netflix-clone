@@ -1,4 +1,5 @@
 import { createSessionId, getUserDetail, LoginRequest, logOut, validateUsernamePassword } from 'api/Services';
+import { getCookie, removeCookie, setCookie } from 'global/CookieConfig';
 import { takeLatest, call, put } from 'redux-saga/effects'
 import { authAction } from 'Redux/authReducer'
 
@@ -21,7 +22,8 @@ function* loginSaga({ payload }: any) {
                 const resSession: Response = yield call(createSessionId,resLogin?.data?.request_token)
                 if (resSession?.data?.success === true) {
                     // yield put(authAction.LoginSuccess())
-                    yield localStorage.setItem('token', JSON.stringify(resSession?.data?.session_id))
+                    // yield localStorage.setItem('token', JSON.stringify(resSession?.data?.session_id))
+                    yield setCookie('token',resSession?.data?.session_id,1)
                     yield put(authAction.getUser())
                 } else {
                     yield put(authAction.LoginFailed())
@@ -43,17 +45,19 @@ function* loginSaga({ payload }: any) {
 
 function* getUserData() {
     yield put(authAction.startLoading())
-    const data: string = yield localStorage.getItem('token')
+    // const data: string = yield localStorage.getItem('token')
+    const data = getCookie('token')
     try {
         if (data) {
-            const getUser: Response = yield call(getUserDetail,JSON.parse(data))
+            const getUser: Response = yield call(getUserDetail,data)
             if (getUser.status === 200) {
                 yield put(authAction.LoginSuccess())
                 yield put(authAction.getMeRequest(getUser.data))
             }
             else {
                 yield put(authAction.LoginFailed())
-                yield localStorage.removeItem('token')
+                yield removeCookie('token')
+                // yield localStorage.removeItem('token')
                 yield put(authAction.logOutSuccess())
             }
         }
@@ -70,12 +74,14 @@ function* getUserData() {
 
 function* logOutSaga(){
     yield put(authAction.startLoading())
-    const data: string = yield localStorage.getItem('token')
+    // const data: string = yield localStorage.getItem('token')
+    const data = getCookie('token')
     yield put(authAction.startDisableBtn())
     try {
         if (data) {
-            const res:Response =  yield call(logOut,JSON.parse(data))
+            const res:Response =  yield call(logOut,data)
             if (res.status === 200) {
+                yield removeCookie('token')
                 yield localStorage.removeItem('token')
                 yield put(authAction.logOutSuccess())
             }

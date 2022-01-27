@@ -1,4 +1,5 @@
 import {IloginService } from 'global/Auth/Interfaces';
+import { getCookie } from 'global/CookieConfig';
 import { IdataResults, ImarkFavorite, ImediaState, Ivideo } from 'global/Home/Interfaces';
 import NAxios from './AxiosConfig';
 import { Urls } from './Urls'
@@ -221,10 +222,10 @@ export const getVideo = async (id: string, media_type: string, cb?: (e: Boolean)
 }
 
 export const markFavorite = async ({ media_type, media_id, favorite, account_id }: ImarkFavorite) => {
-    const session_id = localStorage.getItem('token')
+    const session_id = getCookie('token')
     try {
         if (session_id) {
-            const data = await processRequest(NAxios.post(`account/${account_id}/favorite?api_key=${client_ID}&session_id=${JSON.parse(session_id)}`,
+            const data = await processRequest(NAxios.post(`account/${account_id}/favorite?api_key=${client_ID}&session_id=${session_id}`,
                 {
                     'media_type': media_type.trim(),
                     'media_id': media_id,
@@ -238,9 +239,9 @@ export const markFavorite = async ({ media_type, media_id, favorite, account_id 
 }
 
 export const mediaState = async (media_type: string, media_id: number, cb: (e: ImediaState) => void) => {
-    const session_id = localStorage.getItem('token')
+    const session_id = getCookie('token')
     if (session_id) {
-        const data: ApiResponse = await processRequest(NAxios.get(`${media_type}/${media_id}/account_states?api_key=${client_ID}&session_id=${JSON.parse(session_id)}`))
+        const data: ApiResponse = await processRequest(NAxios.get(`${media_type}/${media_id}/account_states?api_key=${client_ID}&session_id=${session_id}`))
         if (data.status === 200) {
             cb(data.data)
         }
@@ -248,17 +249,17 @@ export const mediaState = async (media_type: string, media_id: number, cb: (e: I
 }
 
 export const getFavorite = async ({ type, account_id, page }: any) => {
-    const token = localStorage.getItem('token')
+    const token = getCookie('token')
     if (token) {
-        const data = await processRequest(NAxios.get(`account/${account_id}/favorite/${type}?api_key=${client_ID}&session_id=${JSON.parse(token)}&sort_by=created_at.desc&page=${page}`))
+        const data = await processRequest(NAxios.get(`account/${account_id}/favorite/${type}?api_key=${client_ID}&session_id=${token}&sort_by=created_at.desc&page=${page}`))
         return data
     }
 }
 
 export const getRated = async ({ type, account_id, page }: any) => {
-    const token = localStorage.getItem('token')
+    const token = getCookie('token')
     if (token) {
-        const data = await processRequest(NAxios.get(`account/${account_id}/rated/${type}?api_key=${client_ID}&session_id=${JSON.parse(token)}&sort_by=created_at.desc&page=${page}`))
+        const data = await processRequest(NAxios.get(`account/${account_id}/rated/${type}?api_key=${client_ID}&session_id=${token}&sort_by=created_at.desc&page=${page}`))
         return data
     }
 }
@@ -270,12 +271,11 @@ export const getUpcoming = async () => {
 }
 
 export const rateMedia = async (media_type: string, media_id: number, value: number, cb: (e: boolean) => void) => {
-    const token = localStorage.getItem('token')
+    const token = getCookie('token')
     cb(true)
     try {
         if (token) {
-            const session_id = JSON.parse(token)
-            await processRequest(NAxios.post(`${media_type}/${media_id}/rating?api_key=${client_ID}&session_id=${session_id}`,
+            await processRequest(NAxios.post(`${media_type}/${media_id}/rating?api_key=${client_ID}&session_id=${token}`,
                 {
                     'value': value
                 }))
@@ -289,11 +289,10 @@ export const rateMedia = async (media_type: string, media_id: number, value: num
 }
 
 export const ratingDelete = async (media_type: string, media_id: number) => {
-    const token = localStorage.getItem('token')
+    const token = getCookie('token')
     try {
         if (token) {
-            const session_id = JSON.parse(token)
-            await processRequest(NAxios.delete(`${media_type}/${media_id}/rating?api_key=${client_ID}&session_id=${session_id}`))
+            await processRequest(NAxios.delete(`${media_type}/${media_id}/rating?api_key=${client_ID}&session_id=${token}`))
         }
     } catch (error) {
         console.log(error);
